@@ -11,6 +11,6 @@ class User < ApplicationRecord
 
    private
      def generate_slug
-       self.slug = first_name.to_s.parameterize
+       self.slug = user_name.to_s.parameterize
      end
 end
