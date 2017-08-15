@@ -1,0 +1,17 @@
+<% @users.each do |user| %>
+	<ul>
+		<li>
+			<%= user.first_name %>
+			<%= user.last_name %>
+			<%= user.user_name %>
+			<% if current_user.friends_with?(user) %>
+				(Friends with)
+
+			<% elsif user.requested_friends.include?(current_user) %>
+				(Request sent)
+			<% else %>
+				<%= link_to "request friend", friendship_send_request_path(:user_id => user.id) %>
+			<% end %>
+		</li>
+	</ul>
+<% end %>

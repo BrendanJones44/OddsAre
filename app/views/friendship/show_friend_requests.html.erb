@@ -1,0 +1,11 @@
+<% @friend_requests.each do |friend_request| %>
+	<ul>
+		<li>
+			Request From:
+			<%= friend_request.first_name %>
+			<%= friend_request.last_name %>
+			(@<%= friend_request.user_name %>)
+			<%= link_to "accept request", friendship_accept_friend_request_path(:user_name => friend_request.user_name) %>
+		</li>
+	</ul>
+<% end %>

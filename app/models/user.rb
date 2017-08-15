@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_friendship
   extend FriendlyId
   before_validation :generate_slug
 
