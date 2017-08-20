@@ -1,6 +1,7 @@
 class Notifications
   constructor: ->
     @notifications = $("[data-behavior='notifications']")
+    $("[data-behavior='unread-count']").text(0)
     @setup() if @notifications.length > 0
 
   setup: ->
