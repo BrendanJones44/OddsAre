@@ -1,1 +1,3 @@
 <%= @user.id %>
+<% @user.requested_friends.include? current_user %>
+  <h4>Accept friend request</h4>

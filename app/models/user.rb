@@ -11,6 +11,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def to_s
+    "test"
+  end
+
    private
      def generate_slug
        self.slug = user_name.to_s.parameterize

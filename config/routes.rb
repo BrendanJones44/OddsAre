@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :notifications
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
   root to: 'pages#index'
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   get '/friendship/send_request' => 'friendship#send_request'
