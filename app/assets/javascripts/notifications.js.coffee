@@ -23,10 +23,17 @@ class Notifications
     )
 
   handleSuccess: (data) =>
-    items = $.map data, (notification) ->
-      "<a class='dropdown-item' href='#{notification.url}'>#{notification.actor.first_name} #{notification.actor.last_name} (@#{notification.actor.user_name}) sent you a friend request</a>"
-    $("[data-behavior='notification-items']").html(items)
-    $("[data-behavior='unread-count']").text(items.length)
+
+    console.log(data)
+    if data.length > 0
+      items = $.map data, (notification) ->
+        "<a class='dropdown-item' href='#{notification.url}'>#{notification.actor.first_name} #{notification.actor.last_name} (@#{notification.actor.user_name}) #{notification.action}</a>"
+      $("[data-behavior='notification-items']").html(items)
+      $("[data-behavior='unread-count']").text(items.length)
+    else
+      item = "<a class='dropdown-item' href=''#'>No New Notifications</a>"
+      $("[data-behavior='notification-items']").html(item)
+
 
 start_notifictations = ->
     new Notifications

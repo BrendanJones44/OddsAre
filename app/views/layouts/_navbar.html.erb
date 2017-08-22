@@ -6,18 +6,30 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item btn-group" data-behavior="notifications">
-        <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
-          <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
-        </div>
-      </li>
+      <% if current_user %>
+        <li class="nav-item btn-group" data-behavior="notifications">
+          <a class="dropdown-toggle nav-link" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+            <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_out">Log Out</a>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/sign_in">Log In</a>
+        </li>
+      <% end %>
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/users/all">All Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/challenge_requests/new">Send an Odds Are</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/friendship/show_friend_requests">Friend Requests</a>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  read_at: 2017-08-21 22:13:14
+  challenge_request_id: 1
+  response_out_of: 1
+  response_actor_number: 1
+
+two:
+  read_at: 2017-08-21 22:13:14
+  challenge_request_id: 1
+  response_out_of: 1
+  response_actor_number: 1

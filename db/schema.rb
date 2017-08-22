@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170816211953) do
+ActiveRecord::Schema.define(version: 20170822021314) do
+
+  create_table "challenge_requests", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "challenge_responses", force: :cascade do |t|
+    t.datetime "read_at"
+    t.integer  "challenge_request_id"
+    t.integer  "response_out_of"
+    t.integer  "response_actor_number"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false

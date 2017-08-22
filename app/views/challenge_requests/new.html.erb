@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="form">
+
+  <h1>Send an Odds Are Challenge</h1>
+  <% if @challenge_request.errors.any? %>
+      <div id="error_explanation">
+       <h2><%= pluralize(@challenge_request.errors.count, "error") %> prohibited this challenge_request from being sent:</h2>
+        <ul>
+          <% @challenge_request.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+       </div>
+  <% end %>
+
+  <%= form_for @challenge_request do |f| %>
+    <%= f.select :recipient_id do %>
+      <% @friends.each do |friend| %>
+        <%= content_tag(:option, friend.first_name + " " + friend.last_name, value: friend.id) %>
+      <% end %>
+    <% end %>
+    <%= f.text_field :action, :placeholder => "What you are challenging them to do" %>
+    <%= f.submit "Send challenge", class: "btn-submit" %>
+  <% end %>
+
+
+
+
+
+  </div>
+</div>

@@ -3,5 +3,5 @@ json.array! @notifications do |notification|
   json.actor notification.actor
   json.action notification.action
   json.notifiable notification.notifiable
-  json.url polymorphic_path(notification.actor)
+  json.url polymorphic_path(notification.notifiable)
 end

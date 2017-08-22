@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post :mark_as_read
     end
   end
+  resources :challenge_requests
   root to: 'pages#index'
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   get '/friendship/send_request' => 'friendship#send_request'
