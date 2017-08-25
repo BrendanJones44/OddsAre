@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :challenge_responses
   resources :notifications do
     collection do
       post :mark_as_read

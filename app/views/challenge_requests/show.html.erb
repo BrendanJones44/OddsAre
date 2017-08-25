@@ -1,1 +1,19 @@
 <%= @challenge_request.action %>
+
+<% if @challenge_response.errors.any? %>
+      <div id="error_explanation">
+       <h2><%= pluralize(@challenge_response.errors.count, "error") %> prohibited your response from being sent:</h2>
+        <ul>
+          <% @challenge_response.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+       </div>
+  <% end %>
+
+<%= form_for @challenge_response do |f| %>
+  <%= f.number_field :response_out_of, :placeholder => "What will the odds are be out of" %>
+  <%= f.number_field :response_actor_number, :placeholder => "What is your number choice" %>
+  <%= hidden_field_tag :challenge_request_id, @challenge_request.id %>
+  <%= f.submit "Send response", class: "btn-submit" %>
+<% end %>

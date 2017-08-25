@@ -19,7 +19,10 @@ class ChallengeRequestsController < ApplicationController
 
   def show
     @challenge_request = ChallengeRequest.find((params[:id]))
+    #Eventually add logic. Challenge requests should have a responded to timestamp that gets updated. Then
+    #only challenge requests that haven't been responded to are sent.
     @challenge_response = ChallengeResponse.new(challenge_request: @challenge_request)
+
   end
   private
 		def challenge_params

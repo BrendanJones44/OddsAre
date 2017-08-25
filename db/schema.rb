@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822021314) do
+ActiveRecord::Schema.define(version: 20170825105941) do
 
   create_table "challenge_requests", force: :cascade do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"
     t.datetime "read_at"
     t.string   "action"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "challenge_response_id"
   end
 
   create_table "challenge_responses", force: :cascade do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 20170822021314) do
     t.integer  "response_actor_number"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.string   "challenge_action"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
