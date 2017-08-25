@@ -1,0 +1,2 @@
+class FinalizeChallenge < ApplicationRecord
+end

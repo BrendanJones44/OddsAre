@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  challenge_response_id: 1
+  finalize_actor_number: 1
+
+two:
+  challenge_response_id: 1
+  finalize_actor_number: 1

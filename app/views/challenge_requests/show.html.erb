@@ -15,5 +15,6 @@
   <%= f.number_field :response_out_of, :placeholder => "What will the odds are be out of" %>
   <%= f.number_field :response_actor_number, :placeholder => "What is your number choice" %>
   <%= hidden_field_tag :challenge_request_id, @challenge_request.id %>
+  <%= hidden_field_tag :challenge_action, @challenge_request.action %>
   <%= f.submit "Send response", class: "btn-submit" %>
 <% end %>
