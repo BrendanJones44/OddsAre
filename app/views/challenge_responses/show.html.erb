@@ -1,2 +1,7 @@
 <%= @challenge_response.response_out_of %>
 <%= @challenge_response.challenge_action %>
+<%= form_for @finalize_challenge do |f| %>
+  <%= f.number_field :finalize_actor_number, :placeholder => "What is your number?" %>
+  <%= hidden_field_tag :challenge_response_id, @challenge_response.id %>
+  <%= f.submit "Send response", class: "btn-submit" %>
+<% end %>

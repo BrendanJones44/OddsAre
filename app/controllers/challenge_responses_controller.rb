@@ -6,6 +6,7 @@ class ChallengeResponsesController < ApplicationController
     @challenge_response.challenge_action = params[:challenge_action]
 
     if @challenge_response.save
+      @challenge_request.update(responded_to_at: Time.zone.now)
       Notification.create(recipient: @challenge_request.actor, actor: current_user, action: "responded to your odds are challenge", notifiable: @challenge_response)
       redirect_to '/users/all'
     else
@@ -14,7 +15,8 @@ class ChallengeResponsesController < ApplicationController
   end
 
   def show
-    @challenge_response = ChallengeResponse.select("response_out_of, challenge_action").where(:id => params[:id]).first
+    @challenge_response = ChallengeResponse.select("response_out_of, challenge_action, id").where(:id => params[:id]).first
+    @finalize_challenge = FinalizeChallenge.new()
   end
 
   private

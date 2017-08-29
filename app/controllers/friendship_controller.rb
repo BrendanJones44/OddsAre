@@ -2,7 +2,7 @@ class FriendshipController < ApplicationController
   def send_request
     @recipient = User.find(params[:user_id])
     current_user.friend_request(@recipient)
-    Notification.create(recipient: @recipient, actor: current_user, action: "sent you a friend request", notifiable: @actor)
+    Notification.create(recipient: @recipient, actor: current_user, action: "sent you a friend request", notifiable: current_user)
     redirect_to '/users/all'
   end
 

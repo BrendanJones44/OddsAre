@@ -35,6 +35,7 @@ gem 'devise'
 gem 'friendly_id', '~> 5.1.0'
 gem 'has_friendship'
 gem 'jquery-turbolinks'
+gem 'language_filter'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
