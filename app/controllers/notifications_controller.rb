@@ -8,4 +8,10 @@ class NotificationsController < ApplicationController
     @notifications.update_all(read_at: Time.zone.now)
     render json: {success: true}
   end
+
+#  def mark_as_clicked
+#    @notifc = Notifcation.where(recipient: current_user).unclicked
+#    @notification.update_all(clicked_at: Time.zone.now)
+#    render json: {success: true}
+#  end
 end

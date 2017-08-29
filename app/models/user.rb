@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_friendship
   has_many :notifications, foreign_key: :recipient_id
   has_many :challenge_requests, foreign_key: :recipient_id
+  has_many :challenge_response, foreign_key: :recipient_id
   extend FriendlyId
   before_validation :generate_slug
   validate :user_name_not_profane

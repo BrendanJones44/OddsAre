@@ -1,22 +1,32 @@
 class ChallengeResponsesController < ApplicationController
   def create
-    @challenge_response = ChallengeResponse.new(challenge_response_params)
     @challenge_request = ChallengeRequest.find(params[:challenge_request_id])
-    @challenge_response.challenge_request_id = params[:challenge_request_id]
-    @challenge_response.challenge_action = params[:challenge_action]
+    if current_user == @challenge_request.recipient
+      @challenge_response = ChallengeResponse.new(challenge_response_params)
+      @challenge_response.challenge_request_id = params[:challenge_request_id]
+      @challenge_response.challenge_action = @challenge_request.action
+      @challenge_response.actor = current_user
+      @challenge_response.recipient = @challenge_request.actor
 
-    if @challenge_response.save
-      @challenge_request.update(responded_to_at: Time.zone.now)
-      Notification.create(recipient: @challenge_request.actor, actor: current_user, action: "responded to your odds are challenge", notifiable: @challenge_response)
-      redirect_to '/users/all'
+      if @challenge_response.save
+        @challenge_request.update(responded_to_at: Time.zone.now)
+        Notification.create(recipient: @challenge_request.actor, actor: current_user, action: "responded to your odds are challenge", notifiable: @challenge_response)
+        redirect_to '/users/all'
+      else
+        render '/challenge_requests/show'
+      end
     else
-      render '/challenge_requests/show'
+      render 'pages/expired'
     end
   end
 
   def show
-    @challenge_response = ChallengeResponse.select("response_out_of, challenge_action, id").where(:id => params[:id]).first
-    @finalize_challenge = FinalizeChallenge.new()
+    @challenge_response = ChallengeResponse.select("response_out_of, challenge_action, id, recipient_id, actor_id, finalized_at").where(:id => params[:id]).first
+    if @challenge_response.recipient == current_user && @challenge_response.finalized_at.nil?
+      @finalize_challenge = FinalizeChallenge.new()
+    else
+      render 'show_as_actor'
+    end
   end
 
   private

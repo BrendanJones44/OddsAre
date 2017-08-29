@@ -1,5 +1,7 @@
 class ChallengeResponse < ApplicationRecord
   has_one :challenge_request
+  belongs_to :recipient, class_name: "User"
+  belongs_to :actor, class_name: "User"
   validate :response_out_of_min
   validate :response_actor_number_not_middle
   validate :response_actor_number_in_bounds

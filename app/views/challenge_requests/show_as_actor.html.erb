@@ -1,0 +1,7 @@
+<h3>You sent a challenge to: <%=@challenge_request.recipient.user_name %> </h3>
+<h5><%=@challenge_request.action %></h5>
+<% if @challenge_request.responded_to_at.nil? %>
+  <h5> They have not responsed yet <h5>
+<% else %>
+  <h5> They responded to you </h5>
+<% end %>

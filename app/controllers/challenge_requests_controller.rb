@@ -19,10 +19,12 @@ class ChallengeRequestsController < ApplicationController
 
   def show
     @challenge_request = ChallengeRequest.find((params[:id]))
-    if @challenge_request.responded_to_at.nil?
+    if @challenge_request.responded_to_at.nil? && @challenge_request.recipient == current_user
     #Eventually add logic. Challenge requests should have a responded to timestamp that gets updated. Then
     #only challenge requests that haven't been responded to are sent.
       @challenge_response = ChallengeResponse.new(challenge_request: @challenge_request)
+    elsif @challenge_request.actor == current_user
+      render 'show_as_actor'
     else
       render 'pages/expired'
     end

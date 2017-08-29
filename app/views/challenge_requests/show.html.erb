@@ -1,3 +1,5 @@
+<%= @challenge_request.actor.user_name %> sent you a challenge:
+
 <%= @challenge_request.action %>
 
 <% if @challenge_response.errors.any? %>
@@ -9,7 +11,8 @@
           <% end %>
         </ul>
        </div>
-  <% end %>
+<% end %>
+
 
 <%= form_for @challenge_response do |f| %>
   <%= f.number_field :response_out_of, :placeholder => "What will the odds are be out of" %>

@@ -23,8 +23,6 @@ class Notifications
     )
 
   handleSuccess: (data) =>
-
-    console.log(data)
     if data.length > 0
       items = $.map data, (notification) ->
         "<a class='dropdown-item' href='#{notification.url}'>#{notification.actor.first_name} #{notification.actor.last_name} (@#{notification.actor.user_name}) #{notification.action}</a>"
