@@ -1,0 +1,2 @@
+class ChallengeResult < ApplicationRecord
+end
