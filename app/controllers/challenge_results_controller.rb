@@ -1,5 +1,5 @@
 class ChallengeResultsController < ApplicationController
   def show
-    @result = ChallengeResult.find(1)
+    @result = ChallengeResult.find((params[:id]))
   end
 end

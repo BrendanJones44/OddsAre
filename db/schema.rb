@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830004518) do
+ActiveRecord::Schema.define(version: 20170903180944) do
 
   create_table "challenge_requests", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170830004518) do
     t.string   "action"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "lost_user_id"
   end
 
   create_table "finalize_challenges", force: :cascade do |t|
