@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903180944) do
+ActiveRecord::Schema.define(version: 20170903183921) do
 
   create_table "challenge_requests", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 20170903180944) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.datetime "clicked_at"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.integer  "lost_user_id"
+    t.integer  "won_user_id"
+    t.string   "action"
+    t.datetime "lost_user_completed_at"
+    t.datetime "won_user_completed_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
