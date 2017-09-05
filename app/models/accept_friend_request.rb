@@ -1,0 +1,2 @@
+class AcceptFriendRequest < ApplicationRecord
+end

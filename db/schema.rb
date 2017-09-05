@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904142039) do
+ActiveRecord::Schema.define(version: 20170905103238) do
+
+  create_table "accept_friend_requests", force: :cascade do |t|
+    t.integer  "target_user_id"
+    t.integer  "acting_user_id"
+    t.datetime "acted_upon_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "challenge_requests", force: :cascade do |t|
     t.integer  "recipient_id"

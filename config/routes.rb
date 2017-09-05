@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :finalize_challenges
   resources :challenge_results
   resources :friend_requests
+  resources :accept_friend_requests
+
   resources :notifications do
     collection do
       post :mark_as_read

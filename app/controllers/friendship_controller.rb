@@ -12,7 +12,8 @@ class FriendshipController < ApplicationController
     @friend_request = FriendRequest.where(target_user_id: current_user.id, acting_user_id: @actor.id).first
     @friend_request.update(acted_upon_at: Time.zone.now)
     current_user.accept_request(@actor)
-    Notification.create(recipient: @actor, actor: current_user, action: "accepted your friend request", notifiable: current_user)
+    @accept_friend_request = AcceptFriendRequest.create(target_user_id: @actor.id, acting_user_id: current_user.id)
+    Notification.create(recipient: @actor, actor: current_user, action: "accepted your friend request", notifiable: @accept_friend_request)
     redirect_to '/friendship/show_friend_requests'
   end
 
