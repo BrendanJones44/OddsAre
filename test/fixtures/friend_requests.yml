@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  target_user_id: 1
+  acting_user_id: 1
+  acted_upon_at: 2017-09-04 10:20:39
+
+two:
+  target_user_id: 1
+  acting_user_id: 1
+  acted_upon_at: 2017-09-04 10:20:39
