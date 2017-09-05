@@ -9,7 +9,9 @@ class ChallengeResponsesController < ApplicationController
       @challenge_response.recipient = @challenge_request.actor
 
       if @challenge_response.save
-        @challenge_request.update(responded_to_at: Time.zone.now)
+        #@challenge_request.update(acted_upon_at: Time.zone.now)
+        @challenge_request.update(responded_to_at: Time.zone.now, acted_upon_at: Time.zone.now)
+
         Notification.create(recipient: @challenge_request.actor, actor: current_user, action: "responded to your odds are challenge", notifiable: @challenge_response)
         redirect_to '/users/all'
       else
