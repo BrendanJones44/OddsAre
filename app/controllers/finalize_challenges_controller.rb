@@ -9,7 +9,7 @@ class FinalizeChallengesController < ApplicationController
       if @finalize_challenge.save
 
         # Used for ensuring a user can't respond multiple times
-        @challenge_response.update(finalized_at: Time.zone.now)
+        @challenge_response.update(finalized_at: Time.zone.now, acted_upon_at: Time.zone.now)
 
         # If nobody lost, this stays as nil
         lost_user_id = nil

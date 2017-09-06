@@ -1,7 +1,18 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications = Notification.where(recipient: current_user).unread
-    #@notifications = Notification.where(recipient: current_user).needs_action
+    #@notifications = Notification.where(recipient: current_user).unread
+    pre_notifications = Notification.where(recipient: current_user)
+    array_build = []
+    if pre_notifications == []
+      @notifications = pre_notifications
+    else
+      pre_notifications.each do |n|
+        if n.notifiable.acted_upon_at.nil?
+          array_build.push(n)
+        end
+      end
+      @notifications = array_build
+    end
   end
 
   def mark_as_read
@@ -10,9 +21,4 @@ class NotificationsController < ApplicationController
     render json: {success: true}
   end
 
-#  def mark_as_clicked
-#    @notifc = Notifcation.where(recipient: current_user).unclicked
-#    @notification.update_all(clicked_at: Time.zone.now)
-#    render json: {success: true}
-#  end
 end

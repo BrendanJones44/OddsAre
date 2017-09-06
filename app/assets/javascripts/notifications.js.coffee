@@ -1,7 +1,7 @@
 class Notifications
   constructor: ->
     @notifications = $("[data-behavior='notifications']")
-    $("[data-behavior='unread-count']").text(0)
+    $("[data-behavior='unread-count']").text(@notifications.length)
     @setup() if @notifications.length > 0
 
   setup: ->
@@ -18,8 +18,6 @@ class Notifications
       url: "/notifications/mark_as_read"
       dataType: "JSON"
       method: "POST"
-      success: ->
-        $("[data-behavior='unread-count']").text(0)
     )
 
   handleSuccess: (data) =>
