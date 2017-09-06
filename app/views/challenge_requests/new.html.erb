@@ -1,31 +1,38 @@
+<%= stylesheet_link_tag "challenge_requests.scss" %>
 <div class="container">
-  <div class="form">
-
-  <h1>Send an Odds Are Challenge</h1>
-  <% if @challenge_request.errors.any? %>
-      <div id="error_explanation">
-       <h2><%= pluralize(@challenge_request.errors.count, "error") %> prohibited this challenge_request from being sent:</h2>
-        <ul>
-          <% @challenge_request.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
+  <div class="card offset-sm-3 col-sm-6">
+    <div class="card-block">
+      <h1 class="card-title" align="center">Send an Odds Are Challenge</h1>
+      <h4>Select a friend</h4>
+      <%= form_for @challenge_request do |f| %>
+        <div class="form-group">
+          <%= f.select :recipient_id, options_for_select(["a","b"]), {}, {class: "form form-group form-control"} do %>
+            <% @friends.each do |friend| %>
+              <%= content_tag(:option, friend.first_name + " " + friend.last_name, value: friend.id) %>
+            <% end %>
           <% end %>
-        </ul>
-       </div>
-  <% end %>
-
-  <%= form_for @challenge_request do |f| %>
-    <%= f.select :recipient_id do %>
-      <% @friends.each do |friend| %>
-        <%= content_tag(:option, friend.first_name + " " + friend.last_name, value: friend.id) %>
+        </div>
+        <h4>Odds are they...</h4>
+        <%= f.text_field :action, class: "form form-group form-control" %>
+        <div class="offset-sm-4 col-sm-8">
+          <%= f.submit "Send challenge", class: "btn btn-primary" %>
+        </div>
       <% end %>
-    <% end %>
-    <%= f.text_field :action, :placeholder => "What you are challenging them to do" %>
-    <%= f.submit "Send challenge", class: "btn-submit" %>
-  <% end %>
-
-
-
-
-
+    </div>
   </div>
+<% if @challenge_request.errors.any? %>
+    <div id="error_explanation">
+     <h2><%= pluralize(@challenge_request.errors.count, "error") %> prohibited this challenge_request from being sent:</h2>
+      <ul>
+        <% @challenge_request.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+     </div>
+<% end %>
+
+
+
+
+
 </div>
