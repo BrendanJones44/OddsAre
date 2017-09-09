@@ -1,8 +1,21 @@
-<%= stylesheet_link_tag "challenge_requests.scss" %>
 <div class="container">
   <div class="card offset-sm-3 col-sm-6">
     <div class="card-block">
-      <h1 class="card-title" align="center">Send an Odds Are Challenge</h1>
+      <h1 class="card-title">Send an Odds Are Challenge</h1>
+      <% if @challenge_request.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-danger" role="alert" text-align="center">
+           <%= pluralize(@challenge_request.errors.count, "error") %> prevented this from being sent: <br/>
+
+
+              <% @challenge_request.errors.each do |attr,msg| %>
+
+                  <strong text-align="center"> <%= msg %> </strong>
+                </div>
+              <% end %>
+
+           </div>
+      <% end %>
       <h4>Select a friend</h4>
       <%= form_for @challenge_request do |f| %>
         <div class="form-group">
@@ -14,25 +27,10 @@
         </div>
         <h4>Odds are they...</h4>
         <%= f.text_field :action, class: "form form-group form-control" %>
-        <div class="offset-sm-4 col-sm-8">
+        <div>
           <%= f.submit "Send challenge", class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
   </div>
-<% if @challenge_request.errors.any? %>
-    <div id="error_explanation">
-     <h2><%= pluralize(@challenge_request.errors.count, "error") %> prohibited this challenge_request from being sent:</h2>
-      <ul>
-        <% @challenge_request.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-     </div>
-<% end %>
-
-
-
-
-
 </div>
