@@ -1,4 +1,5 @@
 class FinalizeChallengesController < ApplicationController
+  before_action :authenticate_user!
   def create
     @finalize_challenge = FinalizeChallenge.new(finalize_challenge_params)
 

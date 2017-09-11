@@ -1,4 +1,5 @@
 class ChallengeResponsesController < ApplicationController
+  before_action :authenticate_user!
   def create
     @challenge_request = ChallengeRequest.find(params[:challenge_request_id])
     if current_user == @challenge_request.recipient

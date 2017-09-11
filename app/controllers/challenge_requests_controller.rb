@@ -1,4 +1,5 @@
 class ChallengeRequestsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @friends = current_user.friends
     @challenge_request = ChallengeRequest.new

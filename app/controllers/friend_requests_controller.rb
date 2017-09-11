@@ -1,4 +1,5 @@
 class FriendRequestsController < ApplicationController
+  before_action :authenticate_user!
   def show
     @friend_request = FriendRequest.find(params[:id])
     if current_user.id == @friend_request.acting_user.id

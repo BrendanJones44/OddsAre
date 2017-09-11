@@ -1,4 +1,5 @@
 class FriendshipController < ApplicationController
+  before_action :authenticate_user!
   def send_request
     @recipient = User.find(params[:user_id])
     current_user.friend_request(@recipient)
