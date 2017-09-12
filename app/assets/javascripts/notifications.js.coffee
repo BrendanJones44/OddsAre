@@ -2,7 +2,7 @@ class Notifications
   constructor: ->
     @notifications = $("[data-behavior='notifications']")
     $("[data-behavior='unread-count']").text(@notifications.length)
-    @setup() if @notifications.length > 0
+    @setup()
 
   setup: ->
     $("[data-behavior='notifications-link']").on "click", @handleClick

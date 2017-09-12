@@ -5,7 +5,7 @@ class FinalizeChallengesController < ApplicationController
 
     # Find challenge response based on id number. The actual object isn't passed into
     # the finalization of the challenge for security reasons.
-    @challenge_response = ChallengeResponse.find(params[:challenge_response_id])
+    @challenge_response = ChallengeResponse.find(@finalize_challenge.challenge_response_id)
     if @challenge_response.finalized_at.nil?
       if @finalize_challenge.save
 

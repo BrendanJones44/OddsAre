@@ -2,16 +2,30 @@
   <div class="card offset-sm-3 col-sm-6">
     <div class="card-block">
       <h1 class="card-title">Respond to your odds are challenge</h1>
+      <% if @finalize_challenge.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-danger" role="alert" text-align="center">
+           <%= pluralize(@finalize_challenge.errors.count, "error") %> prevented this from being sent: <br/>
+
+
+              <% @finalize_challenge.errors.each do |attr,msg| %>
+
+                  <strong text-align="center"> <%= msg %> </strong>
+                </div>
+              <% end %>
+
+           </div>
+      <% end %>
       <h3>You sent <%= @challenge_response.actor.to_s %>: </br></h3>
       <h4>Odds are you <%= @challenge_response.challenge_action %> </br ></h4>
     </div>
     <div class="card-block">
       <h5>They set the odds out of: </br></h5>
-
+      <% @finalize_challenge.challenge_out_of = @challenge_response.response_out_of %>
       <h5><%= @challenge_response.response_out_of %></h5>
       <%= form_for @finalize_challenge do |f| %>
         <%= f.number_field :finalize_actor_number, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
-        <%= hidden_field_tag :challenge_response_id, @challenge_response.id %>
+        <%= f.hidden_field :challenge_response_id, value: @challenge_response.id %>
         <%= f.submit "Send response", class: "btn btn-primary" %>
       <% end %>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905162729) do
+ActiveRecord::Schema.define(version: 20170912110616) do
 
   create_table "accept_friend_requests", force: :cascade do |t|
     t.integer  "target_user_id"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170905162729) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "actor_id"
+    t.integer  "challenge_out_of"
   end
 
   create_table "friend_requests", force: :cascade do |t|
