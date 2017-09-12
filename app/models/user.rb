@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def to_s
-    "test"
+    first_name + " " + last_name + " @(#{user_name})"
   end
 
    private

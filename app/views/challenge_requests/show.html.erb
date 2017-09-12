@@ -1,23 +1,35 @@
-<%= @challenge_request.actor.user_name %> sent you a challenge:
-
-<%= @challenge_request.action %>
-
-<% if @challenge_response.errors.any? %>
-      <div id="error_explanation">
-       <h2><%= pluralize(@challenge_response.errors.count, "error") %> prohibited your response from being sent:</h2>
-        <ul>
-          <% @challenge_response.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-       </div>
-<% end %>
+<div class="container">
+  <div class="card offset-sm-3 col-sm-6">
+    <div class="card-block">
+      <h2 class="card-title"><%= @challenge_request.actor.user_name %> sent you a challenge:</h2>
+      <% if @challenge_response.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-danger" role="alert" text-align="center">
+           <%= pluralize(@challenge_response.errors.count, "error") %> prevented this from being sent: <br/>
 
 
-<%= form_for @challenge_response do |f| %>
-  <%= f.number_field :response_out_of, :placeholder => "What will the odds are be out of" %>
-  <%= f.number_field :response_actor_number, :placeholder => "What is your number choice" %>
-  <%= hidden_field_tag :challenge_request_id, @challenge_request.id %>
-  <%= hidden_field_tag :challenge_action, @challenge_request.action %>
-  <%= f.submit "Send response", class: "btn-submit" %>
-<% end %>
+              <% @challenge_response.errors.each do |attr,msg| %>
+
+                  <strong text-align="center"> <%= msg %> </strong><br />
+
+              <% end %>
+            </div>
+           </div>
+      <% end %>
+
+      <h5 text-align="center">Odds are you <%= @challenge_request.action %></h5>
+
+
+
+      <%= form_for @challenge_response do |f| %>
+        <%= f.label :what_are_the_odds_out_of %><br />
+        <%= f.number_field :response_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>
+        <%= f.label :your_number_choice %><br />
+        <%= f.number_field :response_actor_number, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
+        <%= hidden_field_tag :challenge_request_id, @challenge_request.id %>
+        <%= hidden_field_tag :challenge_action, @challenge_request.action %>
+        <%= f.submit "Send response", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

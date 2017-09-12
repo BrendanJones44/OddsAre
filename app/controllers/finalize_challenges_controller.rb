@@ -35,7 +35,7 @@ class FinalizeChallengesController < ApplicationController
           redirect_to '/users/all'
         end
       else
-        render '/challenge_response/show'
+        render '/challenge_responses/show'
       end
     else
       render 'pages/expired'
