@@ -11,7 +11,16 @@
   <body id="app-container">
     <%= render "layouts/navbar" %>
     <div class="container" >
-    	<p class="notice"><%= notice %></p>
+      <% flash.each do |name, msg| %>
+        <% if msg.is_a?(String) %>
+          <div class="alert alert-<%= flash_class_name(name) %>" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+            </button>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          </div>
+        <% end %>
+      <% end %>
     	<p class="alert"><%= alert %></p>
       <%= yield %>
     </div>

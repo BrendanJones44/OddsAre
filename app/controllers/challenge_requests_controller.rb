@@ -2,7 +2,12 @@ class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!
   def new
     @friends = current_user.friends
-    @challenge_request = ChallengeRequest.new
+    if @friends.length == 0
+      @action = "send an odds are"
+      render 'pages/need_friends'
+    else
+      @challenge_request = ChallengeRequest.new
+    end
   end
 
   def create
@@ -10,7 +15,7 @@ class ChallengeRequestsController < ApplicationController
 		@challenge_request.actor = current_user
 
 		if @challenge_request.save
-      Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you and odds are challenge", notifiable: @challenge_request)
+      Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are challenge", notifiable: @challenge_request)
 			redirect_to '/users/all'
 		else
 			@friends = current_user.friends

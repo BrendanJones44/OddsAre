@@ -5,3 +5,6 @@ You lost!
 <% elsif @result.lost_user_id == @result.initiator_id || @result.lost_user_id == @result.target_id %>
 You won!
 <% end %>
+<% if @result.initiator_id == current_user.id %>
+
+<% end %>
