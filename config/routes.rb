@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :friend_requests
   resources :accept_friend_requests
 
+  get '/notifications.json' => 'notifications#index'
   resources :notifications do
     collection do
       post :mark_as_read
