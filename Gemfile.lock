@@ -219,7 +219,7 @@ DEPENDENCIES
   pg (= 0.21.0)
   puma (~> 3.0)
   rails (~> 5.0.4)
-  rails_12factor (= 0.0.2)
+  rails_12factor
   react-rails
   sass-rails (~> 5.0)
   spring
