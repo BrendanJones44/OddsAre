@@ -38,7 +38,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'has_friendship'
 gem 'jquery-turbolinks'
 gem 'language_filter'
-
+gem 'pg', '0.21.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -48,7 +48,7 @@ gem 'language_filter'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'pg', '0.21.0'
+
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
