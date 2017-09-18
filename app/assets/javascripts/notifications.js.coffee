@@ -1,5 +1,6 @@
 class Notifications
   constructor: ->
+    console.log("inside notifications coffee script")
     @notifications = $("[data-behavior='notifications']")
     $("[data-behavior='unread-count']").text(@notifications.length)
     @setup()
