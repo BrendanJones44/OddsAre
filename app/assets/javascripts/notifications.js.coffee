@@ -6,6 +6,7 @@ class Notifications
     @setup()
 
   setup: ->
+    console.log("inside notifications coffee script")
     $("[data-behavior='notifications-link']").on "click", @handleClick
     $.ajax(
       url: "/notifications.json"
