@@ -39,6 +39,7 @@ class Notifications
 start_notifictations = ->
     new Notifications
 
+console.log("inside coffee file")
 $(document).ready(start_notifictations)
 $(document).on('page:load', start_notifictations)
 
