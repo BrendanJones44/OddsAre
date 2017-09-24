@@ -1,4 +1,5 @@
 class Notifications
+  console.log("inside notifications coffee script")
   constructor: ->
     console.log("inside notifications coffee script")
     @notifications = $("[data-behavior='notifications']")
@@ -16,6 +17,7 @@ class Notifications
     )
 
   handleClick: (e) =>
+    console.log("inside notifications coffee script")
     $.ajax(
       url: "/notifications/mark_as_read"
       dataType: "JSON"
@@ -23,6 +25,7 @@ class Notifications
     )
 
   handleSuccess: (data) =>
+    console.log("inside notifications coffee script")
     if data.length > 0
       items = $.map data, (notification) ->
         "<a class='dropdown-item' href='#{notification.url}'>#{notification.actor.first_name} #{notification.actor.last_name} (@#{notification.actor.user_name}) #{notification.action}</a>"
