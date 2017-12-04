@@ -1,5 +1,6 @@
 class FinalizeChallenge < ApplicationRecord
     #elongs_to :challenge_response
+    has_one :notification, as: :notifiable 
     validates_presence_of :finalize_actor_number, :message => 'You must repsond with a number'
     validates_presence_of :challenge_response_id, :message => 'No id found'
     validate :finalize_actor_number_min

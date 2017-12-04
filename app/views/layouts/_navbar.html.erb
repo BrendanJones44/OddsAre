@@ -9,9 +9,20 @@
       <% if current_user %>
         <li class="nav-item btn-group" data-behavior="notifications">
           <a class="dropdown-toggle nav-link" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
-            <%= fa_icon "bell" %> <span data-behavior="unread-count"></span>
+            <%= fa_icon "bell" %> <%= current_user.notifications.needs_action.size %>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+          <% if current_user.notifications.needs_action.empty? %>
+            <a class='dropdown-item' href="">No new notifications</a>
+          <% else %>
+            <% current_user.notifications.needs_action.each do |notification| %>
+              <div class='dropdown-item'>
+                <a> <%= fa_icon 'times' %> </a>
+                <a href="<%= polymorphic_url(notification.notifiable) %>"><%= notification.to_s %></a>
+              </div>
+
+            <% end %>
+          <% end %>
           </div>
         </li>
         <li class="nav-item">

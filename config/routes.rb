@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get '/friendship/accept_friend_request' => 'friendship#accept_friend_request'
   get '/users/all', to: 'users#all'
   get '/users/:friendly', to: 'users#show'
+
+  get 'pages/test', to: 'pages#test'
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

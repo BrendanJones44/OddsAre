@@ -6,6 +6,7 @@ class ChallengeResponse < ApplicationRecord
   validate :response_out_of_min
   validate :response_actor_number_not_middle
   validate :response_actor_number_in_bounds
+  has_one :notification, as: :notifiable
 
   def response_out_of_min
     if not response_out_of.blank?
