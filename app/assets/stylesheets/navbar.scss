@@ -1,3 +1,15 @@
 .navbar-brand {
+  // Align with the sidebar
   margin-right: 104px !important;
+}
+.dropdown-item:hover{
+  // Overrides the Cursor on the menu item text
+  cursor:pointer;
+}
+.close-notification-item {
+  float: right;
+}
+.dropdown-item {
+  //Allow space for the close notification link
+  min-width: 450px !important;
 }
