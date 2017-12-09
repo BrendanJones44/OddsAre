@@ -8,26 +8,32 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body id="app-container">
-    <%= render "layouts/navbar" %>
-      <div class="row">
+  <body>
+    <div id="top-navbar-wrapper">
+      <%= render "layouts/navbar" %>
+    </div>
+    <div id="wrapper">
+      <div id="left-sidebar-wrapper">
         <%= render "layouts/sidebar" %>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 top-buffer">
-          <% flash.each do |name, msg| %>
-            <% if msg.is_a?(String) %>
-              <div class="alert alert-<%= flash_class_name(name) %>" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
-                <span class="sr-only">Close</span>
-                </button>
-                <%= content_tag :div, msg, :id => "flash_#{name}" %>
-              </div>
-            <% end %>
-          <% end %>
-
-          <%= yield %>
+      </div>
+      <div id="content-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <% flash.each do |name, msg| %>
+                <% if msg.is_a?(String) %>
+                  <div class="alert alert-<%= flash_class_name(name) %>" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                  </div>
+                <% end %>
+              <% end %>
+              <%= yield %>
+            </div>
         </div>
-
-<!-- <%= fa_icon "user-circle-o" %> -->
+      </div>
     </div>
   </body>
 </html>
