@@ -15,17 +15,13 @@ document.addEventListener("turbolinks:load", function() {
 				type: 'POST',
 				success:function(){
 					// Remove dropdown-item once notification updated
-					parent.remove();
-					var numberOfNotifications = Number(
-						$('#notification-count').text()
-					) - 1;
+					dropdownItem.remove();
+					var numberOfNotifications = Number($('#notification-count').text()) - 1;
 					// Don't leave an empty dropdown-menu
 					if(numberOfNotifications === 0){
-						$('#notification-dropdown').append(
-							"<a class='dropdown-item' href=''>No new notifications</a>"
-						);
+						$('#notification-dropdown').append("<a class='dropdown-item' href=''>No new notifications</a>");
 					}
-					// Update the notification count with -1 of what it was
+					// Update the notification count with -1 of what it was.
 					$('#notification-count').text(numberOfNotifications);
 				}
 			})
