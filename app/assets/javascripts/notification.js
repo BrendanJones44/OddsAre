@@ -1,19 +1,31 @@
+// Bind function to page so it still works on navigation
 document.addEventListener("turbolinks:load", function() {
+	// Function to dimiss notifications from notification dropdown
 	$(function() {
 		$('.dismiss-notification').on("click", function(event){
 			var notificationElement = $(this);
-			var parent = $(this).parent().parent();
-			console.log(parent);
+			// Grab the surrounding dropdown-item to remove notification once updated
+			var dropdownItem = $(this).parent().parent();
+			// Don't navigate away from page
 	    event.preventDefault();
+			// Update notification object as read
 			$.ajax({
+				// Grab notification's dynamic url attribute
 				url: $('.dismiss-notification').attr("url"),
 				type: 'POST',
 				success:function(){
+					// Remove dropdown-item once notification updated
 					parent.remove();
-					var numberOfNotifications = Number($('#notification-count').text()) - 1;
+					var numberOfNotifications = Number(
+						$('#notification-count').text()
+					) - 1;
+					// Don't leave an empty dropdown-menu
 					if(numberOfNotifications === 0){
-						$('#notification-dropdown').append( "<a class='dropdown-item' href=''>No new notifications</a>" );
+						$('#notification-dropdown').append(
+							"<a class='dropdown-item' href=''>No new notifications</a>"
+						);
 					}
+					// Update the notification count with -1 of what it was
 					$('#notification-count').text(numberOfNotifications);
 				}
 			})
