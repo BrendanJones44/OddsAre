@@ -4,3 +4,4 @@ $(function() {
     console.log("happened!");
   })
 });
+console.log("happened");
