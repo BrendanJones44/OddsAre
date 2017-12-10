@@ -5,12 +5,7 @@ Rails.application.routes.draw do
   resources :friend_requests
   resources :accept_friend_requests
 
-  get '/notifications.json' => 'notifications#index'
-  resources :notifications do
-    collection do
-      post :mark_as_read
-    end
-  end
+  post '/notifications/:id/mark_as_read', to: 'notifications#mark_as_read', as: 'mark_notification_as_read'
   resources :challenge_requests
   root to: 'pages#index'
   devise_for :users, :controllers => {:registrations => "users/registrations"}

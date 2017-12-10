@@ -15,7 +15,7 @@ class ChallengeRequestsController < ApplicationController
 		@challenge_request.actor = current_user
 
 		if @challenge_request.save
-      Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are challenge", notifiable: @challenge_request)
+      Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are", notifiable: @challenge_request)
 			redirect_to '/users/all'
 		else
 			@friends = current_user.friends

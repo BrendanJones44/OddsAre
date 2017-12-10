@@ -17,10 +17,10 @@
           <% else %>
             <% current_user.notifications.needs_action.each do |notification| %>
               <div class='dropdown-item' href="<%= polymorphic_url(notification.notifiable) %>">
-                  <span class="notification-text"><%= notification.to_s %></span>
-                <a href=""><span class="close-notification-item"><%= fa_icon 'times' %></span></a>
+                  <span class="notification-text"><%= notification.to_s %>
+                <a class="dismiss-notification" href=""><span class="close-notification-item"><%= fa_icon 'times' %></span></a>
               </div>
-
+<!-- data-method="post" <%= mark_notification_as_read_path(notification)%> -->
             <% end %>
           <% end %>
           </div>
