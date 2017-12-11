@@ -19,6 +19,13 @@
   border-color: #494F57 !important;
 }
 
+/* Override bootstrap's blue background */
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: inherit !important;
+}
+
 #notification-count {
   margin-left: 5px;
 }

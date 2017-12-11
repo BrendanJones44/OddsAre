@@ -18,7 +18,6 @@
             <% current_user.notifications.needs_action.each do |notification| %>
             <a href="<%= polymorphic_url(notification.notifiable) %>">
               <div class='dropdown-item' href="<%= polymorphic_url(notification.notifiable) %>">
-
                   <span class="notification-text"><%= notification.to_s %>
                 <a class="dismiss-notification" url="<%= mark_notification_as_read_path(notification)%>" href=""><span class="close-notification-item"><%= fa_icon 'times' %></span></a></a>
               </div>
