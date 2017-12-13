@@ -26,6 +26,14 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    first_name + " " + last_name
+  end
+
+  def anchor
+    "(@#{user_name})"
+  end
+
   def to_s
     first_name + " " + last_name + " @(#{user_name})"
   end
