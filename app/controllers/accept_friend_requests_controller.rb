@@ -17,7 +17,7 @@ class AcceptFriendRequestsController < ApplicationController
 
     # View the friend request's profile
 
-    # TODO: Maybe fix this up a bit? 
+    # TODO: Maybe fix this up a bit?
     if current_user.id == @accepted_friend_request.acting_user_id
       redirect_to user_path(@accepted_friend_request.targeting_user)
     else

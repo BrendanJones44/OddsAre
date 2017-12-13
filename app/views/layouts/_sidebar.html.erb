@@ -2,8 +2,27 @@
   <ul class="nav flex-column sidebar-group">
     <label>Account</label>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "sign-in" %></span><span class="sidebar-link-text">Log in</a></span>
-    </li>
+      <% if current_user %>
+        <a href="<%= destroy_user_session_path %>">
+          <span class="sidebar-link-favicon">
+            <%= fa_icon "sign-in" %>
+          </span>
+          <span class="sidebar-link-text">
+            Log out
+          </span>
+        </a>
+      <% else %>
+      <!-- user not logged in -->
+        <a href="<%= new_user_session_path %>">
+          <span class="sidebar-link-favicon">
+            <%= fa_icon "sign-in" %>
+          </span>
+          <span class="sidebar-link-text">
+            Log in
+          </span>
+        </a>
+    <% end %>
+  </li><!-- nav-item for login/logout link -->
     <li class="nav-item">
       <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
     </li>
