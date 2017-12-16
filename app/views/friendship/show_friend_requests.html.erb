@@ -1,9 +1,14 @@
-<% @friend_requests.each do |friend_request| %>
-	<ul>
-		<li>
-			Request From:
-			<%= friend_request.to_s %>
-			<%= button_to "Accept Friend", accept_friend_request_url(:user_name => friend_request.user_name), class: "btn btn-sm btn-primary" %>
-		</li>
-	</ul>
-<% end %>
+<h1> Your Friend Requests </h1>
+<% if @friend_requests.empty? %>
+	<h5>You don't have any friend requests at the moment!</h5>
+<% else %>
+	<% @friend_requests.each do |friend_request| %>
+		<ul>
+			<li>
+				Request From:
+				<%= friend_request.to_s %>
+				<%= button_to "Accept Friend", accept_friend_request_url(:user_name => friend_request.user_name), class: "btn btn-sm btn-primary" %>
+			</li>
+		</ul>
+	<% end %> <!-- End of friend_request each loop -->
+<% end %> <!-- End of having friend requests -->

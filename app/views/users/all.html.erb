@@ -1,19 +1,18 @@
+<h1> All users </h1>
 <% @users.each do |user| %>
-	<ul>
-		<li>
-			<%= user.first_name %>
-			<%= user.last_name %>
-			<%= user.user_name %>
-			<% if current_user.friends_with?(user) %>
-				(Friends with)
+	<div class="jumbotron">
+		<ul>
+			<h2><%= user.to_s %></h2>
+				<% if current_user.friends_with?(user) %>
+					(Friends with)
 
-			<% elsif user.requested_friends.include?(current_user) %>
-				(Request sent)
-			<% elsif current_user.requested_friends.include?(user) %>
-				<%= button_to "Accept Friend", accept_friend_request_url(:user_name => user.user_name), class: "btn btn-sm btn-primary" %>
-			<% else %>
-				<%= button_to "Request Friend", new_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary" %>
-			<% end %>
-		</li>
-	</ul>
+				<% elsif user.requested_friends.include?(current_user) %>
+					(Request sent)
+				<% elsif current_user.requested_friends.include?(user) %>
+					<%= button_to "Accept Friend", accept_friend_request_url(:user_name => user.user_name), class: "btn btn-sm btn-primary" %>
+				<% else %>
+					<%= button_to "Request Friend", new_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary" %>
+				<% end %>
+		</ul>
+	</div>
 <% end %>
