@@ -1,4 +1,5 @@
 class Notification < ApplicationRecord
+  enum dismiss_type: [:on_click]
   belongs_to :recipient, class_name: "User"
   belongs_to :actor, class_name: "User"
   belongs_to :notifiable, polymorphic: true

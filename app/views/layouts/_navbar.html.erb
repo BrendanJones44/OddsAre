@@ -7,40 +7,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if current_user %>
-        <li class="nav-item btn-group" data-behavior="notifications">
-          <a class="dropdown-toggle nav-link" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
-            <%= fa_icon "bell" %><span id="notification-count"><%= current_user.notifications.needs_action.size %></span>
-          </a>
-          <div id="notification-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
-          <% if current_user.notifications.needs_action.empty? %>
-            <a class='dropdown-item' href="">No new notifications</a>
-          <% else %>
-            <% current_user.notifications.needs_action.each do |notification| %>
-            <a href="<%= polymorphic_url(notification.notifiable) %>">
-              <div class='dropdown-item' href="<%= polymorphic_url(notification.notifiable) %>">
-                  <span class="notification-text"><%= notification.to_s %>
-                <a class="dismiss-notification" url="<%= mark_notification_as_read_path(notification)%>" href=""><span class="close-notification-item"><%= fa_icon 'times' %></span></a></a>
-              </div>
-            <% end %>
-          <% end %>
-          </div>
-        </li>
+        <%= render "layouts/notification_menu" %>
       <% else %>
         <li class="nav-item">
           <a class="nav-link" href="/users/sign_in">Log In</a>
         </li>
       <% end %>
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link" href="/users/all">All Users</a>
+        <a class="nav-link" href="/users/all">How to Play</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/challenge_requests/new">Send an Odds Are</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/friendship/show_friend_requests">Friend Requests</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

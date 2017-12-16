@@ -4,8 +4,8 @@ class FriendshipController < ApplicationController
     @recipient = User.find(params[:user_id])
     current_user.friend_request(@recipient)
     @friend_request = FriendRequest.create(target_user_id: @recipient.id, acting_user_id: current_user.id)
-    Notification.create(recipient: @recipient, actor: current_user, action: "sent you a friend request", notifiable: @friend_request)
-    redirect_to '/users/all'
+    Notification.create(recipient: @recipient, actor: current_user, action: "sent you a friend request", notifiable: @friend_request, dismiss_type: "on_click")
+    redirect_back(fallback_location: root_path)
   end
 
   def accept_friend_request
@@ -14,9 +14,9 @@ class FriendshipController < ApplicationController
     @friend_request.update(acted_upon_at: Time.zone.now)
     @friend_request.notification.update(acted_upon_at: Time.zone.now)
     current_user.accept_request(@actor)
-    @accept_friend_request = AcceptFriendRequest.create(target_user_id: @actor.id, acting_user_id: current_user.id)
-    Notification.create(recipient: @actor, actor: current_user, action: "accepted your friend request", notifiable: @accept_friend_request)
-    redirect_to '/friendship/show_friend_requests'
+    #@accept_friend_request = AcceptFriendRequest.create(target_user_id: @actor.id, acting_user_id: current_user.id)
+    Notification.create(recipient: @actor, actor: current_user, action: "accepted your friend request", notifiable: @accept_friend_request, dismiss_type: "on_click")
+    redirect_back(fallback_location: root_path)
   end
 
   def show_friend_requests

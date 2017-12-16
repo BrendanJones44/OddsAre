@@ -9,10 +9,20 @@
         <span class="badge badge-pill badge-danger">Lost: 4</span>
         <span class="badge badge-pill badge-primary">Completed: 2</span>
       </div>
+      <% if current_user == @user %>
+
+      <% else %><!-- end of profile view -->
+        <% if current_user.pending_friends.include?(@user) %>
+          <h5>Friend request pending </h5>
+        <% elsif current_user.requested_friends.include?(@user) %>
+          <%= button_to "Accept Friend", accept_friend_request_url(:user_name => @user.user_name), class: "btn btn-sm btn-primary" %>
+        <% elsif current_user.friends.include?(@user) %>
+          <%= button_to "Send Odds Are", new_challenge_request_path, method: :get, class: "btn btn-sm btn-primary" %>
+        <% else %>
+          <%= button_to "Add Friend", new_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
+        <% end %>
+        <h4>External user</h4>
+      <% end %><!-- end of external user view -->
     </div>
   </div>
 </div>
-
-<% if current_user.requested_friends.include? @user %>
-  <%= link_to "accept request", friendship_accept_friend_request_path(:user_name => @user.user_name) %>
-<% end %>
