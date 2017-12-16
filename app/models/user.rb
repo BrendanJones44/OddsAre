@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_friendship
   has_many :notifications, foreign_key: :recipient_id
-  has_many :challenge_requests, foreign_key: :recipient_id
+  has_many :sent_challenge_requests, class_name: "ChallengeRequest", foreign_key: :actor_id
+  has_many :received_challenge_requests, class_name: "ChallengeRequest", foreign_key: :recipient_id
   has_many :challenge_response, foreign_key: :recipient_id
   has_many :friend_requests, foreign_key: :targeting_user
   validates_uniqueness_of :user_name, :case_sensitive => false
@@ -31,9 +32,15 @@ class User < ApplicationRecord
     first_name + " " + last_name
   end
 
+  def has_friends
+    friends.any?
+  end
+
   def has_friend_requests
     requested_friends.any?
   end
+
+  def
 
   def anchor
     "(@#{user_name})"
@@ -43,13 +50,21 @@ class User < ApplicationRecord
     first_name + " " + last_name + " @(#{user_name})"
   end
 
-  def uppercase_names
-    self.first_name = self.first_name.upcase_first
-    self.last_name = self.last_name.upcase_first
+  def num_current_odds_ares
+    sent_challenge_requests.where(responded_to_at: nil).size + received_challenge_requests.where(responded_to_at: nil).size
+  end
+
+  def has_current_odds_ares
+    num_current_odds_ares != 0
   end
 
    private
      def generate_slug
        self.slug = user_name.to_s.parameterize
+     end
+
+     def uppercase_names
+       self.first_name = self.first_name.upcase_first
+       self.last_name = self.last_name.upcase_first
      end
 end

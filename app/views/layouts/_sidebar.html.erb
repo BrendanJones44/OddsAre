@@ -33,11 +33,21 @@
   <ul class="nav flex-column sidebar-group">
     <label>Odds Ares</label>
     <li class="nav-item">
-      <a href="#">
+      <a href="<%= new_challenge_request_url %>">
           <span class="sidebar-link-favicon"><%= fa_icon "pencil-square-o" %></span><span class="sidebar-link-text">Create</span></a>
     </li>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "exchange" %></span><span class="sidebar-link-text">Current <b>(2)</b></span></a>
+      <a href="#">
+        <span class="sidebar-link-favicon">
+          <%= fa_icon "exchange" %>
+        </span>
+        <span class="sidebar-link-text">
+          Current
+          <% if current_user.has_current_odds_ares %>
+            <b>(<%=current_user.num_current_odds_ares%>)</b>
+          <% end %>
+        </span>
+      </a>
     </li>
     <li class="nav-item">
       <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
@@ -49,7 +59,7 @@
   <ul class="nav flex-column sidebar-group">
     <label>Friends</label>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "users" %></span><span class="sidebar-link-text">Your Friends</a></span>
+      <a href="<%= users_friends_path %>"><span class="sidebar-link-favicon"><%= fa_icon "users" %></span><span class="sidebar-link-text">Your Friends</a></span>
     </li>
     <li class="nav-item">
       <a href="<%= friendship_show_friend_requests_path %>">

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/friendship/show_friend_requests' => 'friendship#show_friend_requests'
   post '/friendship/accept_friend_request' => 'friendship#accept_friend_request', as: 'accept_friend_request'
   get '/users/all', to: 'users#all'
+  get '/users/friends', to: 'users#friends'
   get '/users/:friendly', to: 'users#show'
 
   get 'pages/test', to: 'pages#test'

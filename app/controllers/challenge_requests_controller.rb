@@ -16,7 +16,7 @@ class ChallengeRequestsController < ApplicationController
 
 		if @challenge_request.save
       Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are", notifiable: @challenge_request)
-			redirect_to '/users/all'
+      redirect_back(fallback_location: root_path)
 		else
 			@friends = current_user.friends
 			render 'new'
@@ -34,6 +34,9 @@ class ChallengeRequestsController < ApplicationController
     else
       render 'pages/expired'
     end
+  end
+
+  def show_current
 
   end
   private
