@@ -1,21 +1,28 @@
-#wrapper {
-  //Allow space for sidebar
-  padding-left: 200px;
-}
+@media (min-width: 768px) {
+  #wrapper {
+    //Allow space for sidebar
+    padding-left: 200px;
+  }
 
-#left-sidebar-wrapper {
-  //Cannot do right +200px
-  margin-left: -200px;
-  left: 200px;
-  width: 200px;
-  background-color: #f7f7f7;
-  position: fixed;
-  height: 100%;
-  z-index: 1000;
-  //Allow for sidebar scrolling if applicable
-  overflow-y: auto;
-}
+  #left-sidebar-wrapper {
+    //Cannot do right +200px
+    margin-left: -200px;
+    left: 200px;
+    width: 200px;
+    background-color: #f7f7f7;
+    position: fixed;
+    height: 100%;
+    z-index: 1000;
+    //Allow for sidebar scrolling if applicable
+    overflow-y: auto;
+  }
 
-#content-wrapper {
-  width: 100%;
+  #content-wrapper {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  #left-sidebar-wrapper {
+    display: none;
+  }
 }
