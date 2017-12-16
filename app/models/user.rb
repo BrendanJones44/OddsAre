@@ -30,6 +30,10 @@ class User < ApplicationRecord
     first_name + " " + last_name
   end
 
+  def has_friend_requests
+    requested_friends.any?
+  end
+
   def anchor
     "(@#{user_name})"
   end

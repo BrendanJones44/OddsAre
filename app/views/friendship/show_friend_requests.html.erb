@@ -2,10 +2,8 @@
 	<ul>
 		<li>
 			Request From:
-			<%= friend_request.first_name %>
-			<%= friend_request.last_name %>
-			(@<%= friend_request.user_name %>)
-			<%= link_to "accept request", friendship_accept_friend_request_path(:user_name => friend_request.user_name) %>
+			<%= friend_request.to_s %>
+			<%= button_to "Accept Friend", accept_friend_request_url(:user_name => friend_request.user_name), class: "btn btn-sm btn-primary" %>
 		</li>
 	</ul>
 <% end %>

@@ -52,7 +52,17 @@
       <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "users" %></span><span class="sidebar-link-text">Your Friends</a></span>
     </li>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "plus-square" %></span><span class="sidebar-link-text">Requests</a></span>
+      <a href="<%= friendship_show_friend_requests_path %>">
+        <span class="sidebar-link-favicon">
+          <%= fa_icon "plus-square" %>
+        </span>
+        <span class="sidebar-link-text">
+          Requests
+          <% if current_user.has_friend_requests %>
+           <b>(<%= current_user.requested_friends.size %>)</b>
+          <% end %>
+        </span>
+      </a>
     </li>
     <li class="nav-item">
       <a href="<%= users_all_path %>"><span class="sidebar-link-favicon"><%= fa_icon "search" %></span><span class="sidebar-link-text">Search</a></span>
