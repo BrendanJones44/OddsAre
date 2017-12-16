@@ -8,6 +8,7 @@ class User < ApplicationRecord
   extend FriendlyId
   before_validation :generate_slug
   validate :user_name_not_profane
+  before_save :uppercase_names
 
 
   friendly_id :user_name, use: [:slugged, :finders]
@@ -40,6 +41,11 @@ class User < ApplicationRecord
 
   def to_s
     first_name + " " + last_name + " @(#{user_name})"
+  end
+
+  def uppercase_names
+    self.first_name = self.first_name.upcase_first
+    self.last_name = self.last_name.upcase_first
   end
 
    private
