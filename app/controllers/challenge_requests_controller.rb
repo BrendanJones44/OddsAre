@@ -37,7 +37,8 @@ class ChallengeRequestsController < ApplicationController
   end
 
   def show_current
-
+    @requests_waiting_on_user = current_user.challenge_requests_waiting_on_user
+    @requests_waiting_on_friends = current_user.challenge_requests_waiting_on_friends
   end
   private
 		def challenge_params

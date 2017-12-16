@@ -1,0 +1,16 @@
+<h1>Current Odds Ares</h1>
+<h3>Odds Ares you need to set the odds out of...</h3>
+<% @requests_waiting_on_user.each do |request| %>
+  <li>
+    <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.actor.to_s%></a>
+  </li>
+<% end %>
+<h3>Odds Ares friends need to set the odds out of...</h3>
+<% @requests_waiting_on_friends.each do |request| %>
+  <li>
+    <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.recipient.to_s%></a>
+  </li>
+<% end %>
+<h3>Odds Ares you need need to pick a number... </h3>
+
+<h3>Odds Ares friends need to pick a number...</h3>

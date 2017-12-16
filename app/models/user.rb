@@ -58,6 +58,14 @@ class User < ApplicationRecord
     num_current_odds_ares != 0
   end
 
+  def challenge_requests_waiting_on_friends
+    sent_challenge_requests.where(responded_to_at: nil)
+  end
+
+  def challenge_requests_waiting_on_user
+    received_challenge_requests.where(responded_to_at: nil)
+  end
+
    private
      def generate_slug
        self.slug = user_name.to_s.parameterize
