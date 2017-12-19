@@ -1,5 +1,5 @@
 class ChallengeResponse < ApplicationRecord
-  has_one :challenge_request
+  belongs_to :challenge_request
   #has_one :finalize_challenge
   belongs_to :recipient, class_name: "User"
   belongs_to :actor, class_name: "User"

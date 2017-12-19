@@ -26,8 +26,6 @@ class ChallengeRequestsController < ApplicationController
   def show
     @challenge_request = ChallengeRequest.find((params[:id]))
     if @challenge_request.responded_to_at.nil? && @challenge_request.recipient == current_user
-    #Eventually add logic. Challenge requests should have a responded to timestamp that gets updated. Then
-    #only challenge requests that haven't been responded to are sent.
       @challenge_response = ChallengeResponse.new(challenge_request: @challenge_request)
     elsif @challenge_request.actor == current_user
       render 'show_as_actor'
@@ -37,8 +35,8 @@ class ChallengeRequestsController < ApplicationController
   end
 
   def show_current
-    @requests_waiting_on_user = current_user.challenge_requests_waiting_on_user
-    @requests_waiting_on_friends = current_user.challenge_requests_waiting_on_friends
+    @requests_waiting_on_user_to_set = current_user.challenge_requests_waiting_on_user_to_set
+    @requests_waiting_on_friends_to_set = current_user.challenge_requests_waiting_on_friends_to_set
   end
   private
 		def challenge_params

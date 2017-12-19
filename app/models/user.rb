@@ -58,11 +58,11 @@ class User < ApplicationRecord
     num_current_odds_ares != 0
   end
 
-  def challenge_requests_waiting_on_friends
+  def challenge_requests_waiting_on_friends_to_set
     sent_challenge_requests.where(responded_to_at: nil)
   end
 
-  def challenge_requests_waiting_on_user
+  def challenge_requests_waiting_on_user_to_set
     received_challenge_requests.where(responded_to_at: nil)
   end
 
