@@ -23,7 +23,7 @@ class FinalizeChallengesController < ApplicationController
 
         # The target of the odds are lost
         if @finalize_challenge.finalize_actor_number == challenge_response.response_actor_number
-          lost_user_id = challenge_response.actor_id
+          lost_user_id = challenge_response.challenge_request.recipient.id
           won_user_id = current_user.id
           Task.create(lost_user_id: lost_user_id, won_user_id: current_user.id, action: challenge_response.challenge_request.action)
 
