@@ -12,5 +12,14 @@
   </li>
 <% end %>
 <h3>Odds Ares you need need to pick a number... </h3>
-
+<% @responses_waiting_on_user_to_complete.each do |response| %>
+  <li>
+    <a href="<%= challenge_response_path(response) %>">Odds are from: <%=%></a>
+  </li>
+<% end %>
 <h3>Odds Ares friends need to pick a number...</h3>
+<% @responses_waiting_on_friends_to_complete.each do |response| %>
+  <li>
+    <a href="<%= challenge_response_path(response) %>">Odds are to: <%=%></a>
+  </li>
+<% end %>

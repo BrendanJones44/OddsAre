@@ -40,14 +40,12 @@ class User < ApplicationRecord
     requested_friends.any?
   end
 
-  def
-
   def anchor
     "(@#{user_name})"
   end
 
   def to_s
-    first_name + " " + last_name + " @(#{user_name})"
+    first_name + " " + last_name + " (@#{user_name})"
   end
 
   def num_current_odds_ares
@@ -64,6 +62,14 @@ class User < ApplicationRecord
 
   def challenge_requests_waiting_on_user_to_set
     received_challenge_requests.where(responded_to_at: nil)
+  end
+
+  def challenge_responses_waiting_on_user_to_complete
+    ChallengeResponse.where(finalized_at: nil).joins(:challenge_request).merge(sent_challenge_requests)
+  end
+
+  def challenge_responses_waiting_on_friends_to_complete
+    ChallengeResponse.where(finalized_at: nil).joins(:challenge_request).merge(received_challenge_requests)
   end
 
    private

@@ -1,34 +1,25 @@
-<div class="container">
-  <div class="card offset-sm-3 col-sm-6">
-    <div class="card-block">
-      <h1 class="card-title">Send an Odds Are Challenge</h1>
-      <% if @challenge_request.errors.any? %>
-          <div id="error_explanation">
-            <div class="alert alert-danger" role="alert" text-align="center">
-           <%= pluralize(@challenge_request.errors.count, "error") %> prevented this from being sent: <br/>
-
-
-              <% @challenge_request.errors.each do |attr,msg| %>
-
-                  <strong text-align="center"> <%= msg %> </strong>
-                </div>
-              <% end %>
-
-           </div>
-      <% end %>
-      <h4>Select a friend</h4>
-      <%= form_for @challenge_request do |f| %>
-        <div class="form-group">
-          <%= f.select :recipient_id, options_for_select(["a","b"]), {}, {class: "form form-group form-control"} do %>
-            <% @friends.each do |friend| %>
-              <%= content_tag(:option, friend.first_name + " " + friend.last_name, value: friend.id) %>
+<div class="card offset-sm-3 col-sm-6">
+  <div class="card-block">
+    <h1 class="card-title">Send an Odds Are Challenge</h1>
+    <% if @challenge_request.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger" role="alert" text-align="center">
+            <% @challenge_request.errors.each do |attr,msg| %>
+              <strong text-align="center"> <%= msg %> </strong>
             <% end %>
-          <% end %>
+          </div>
         </div>
-        <h4>Odds are they...</h4>
+    <% end %><!-- end of error box -->
+    <h4>Select a friend</h4>
+    <%= form_for @challenge_request do |f| %>
+      <%= f.select :recipient_id, options_for_select(["a","b"]), {}, {class: "form form-group form-control"} do %>
+        <% @friends.each do |friend| %>
+          <%= content_tag(:option, friend.first_name + " " + friend.last_name, value: friend.id) %>
+        <% end %>
+      <% end %>
+      <h4>Odds are they...</h4>
         <%= f.text_field :action, class: "form form-group form-control" %>
         <%= f.submit "Send challenge", class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
-</div>
+    <% end %><!-- end of challenge_request form -->
+  </div><!-- end of card-block -->
+</div><!-- end of card -->

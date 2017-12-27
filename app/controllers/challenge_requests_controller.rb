@@ -37,6 +37,8 @@ class ChallengeRequestsController < ApplicationController
   def show_current
     @requests_waiting_on_user_to_set = current_user.challenge_requests_waiting_on_user_to_set
     @requests_waiting_on_friends_to_set = current_user.challenge_requests_waiting_on_friends_to_set
+    @responses_waiting_on_friends_to_complete = current_user.challenge_responses_waiting_on_friends_to_complete
+    @responses_waiting_on_user_to_complete = current_user.challenge_responses_waiting_on_user_to_complete
   end
   private
 		def challenge_params
