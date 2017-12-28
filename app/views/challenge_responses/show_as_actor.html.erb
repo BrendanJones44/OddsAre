@@ -1,0 +1,19 @@
+<div class="card offset-sm-3 col-sm-6">
+  <div class="card-block">
+    <h1 class="card-title">Odds are from: <%=  %></h1>
+    <h3 class="card-subtitle">Odds are you: <%= @challenge_response.challenge_request.action %></h3>
+    <h5 class="card-centered-content">You set the odds out of: <%= @challenge_response.response_out_of %></h5>
+    <h5 class="card-centered-content">
+      You chose:
+      <button id="challenge_response_show_actor_number" class="btn btn-sm btn-primary">Show number</button>
+      <span id="challenge_response_actor_number_view">
+        <%= @challenge_response.response_actor_number %>
+      </span>
+    </h5>
+    <% if @challenge_response.finalized_at.nil? %>
+      <h5 class="card-centered-content"> They have not picked their number yet <h5>
+    <% else %>
+      <h5> They picked their number!</h5>
+    <% end %>
+  </div>
+</div>

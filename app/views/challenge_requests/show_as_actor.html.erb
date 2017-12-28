@@ -1,7 +1,11 @@
-<h3>You sent a challenge to: <%=@challenge_request.recipient.user_name %> </h3>
-<h5><%=@challenge_request.action %></h5>
-<% if @challenge_request.responded_to_at.nil? %>
-  <h5> They have not responsed yet <h5>
-<% else %>
-  <h5> They responded to you </h5>
-<% end %>
+<div class="card offset-sm-3 col-sm-6">
+  <div class="card-block">
+    <h1 class="card-title">Odds are to: <%= @challenge_request.recipient.full_name %></h1>
+    <h3 class="card-subtitle">Odds are they: <%= @challenge_request.action %></h3>
+    <% if @challenge_request.responded_to_at.nil? %>
+      <h5 class="card-centered-content"> They have not responsed yet <h5>
+    <% else %>
+      <h5> They responded to you </h5>
+    <% end %>
+  </div>
+</div>

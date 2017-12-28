@@ -28,6 +28,8 @@ class ChallengeResponsesController < ApplicationController
     if challenge_response.challenge_request.actor == current_user && challenge_response.finalized_at.nil?
       @finalize_challenge = FinalizeChallenge.new(challenge_response_id: challenge_response.id)
     else
+      # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
+      @challenge_response = challenge_response
       render 'show_as_actor'
     end
   end

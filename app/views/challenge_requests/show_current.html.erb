@@ -13,47 +13,55 @@
       <% if @requests_waiting_on_user_to_set.empty? and @responses_waiting_on_user_to_complete.empty? %>
         <h5>You have no odds ares waiting on you!</h5>
       <% else %>
-        <h5 id="current-odds-not-set">Odds Ares you need to set the odds out of...</h5>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <% @requests_waiting_on_user_to_set.each do |request| %>
-          <li>
-            <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.actor.to_s%></a>
-          </li>
+        <% if not @requests_waiting_on_user_to_set.empty? %>
+          <h5 id="current-odds-not-set">Odds Ares you need to set the odds out of...</h5>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <% @requests_waiting_on_user_to_set.each do |request| %>
+            <li>
+              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.actor.to_s%></a>
+            </li>
+          <% end %>
         <% end %>
-        <h5>Odds Ares you need need to pick a number... </h5>
-        <% @responses_waiting_on_user_to_complete.each do |response| %>
-          <li>
-            <a href="<%= challenge_response_path(response) %>">Odds are from: <%=%></a>
-          </li>
+        <% if not @responses_waiting_on_user_to_complete.empty? %>
+          <h5>Odds Ares you need need to pick a number... </h5>
+          <% @responses_waiting_on_user_to_complete.each do |response| %>
+            <li>
+              <a href="<%= challenge_response_path(response) %>">Odds are from: <%=%></a>
+            </li>
+          <% end %>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         <% end %>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
       <% end %>
     </div><!-- end of current-odds-waiting-on-user-wrapper -->
     <div id="current-odds-waiting-on-friends-wrapper">
       <% if @requests_waiting_on_friends_to_set.empty? and @responses_waiting_on_friends_to_complete.empty? %>
         <h5>You have no odds ares waiting on friends!</h5>
       <% else %>
-        <h5>Odds Ares friends need to pick a number...</h5>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <% @responses_waiting_on_friends_to_complete.each do |response| %>
-          <li>
-            <a href="<%= challenge_response_path(response) %>">Odds are to: <%=%></a>
-          </li>
+        <% if not @responses_waiting_on_friends_to_complete.empty? %>
+          <h5>Odds Ares friends need to pick a number...</h5>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <% @responses_waiting_on_friends_to_complete.each do |response| %>
+            <li>
+              <a href="<%= challenge_response_path(response) %>">Odds are to: <%=%></a>
+            </li>
+          <% end %>
         <% end %>
-        <h5>Odds Ares friends need to set the odds out of...</h5>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <% @requests_waiting_on_friends_to_set.each do |request| %>
-          <li>
-            <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.recipient.to_s%></a>
-          </li>
+        <% if not @requests_waiting_on_friends_to_set.empty? %>
+          <h5>Odds Ares friends need to set the odds out of...</h5>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <% @requests_waiting_on_friends_to_set.each do |request| %>
+            <li>
+              <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.recipient.to_s%></a>
+            </li>
+          <% end %>
         <% end %>
       <% end %>
     </div><!-- end of current-odds-waiting-on-friends-wrapper -->
