@@ -49,7 +49,14 @@ class User < ApplicationRecord
   end
 
   def num_current_odds_ares
-    sent_challenge_requests.where(responded_to_at: nil).size + received_challenge_requests.where(responded_to_at: nil).size
+    sent_challenge_requests.where(responded_to_at: nil).size +
+      received_challenge_requests.where(responded_to_at: nil).size +
+        challenge_responses_waiting_on_user_to_complete.size +
+          challenge_responses_waiting_on_friends_to_complete.size
+  end
+
+  def lost_odds_ares
+    ChallengeResult.where(lost_user_id: id)
   end
 
   def has_current_odds_ares

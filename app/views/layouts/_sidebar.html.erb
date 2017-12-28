@@ -53,7 +53,16 @@
       <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
     </li>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "fire" %></span><span class="sidebar-link-text">Lost <b>(1)</b></span></a>
+      <a href="#">
+        <span class="sidebar-link-favicon">
+          <%= fa_icon "fire" %>
+        </span>
+        <span class="sidebar-link-text">
+          Lost
+          <% if current_user.lost_odds_ares != 0 %>
+            <b>(<%= current_user.lost_odds_ares.size %>)</b>
+          <% end %>
+        </span></a>
     </li>
   </ul>
   <ul class="nav flex-column sidebar-group">
