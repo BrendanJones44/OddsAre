@@ -1,0 +1,10 @@
+#current-odds-waiting-on-user-link {
+  cursor: pointer;
+}
+#current-odds-waiting-on-friends-link {
+  cursor: pointer;
+}
+#current-odds-waiting-on-friends-wrapper {
+  // Initially this should not be visible (toggled via navbar)
+  display: none;
+}

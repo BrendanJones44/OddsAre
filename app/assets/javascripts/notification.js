@@ -6,7 +6,6 @@ document.addEventListener("turbolinks:load", function() {
 			var notificationElement = $(this);
 			// Grab the surrounding dropdown-item to remove notification once updated
 			var dropdownItem = $(this).parent();
-			console.log(dropdownItem)
 			// Don't navigate away from page
 	    event.preventDefault();
 			// Update notification object as read
