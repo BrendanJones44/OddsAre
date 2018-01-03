@@ -46,12 +46,16 @@ gem 'language_filter'
 group :test do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'faker', '~> 1.8.7'
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do
-
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rspec-rails', '~> 3.4'
+  gem 'capybara', '~> 2.5'
+  gem 'factory_girl_rails', '~> 4.5.0'
   gem 'byebug', platform: :mri
 end
 

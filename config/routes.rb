@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/users/:friendly', to: 'users#show'
 
   get 'pages/test', to: 'pages#test'
+  get 'pages/how_to_play', to: 'pages#how_to_play'
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
