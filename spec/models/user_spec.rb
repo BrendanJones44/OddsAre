@@ -54,5 +54,46 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe "#anchor" do
+      it "returns the users anchor" do
+        user = FactoryGirl.create :user
+        user.update_attribute(:user_name, "sam")
+        expect(user.anchor).to eql("(@sam)")
+      end
+    end
+
+    describe "#to_s" do
+      it "returns the expected to_s" do
+        user = FactoryGirl.create :user
+        user.update_attribute(:user_name, "sam")
+        user.update_attribute(:first_name, "bob")
+        user.update_attribute(:last_name, "mill")
+        expect(user.to_s).to eql("Bob Mill (@sam)")
+      end
+    end
+
+    describe "#user_name" do
+      context "user name contains profanity" do
+        subject{ FactoryGirl.create :user }
+        before { subject.update_attribute(:user_name, "fuck") }
+        it { expect(subject).to be_invalid }
+      end
+    end
+
+    describe "#first_name" do
+      context "user name contains profanity" do
+        subject{ FactoryGirl.create :user }
+        before { subject.update_attribute(:first_name, "fuck") }
+        it { expect(subject).to be_invalid }
+      end
+    end
+
+    describe "#last_name" do
+      context "user name contains profanity" do
+        subject{ FactoryGirl.create :user }
+        before { subject.update_attribute(:last_name, "fuck") }
+        it { expect(subject).to be_invalid }
+      end
+    end
   end
 end
