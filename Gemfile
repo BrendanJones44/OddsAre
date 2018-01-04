@@ -22,6 +22,8 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 
 gem 'react-rails'
 
+gem 'language_filter'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -54,6 +56,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rack-mini-profiler', require: false
   gem 'rspec-rails', '~> 3.4'
   gem 'capybara', '~> 2.5'
   gem 'factory_girl_rails', '~> 4.5.0'

@@ -1,4 +1,10 @@
 require 'rails_helper'
+require './spec/support/user_helpers'
+
+RSpec.configure do |c|
+  c.include UserHelpers
+end
+
 RSpec.describe ChallengeRequestsController, type: :controller do
   describe "GET #new" do
     context "anonymous user" do
@@ -21,11 +27,8 @@ RSpec.describe ChallengeRequestsController, type: :controller do
 
     context "authenticated user with friends" do
       before(:each) do
-        user_a = FactoryGirl.create :user
-        sign_in user_a
-        user_b = FactoryGirl.create :user
-        user_a.friend_request(user_b)
-        user_b.accept_request(user_a)
+        user_with_friends = get_user_with_friends()
+        sign_in user_with_friends
         get :new
       end
       it "should allow the user to view the new request page" do

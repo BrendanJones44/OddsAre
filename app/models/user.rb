@@ -1,32 +1,30 @@
 class User < ApplicationRecord
+  ### Association Macros ###
   has_friendship
   has_many :notifications, foreign_key: :recipient_id
   has_many :sent_challenge_requests, class_name: "ChallengeRequest", foreign_key: :actor_id
   has_many :received_challenge_requests, class_name: "ChallengeRequest", foreign_key: :recipient_id
   has_many :challenge_response, foreign_key: :recipient_id
   has_many :friend_requests, foreign_key: :targeting_user
+
+  ### Validations Macros ###
   validates_uniqueness_of :user_name, :case_sensitive => false
-  extend FriendlyId
-  before_validation :generate_slug
-  validate :user_name_not_profane
+  validates_presence_of :user_name
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validate :clean_user_name
+  validate :clean_first_name
+  validate :clean_last_name
+
+  ### Callbacks ###
   before_save :uppercase_names
+  before_validation :generate_slug
 
-
+  ### External usages ###
+  extend FriendlyId
   friendly_id :user_name, use: [:slugged, :finders]
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  def user_name_not_profane
-    if not user_name.blank?
-      swears = ['anal','anus','arse','ass','ballsack','balls','bastard','bitch','biatch','blowjob','boner','boob','butt','buttplug','clitoris','cock','coon','cunt','dick','dildo','dyke','fag','feck','fuck',
-        'homo','jizz','nigger','nigga','penis','piss','prick','pube','pussy','queer','scrotum','sex','shit','sh1t','slut','tit','vagina','whore']
-      if swears.include?(user_name)
-        errors.add(:user_name, "User name inappropriate, please choose another")
-      end
-    end
-  end
 
   def full_name
     first_name + " " + last_name
@@ -46,6 +44,27 @@ class User < ApplicationRecord
 
   def to_s
     first_name + " " + last_name + " (@#{user_name})"
+  end
+
+  def clean_user_name
+    profanity_filter = LanguageFilter::Filter.new matchlist: :profanity
+    if profanity_filter.match? user_name then
+      errors.add(:user_name, "The following language is inappropriate in a username: #{profanity_filter.matched(user_name).join(', ')}")
+    end
+  end
+
+  def clean_first_name
+    profanity_filter = LanguageFilter::Filter.new matchlist: :profanity
+    if profanity_filter.match? first_name then
+      errors.add(:first_name, "The following language is inappropriate in a first name: #{profanity_filter.matched(first_name).join(', ')}")
+    end
+  end
+
+  def clean_last_name
+    profanity_filter = LanguageFilter::Filter.new matchlist: :profanity
+    if profanity_filter.match? last_name then
+      errors.add(:last_name, "The following language is inappropriate in a first name: #{profanity_filter.matched(last_name).join(', ')}")
+    end
   end
 
   def num_current_odds_ares

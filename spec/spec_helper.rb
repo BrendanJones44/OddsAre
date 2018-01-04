@@ -96,4 +96,5 @@ RSpec.configure do |config|
 end
 require 'capybara/rspec'
 require 'simplecov'
+require 'support/database_cleaner'
 SimpleCov.start
