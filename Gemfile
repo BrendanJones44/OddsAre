@@ -50,6 +50,7 @@ group :test do
   gem 'database_cleaner', '~> 1.5'
   gem 'faker', '~> 1.8.7'
   gem 'simplecov', :require => false
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
