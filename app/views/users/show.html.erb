@@ -19,7 +19,7 @@
         <% elsif current_user.friends.include?(@user) %>
           <%= button_to "Send Odds Are", new_challenge_request_path, method: :get, class: "btn btn-sm btn-primary" %>
         <% else %>
-          <%= button_to "Add Friend", new_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
+          <%= button_to "Add Friend", send_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
         <% end %>
         <h4>External user</h4>
       <% end %><!-- end of external user view -->

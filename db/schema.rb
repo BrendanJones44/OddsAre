@@ -10,67 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218222252) do
+ActiveRecord::Schema.define(version: 20180104223716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accept_friend_requests", force: :cascade do |t|
-    t.integer  "target_user_id"
-    t.integer  "acting_user_id"
-    t.datetime "acted_upon_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "challenge_requests", force: :cascade do |t|
-    t.integer  "recipient_id"
-    t.integer  "actor_id"
-    t.datetime "read_at"
     t.string   "action"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "challenge_response_id"
-    t.datetime "responded_to_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.datetime "acted_upon_at"
     t.integer  "notification_id"
   end
 
   create_table "challenge_responses", force: :cascade do |t|
-    t.datetime "read_at"
-    t.integer  "challenge_request_id"
     t.integer  "response_out_of"
-    t.integer  "response_actor_number"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "challenge_action"
-    t.integer  "actor_id"
-    t.integer  "recipient_id"
-    t.datetime "finalized_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.datetime "acted_upon_at"
-  end
-
-  create_table "challenge_results", force: :cascade do |t|
-    t.integer  "initiator_id"
-    t.integer  "target_id"
-    t.integer  "challenge_out_of"
-    t.integer  "initiator_num"
-    t.integer  "target_num"
-    t.string   "action"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "lost_user_id"
-    t.datetime "acted_upon_at"
-    t.integer  "won_user_id"
-  end
-
-  create_table "finalize_challenges", force: :cascade do |t|
-    t.integer  "challenge_response_id"
-    t.integer  "finalize_actor_number"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "actor_id"
-    t.integer  "challenge_out_of"
+    t.integer  "target_number"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -117,14 +75,15 @@ ActiveRecord::Schema.define(version: 20171218222252) do
     t.integer  "dismiss_type"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.integer  "lost_user_id"
-    t.integer  "won_user_id"
-    t.string   "action"
-    t.datetime "lost_user_completed_at"
-    t.datetime "won_user_completed_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "odds_ares", force: :cascade do |t|
+    t.integer  "initiator_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "challenge_request_id"
+    t.index ["challenge_request_id"], name: "index_odds_ares_on_challenge_request_id", using: :btree
+    t.index ["initiator_id"], name: "index_odds_ares_on_initiator_id", using: :btree
+    t.index ["recipient_id"], name: "index_odds_ares_on_recipient_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -148,4 +107,5 @@ ActiveRecord::Schema.define(version: 20171218222252) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "odds_ares", "challenge_requests"
 end

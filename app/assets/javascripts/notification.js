@@ -32,6 +32,7 @@ document.addEventListener("turbolinks:load", function() {
 	$(function() {
 		$('.notification-link').on("click", function(event){
 			if ($(this).data("dismiss-type") === "on_click"){
+				console.log($(this))
 				$.ajax({
 					// Grab notification's dynamic url attribute
 					url: $('.notification-link').data("dismiss-url"),

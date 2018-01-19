@@ -7,7 +7,7 @@
     <a class='dropdown-item' href="">No new notifications</a>
   <% else %>
     <% current_user.notifications.needs_action.each do |notification| %>
-    <a class="notification-link" href="<%= polymorphic_url(notification.notifiable) %>" data-dismiss-type="<%= notification.dismiss_type %>">
+    <a class="notification-link" href="<%= polymorphic_url(notification.notifiable) %>" data-dismiss-type="<%= notification.dismiss_type %>" data-dismiss-url="<%= mark_notification_as_read_path(notification)%>">
       <div class='dropdown-item'>
           <span class="notification-text"><%= notification.to_s %>
         <a class="dismiss-notification" data-dismiss-url="<%= mark_notification_as_read_path(notification)%>" href=""><span class="close-notification-item"><%= fa_icon 'times' %></span></a></a>
