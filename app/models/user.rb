@@ -75,7 +75,7 @@ class User < ApplicationRecord
   # end
   #
   def lost_odds_ares
-    []  
+    []
   #   ChallengeResult.where(lost_user_id: id)
   end
   #

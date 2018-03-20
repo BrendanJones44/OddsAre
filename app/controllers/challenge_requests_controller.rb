@@ -1,5 +1,6 @@
 class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!
+
   def new
     @friends = current_user.friends
     if @friends.length == 0
@@ -13,7 +14,6 @@ class ChallengeRequestsController < ApplicationController
   def create
     @challenge_request = ChallengeRequest.new(challenge_params)
 		@challenge_request.actor = current_user
-
 		if @challenge_request.save
       Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are", notifiable: @challenge_request)
       redirect_back(fallback_location: root_path)

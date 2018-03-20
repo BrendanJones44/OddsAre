@@ -9,5 +9,6 @@ FactoryGirl.define do
     user_name { Faker::LeagueOfLegends.champion }
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
+    #id { Faker::Number.between(1,200) }
   end
 end

@@ -143,4 +143,41 @@ RSpec.describe FriendshipController, type: :controller do
       end
     end
   end
+
+  describe "GET #show_friend_requests" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    context "anonymous user" do
+      it "should be redirected to signin" do
+        get :show_friend_requests
+        expect( response ).to redirect_to( new_user_session_path )
+      end
+    end
+
+    context "authenticated user" do
+      before do
+        sign_in user
+      end
+
+      context "requests without having any friend requests" do
+        it "should return an empty array" do
+          get :show_friend_requests
+          expect(assigns(:friend_requests)).to eq([])
+        end
+      end
+
+      context "requests with a friend request" do
+        let(:other_user) { FactoryGirl.create :user }
+
+        before do
+          other_user.friend_request(user)
+        end
+
+        it "should return have a friend request" do
+          get :show_friend_requests
+          expect(assigns(:friend_requests).size).to eq(1)
+        end
+      end
+    end
+  end
 end

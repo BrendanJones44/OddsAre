@@ -9,7 +9,11 @@ class FriendshipController < ApplicationController
         raise Exception.new('Friendship already exists')
       end
       current_user.friend_request(recipient)
-      Notification.create(recipient: recipient, actor: current_user, action: "sent you a friend request", notifiable: current_user, dismiss_type: "on_click")
+      Notification.create(recipient: recipient,
+                          actor: current_user,
+                          action: "sent you a friend request",
+                          notifiable: current_user,
+                          dismiss_type: "on_click")
     end
     redirect_back(fallback_location: root_path)
   end
@@ -23,7 +27,11 @@ class FriendshipController < ApplicationController
       end
       if actor.pending_friends.include? current_user
         current_user.accept_request(actor)
-        Notification.create(recipient: actor, actor: current_user, action: "accepted your friend request", notifiable: current_user, dismiss_type: "on_click")
+        Notification.create(recipient: actor,
+                            actor: current_user,
+                            action: "accepted your friend request",
+                            notifiable: current_user,
+                            dismiss_type: "on_click")
       else
         raise Exception.new('No friend request exists to accept')
       end

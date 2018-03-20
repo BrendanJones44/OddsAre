@@ -6,6 +6,10 @@ class Notification < ApplicationRecord
 
   scope :needs_action, -> { where( acted_upon_at: nil ) }
 
+  def user_can_update(user)
+    self.recipient_id? && user == self.recipient
+  end
+
   def to_s
     actor.first_name + " " + actor.last_name + " " + action
   end
