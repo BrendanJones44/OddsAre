@@ -13,9 +13,17 @@ class ChallengeRequestsController < ApplicationController
 
   def create
     @challenge_request = ChallengeRequest.new(challenge_params)
-		@challenge_request.actor = current_user
+
 		if @challenge_request.save
-      Notification.create(recipient: @challenge_request.recipient, actor: current_user, action: "sent you an odds are", notifiable: @challenge_request)
+      odds_are = OddsAre.new()
+      odds_are.initiator = current_user
+      odds_are.challenge_request = @challenge_request
+      odds_are.recipient_id = params.require(:recipient_id)
+      Notification.create(recipient: odds_are.recipient,
+                          actor: current_user,
+                          action: "sent you an odds are",
+                          notifiable: @challenge_request)
+      # odds_are.save
       redirect_back(fallback_location: root_path)
 		else
 			@friends = current_user.friends
@@ -42,7 +50,11 @@ class ChallengeRequestsController < ApplicationController
   end
   private
 		def challenge_params
-			params.require(:challenge_request).permit(:action, :recipient_id)
+			params.require(:challenge_request).permit(:action)
 		end
+
+    def odds_are_params
+      params.require(:recipient_id)
+    end
 
 end

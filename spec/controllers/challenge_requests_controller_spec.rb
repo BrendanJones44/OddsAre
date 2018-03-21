@@ -39,7 +39,6 @@ RSpec.describe ChallengeRequestsController, type: :controller do
 
   describe "POST #create" do
     let(:user) { FactoryGirl.create(:user) }
-    let(:empty_challenge_request) { ChallengeRequest.new() }
     context "anonymous user" do
       it "should be redirected to signin" do
         post :create
@@ -51,19 +50,52 @@ RSpec.describe ChallengeRequestsController, type: :controller do
         sign_in user
       end
 
-      context "requests with no challenge request" do
+      context "requests with no parameters" do
         it "should require parameters" do
-          expect{ post :create }.to raise_error ActionController::ParameterMissing
+          expect{
+            post :create, params: {}
+          }.to raise_error ActionController::ParameterMissing
         end
       end
 
       context "with empty challenge request" do
+        let(:empty_challenge_request) { ChallengeRequest.new() }
         it "throws an error" do
           expect{
-            post :create, challenge_request: empty_challenge_request
-          }.to raise_error ActiveRecord::RecordInvalid
+            post :create, params: { challenge_request: empty_challenge_request }
+          }.to raise_error ActionController::ParameterMissing
         end
       end
+
+      context "with valid challenge request" do
+        before do
+
+        end
+        let(:challenge_request) { build(:challenge_request) }
+
+        context "without any recipient" do
+          it "throws an error" do
+            expect{
+              post :create, params: { challenge_request: challenge_request }
+            }.to raise_error ActionController::ParameterMissing
+          end
+        end
+
+        context "with non-exisistent recpient id" do
+          it "throws an error" do
+            puts("BRENDAN")
+            puts(challenge_request.action)
+            expect{
+              post :create, :params => {
+                :challenge_request => { :action => "My Widget"},
+                :recipient_id => 10000
+              }
+            }.to raise_error ActiveRecord::RecordNotFound
+          end
+        end
+      end
+
+
     end
   end
 end
