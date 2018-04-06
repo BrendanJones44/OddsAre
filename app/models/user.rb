@@ -84,9 +84,11 @@ class User < ApplicationRecord
     false
   end
   #
-  # def challenge_requests_waiting_on_friends_to_set
-  #   sent_challenge_requests.where(responded_to_at: nil)
-  # end
+  def challenge_requests_waiting_on_friends_to_set
+    sent_odds_ares
+    #ChallengeRequest.where(responded_to_at: nil).joins(:odds_are).merge(sent_odds_ares)
+    #sent_odds_ares.joins(:challenge_request).merge(:challenge_request).where(responded_to_at: nil)
+  end
   #
   # def challenge_requests_waiting_on_user_to_set
   #   received_challenge_requests.where(responded_to_at: nil)

@@ -14,21 +14,30 @@ class ChallengeRequestsController < ApplicationController
   def create
     @challenge_request = ChallengeRequest.new(challenge_params)
 
-		if @challenge_request.save
-      odds_are = OddsAre.new()
-      odds_are.initiator = current_user
-      odds_are.challenge_request = @challenge_request
-      odds_are.recipient_id = params.require(:recipient_id)
-      Notification.create(recipient: odds_are.recipient,
-                          actor: current_user,
-                          action: "sent you an odds are",
-                          notifiable: @challenge_request)
-      # odds_are.save
-      redirect_back(fallback_location: root_path)
-		else
-			@friends = current_user.friends
-			render 'new'
-		end
+    recipient = User.find(params.require(:recipient_id))
+
+    if recipient.blank?
+      raise Exception.new('No user found with user_id: ' + recipient_id)
+    elsif not current_user.friends.include? recipient
+        raise Exception.new(
+          'You must be friends with the recpient to odds are them')
+    else
+  		if @challenge_request.save
+        odds_are = OddsAre.new()
+        odds_are.initiator = current_user
+        odds_are.challenge_request = @challenge_request
+        odds_are.recipient_id = params.require(:recipient_id)
+        Notification.create(recipient: odds_are.recipient,
+                            actor: current_user,
+                            action: "sent you an odds are",
+                            notifiable: @challenge_request)
+        odds_are.save
+        redirect_back(fallback_location: root_path)
+  		else
+  			@friends = current_user.friends
+  			render 'new'
+  		end
+    end
   end
 
   def show
@@ -56,5 +65,4 @@ class ChallengeRequestsController < ApplicationController
     def odds_are_params
       params.require(:recipient_id)
     end
-
 end
