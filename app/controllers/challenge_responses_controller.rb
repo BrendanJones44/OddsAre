@@ -1,21 +1,29 @@
 class ChallengeResponsesController < ApplicationController
   before_action :authenticate_user!
   def create
-    @challenge_request = ChallengeRequest.find(params[:challenge_request_id])
-    if current_user == @challenge_request.recipient
-      @challenge_response = ChallengeResponse.new(challenge_response_params)
-      @challenge_response.challenge_request = @challenge_request
+    @challenge_response = ChallengeResponse.new(challenge_response_params)
+    odds_are = OddsAre.find(@challenge_response.odds_are_id)
+    if current_user == odds_are.recipient
+      #@challenge_response = ChallengeResponse.new(challenge_response_params)
+      #@challenge_response.challenge_request = challenge_request
       if @challenge_response.save
-        @challenge_request.update(responded_to_at: Time.zone.now)
-        @challenge_request.notification.update(acted_upon_at: Time.zone.now)
-        @challenge_request.challenge_response = @challenge_response
-        Notification.create(recipient: @challenge_request.actor, actor: current_user, action: "responded to your odds are", notifiable: @challenge_response)
+        odds_are.update(responded_to_at: Time.zone.now)
+        challenge_request.notification.update(acted_upon_at: Time.zone.now)
+        odds_are.challenge_response = @challenge_response
+        Notification.create(
+          recipient: odds_are.initiator,
+          actor: current_user,
+          action: "responded to your odds are",
+          notifiable: @challenge_response
+        )
         redirect_to '/users/all'
       else
         render '/challenge_requests/show'
       end
     else
-      render 'pages/expired'
+      raise Exception.new(
+        'You must be the recipient off the odds are to respond'
+      )
     end
   end
 
@@ -36,6 +44,8 @@ class ChallengeResponsesController < ApplicationController
 
   private
     def challenge_response_params
-      params.require(:challenge_response).permit(:response_out_of, :response_actor_number, :challenge_request_id)
+      params.require(:challenge_response).permit(:response_out_of,
+                                                 :response_actor_number,
+                                                 :odds_are_id)
     end
 end

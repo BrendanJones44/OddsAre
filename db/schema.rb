@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321020618) do
+ActiveRecord::Schema.define(version: 20180407142041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,12 @@ ActiveRecord::Schema.define(version: 20180321020618) do
   end
 
   create_table "challenge_responses", force: :cascade do |t|
-    t.integer  "response_out_of"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "odds_out_of"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.datetime "acted_upon_at"
-    t.integer  "target_number"
+    t.integer  "number_chosen"
+    t.integer  "odds_are_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(version: 20180321020618) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "challenge_request_id"
+    t.datetime "responded_to_at"
     t.index ["challenge_request_id"], name: "index_odds_ares_on_challenge_request_id", using: :btree
     t.index ["initiator_id"], name: "index_odds_ares_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_odds_ares_on_recipient_id", using: :btree

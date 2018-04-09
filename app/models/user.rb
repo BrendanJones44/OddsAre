@@ -2,8 +2,8 @@ class User < ApplicationRecord
   ### Association Macros ###
   has_friendship
   has_many :notifications, foreign_key: :recipient_id
-  has_many :sent_odds_ares, class_name: "OddsAre", foreign_key: :initiator_id
-  has_many :received_odds_ares, class_name: "OddsAre", foreign_key: :recipient_id
+  has_many :sent_odds_ares, class_name: "OddsAre", foreign_key: :initiator_id, dependent: :delete_all
+  has_many :received_odds_ares, class_name: "OddsAre", foreign_key: :recipient_id, dependent: :delete_all
   has_many :challenge_response, foreign_key: :recipient_id
   has_many :friend_requests, foreign_key: :targeting_user
 

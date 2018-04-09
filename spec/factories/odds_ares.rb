@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :odds_are do
-    initiator_id 1
-    recipient_id 1
+    association :recipient, factory: :user
+    association :initiator, factory: :user
+    association :challenge_request, factory: :challenge_request
   end
-
 end
