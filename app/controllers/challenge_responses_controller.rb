@@ -6,7 +6,6 @@ class ChallengeResponsesController < ApplicationController
     if current_user == odds_are.recipient
       if @challenge_response.save
         odds_are.update(responded_to_at: Time.zone.now)
-        # To do: factory should have notification   ``
         odds_are.challenge_request.notification.update(acted_upon_at: Time.zone.now)
         odds_are.challenge_response = @challenge_response
         Notification.create(
@@ -15,10 +14,8 @@ class ChallengeResponsesController < ApplicationController
           action: "responded to your odds are",
           notifiable: @challenge_response
         )
-        redirect_to '/users/all'
+        redirect_back(fallback_location: root_path)
       else
-        puts("Challenge Response chosen number: " + @challenge_response.number_chosen)
-        puts("Challenge Response out of number: " + @challenge_response.odds_out_of)
         render '/challenge_requests/show'
       end
     else

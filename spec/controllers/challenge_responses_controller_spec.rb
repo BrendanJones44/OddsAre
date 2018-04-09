@@ -100,24 +100,24 @@ RSpec.describe ChallengeResponsesController, type: :controller do
         end
 
         it "should create a challenge response object" do
-          expect(ChallengeResponse.all.size). to eql 1
+          expect( ChallengeResponse.all.size ). to eql 1
+        end
+
+        it "should update the odds are's timestamp" do
+          expect( OddsAre.first.responded_to_at ).to be_a( Time )
         end
 
         it "should redirect user back" do
           expect( response ).to redirect_to "base_path"
         end
 
-        # it "should update the responded timestamp on the odds are object" do
-        #
-        # end
-        #
-        # it "should create a notification for the odds are's initiator" do
-        #
-        # end
-        #
-        # it "should redirect user back" do
-        #
-        # end
+        it "should create a notification for the odds are's initiator" do
+          expect( valid_odds_are.initiator.notifications.size ).to eql 1
+        end
+
+        it "should mark the responder's notification as read" do
+          expect( Notification.first.acted_upon_at).to be_a( Time )
+        end
       end
     end
   end
