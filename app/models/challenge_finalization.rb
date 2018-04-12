@@ -1,0 +1,2 @@
+class ChallengeFinalization < ApplicationRecord
+end
