@@ -42,8 +42,8 @@ class ChallengeResponsesController < ApplicationController
 
   private
     def challenge_response_params
-      params.require(:challenge_response).permit(:response_out_of,
-                                                 :response_actor_number,
+      params.require(:challenge_response).permit(:odds_out_of,
+                                                 :number_chosen,
                                                  :odds_are_id)
     end
 end

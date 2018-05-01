@@ -90,6 +90,47 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
         end
       end
 
+      context "requets with valid challenge finalization, but no winner" do
+        let(:challenge_response) {
+          FactoryGirl.create(:challenge_response,
+          :odds_are_id => 1,
+          :number_chosen => 10,
+          :odds_out_of => 50
+          )
+        }
+        let(:associated_odds_are) {
+          FactoryGirl.create(:odds_are, :initiator => user, :challenge_response => challenge_response)
+        }
+
+        let(:challenge_finalization) {
+          FactoryGirl.attributes_for(:challenge_finalization,
+          :odds_are_id => associated_odds_are.id)
+        }
+
+        before do
+          request.env["HTTP_REFERER"] = "base_path"
+          post :create, :params => {
+            :challenge_finalization => challenge_finalization
+          }
+        end
+
+        it "should create a challenge finalization object" do
+          expect( ChallengeFinalization.all.size ).to eql 1
+        end
+
+        it "should update the odds are's timestamp" do
+          expect( OddsAre.first.finalized_at).to be_a( Time )
+        end
+
+        it "should redirect user back" do
+          expect( response ).to redirect_to "base_path"
+        end
+
+        it "should notify the other user the odds are is completed" do
+          expect( associated_odds_are.recipient.notifications.size ).to eql 1
+        end
+      end
+
     end
   end
 end

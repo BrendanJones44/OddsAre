@@ -3,8 +3,8 @@ class ChallengeFinalizationsController < ApplicationController
 
   def create
     params.require(:challenge_finalization)
-    @finalize_challenge = ChallengeFinalization.new(finalize_challenge_params)
-    odds_are = OddsAre.find(@finalize_challenge.odds_are_id)
+    @challenge_finalization = ChallengeFinalization.new(finalize_challenge_params)
+    odds_are = OddsAre.find(@challenge_finalization.odds_are_id)
     if odds_are.finalized_at?
       raise Exception.new(
         "This odds are has already been completed"
@@ -14,18 +14,22 @@ class ChallengeFinalizationsController < ApplicationController
       raise Exception.new(
         'You must be the initiator of the odds are to respond')
     else
+      @challenge_finalization = ChallengeFinalization.new(finalize_challenge_params)
+
+      if @challenge_finalization.save
+
+        challenge_response = odds_are.challenge_response
+
+        if (recipient_won(@challenge_finalization, challenge_response))
+        elsif (initiator_won(@challenge_finalization, challenge_response))
+        else
+        end
+
+        odds_are.update(finalized_at: Time.zone.now)
+        Notification.create(recipient: odds_are.recipient, actor: current_user, action: "completed an odds are", notifiable: odds_are)
+        redirect_back(fallback_location: root_path)
+      end
     end
-    # if challenge_response.finalized_at.nil?
-    #   @finalize_challenge = FinalizeChallenge.new(finalize_challenge_params)
-    #   if @finalize_challenge.save
-    #
-    #     # Used for ensuring a user can't respond multiple times
-    #     challenge_response.update(finalized_at: Time.zone.now)
-    #     challenge_response.notification.update(acted_upon_at: Time.zone.now)
-    #     # If nobody loses, these stay nil
-    #     lost_user_id = nil
-    #     won_user_id = nil
-    #
     #     # The target of the odds are lost
     #     if @finalize_challenge.finalize_actor_number == challenge_response.response_actor_number
     #       lost_user_id = challenge_response.challenge_request.recipient.id
@@ -66,4 +70,13 @@ class ChallengeFinalizationsController < ApplicationController
     def finalize_challenge_params
       params.require(:challenge_finalization).permit(:number_guessed, :odds_are_id)
     end
+
+    def initiator_won(challenge_finalization, challenge_response)
+      challenge_finalization.number_guessed == challenge_response.number_chosen
+    end
+
+    def recipient_won(challenge_finalization, challenge_response)
+      challenge_finalization.number_guessed + challenge_response.number_chosen == challenge_response.odds_out_of
+    end
+
 end

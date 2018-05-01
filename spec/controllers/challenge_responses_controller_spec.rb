@@ -107,6 +107,10 @@ RSpec.describe ChallengeResponsesController, type: :controller do
           expect( OddsAre.first.responded_to_at ).to be_a( Time )
         end
 
+        it "should update the odds are's association" do
+          expect( OddsAre.first.challenge_response ).to be_a( ChallengeResponse )
+        end
+
         it "should redirect user back" do
           expect( response ).to redirect_to "base_path"
         end
