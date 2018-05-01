@@ -21,7 +21,9 @@ class ChallengeFinalizationsController < ApplicationController
         challenge_response = odds_are.challenge_response
 
         if (recipient_won(@challenge_finalization, challenge_response))
+          Task.create(loser: odds_are.initiator, winner: odds_are.recipient, action: odds_are.challenge_request.action)
         elsif (initiator_won(@challenge_finalization, challenge_response))
+          Task.create(loser: odds_are.recipient, winner: odds_are.initiator, action: odds_are.challenge_request.action)
         else
         end
 
