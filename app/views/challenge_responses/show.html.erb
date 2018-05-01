@@ -17,11 +17,10 @@
     </div>
     <div class="card-block">
       <h5>They set the odds out of: </br></h5>
-      <% @finalize_challenge.challenge_out_of = @response_out_of %>
       <h5><%= @response_out_of %></h5>
       <%= form_for @finalize_challenge do |f| %>
-        <%= f.number_field :finalize_actor_number, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
-        <%= f.hidden_field :challenge_response_id, value: @response_id %>
+        <%= f.number_field :number_guessed, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
+        <%= f.hidden_field :odds_are_id, value: @finalize_challenge.odds_are_id %>
         <%= f.submit "Send response", class: "btn btn-primary" %>
       <% end %>
     </div>

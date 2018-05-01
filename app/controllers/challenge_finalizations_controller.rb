@@ -28,6 +28,7 @@ class ChallengeFinalizationsController < ApplicationController
         end
 
         odds_are.update(finalized_at: Time.zone.now)
+        odds_are.challenge_response.notification.update(acted_upon_at: Time.zone.now)
         Notification.create(recipient: odds_are.recipient, actor: current_user, action: "completed an odds are", notifiable: odds_are)
         redirect_back(fallback_location: root_path)
       end

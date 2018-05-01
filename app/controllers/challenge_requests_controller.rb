@@ -32,6 +32,7 @@ class ChallengeRequestsController < ApplicationController
                             action: "sent you an odds are",
                             notifiable: @challenge_request)
         odds_are.save
+        flash[:notice] = "Odds are sent to " + recipient.full_name
         redirect_back(fallback_location: root_path)
   		else
   			@friends = current_user.friends
@@ -42,9 +43,9 @@ class ChallengeRequestsController < ApplicationController
 
   def show
     @challenge_request = ChallengeRequest.find((params[:id]))
-    if @challenge_request.responded_to_at.nil? && @challenge_request.recipient == current_user
-      @challenge_response = ChallengeResponse.new(challenge_request: @challenge_request)
-    elsif @challenge_request.actor == current_user
+    if @challenge_request.odds_are.responded_to_at.nil? && @challenge_request.odds_are.recipient == current_user
+      @challenge_response = ChallengeResponse.new()
+    elsif @challenge_request.odds_are.initiator == current_user
       render 'show_as_actor'
     else
       render 'pages/expired'

@@ -27,15 +27,17 @@ class ChallengeResponsesController < ApplicationController
 
   def show
     challenge_response = ChallengeResponse.find(params[:id])
-    @challenge_action = challenge_response.challenge_request.action
-    @other_user = challenge_response.recipient
-    @response_out_of = challenge_response.response_out_of
+    odds_are = challenge_response.odds_are
+    @challenge_action = odds_are.challenge_request.action
+    @other_user = odds_are.recipient
+    @response_out_of = challenge_response.odds_out_of
     @response_id = challenge_response.id
-    if challenge_response.challenge_request.actor == current_user && challenge_response.finalized_at.nil?
-      @finalize_challenge = FinalizeChallenge.new(challenge_response_id: challenge_response.id)
+    if odds_are.initiator == current_user && odds_are.finalized_at.nil?
+      @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
     else
       # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
       @challenge_response = challenge_response
+      @odds_are = challenge_response.odds_are
       render 'show_as_actor'
     end
   end

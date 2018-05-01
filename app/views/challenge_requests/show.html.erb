@@ -1,6 +1,6 @@
 <div class="card offset-sm-3 col-sm-6">
   <div class="card-block">
-    <h1 class="card-title"><%= @challenge_request.actor.full_name %>:</h1>
+    <h1 class="card-title"><%= @challenge_request.odds_are.initiator.full_name %>:</h1>
     <h3 class="card-subtitle">Odds are you <%= @challenge_request.action %></h3>
     <% if @challenge_response.errors.any? %>
       <div id="error_explanation">
@@ -13,11 +13,10 @@
     <% end %>
     <%= form_for @challenge_response do |f| %>
       <h4>What are the odds out of</h4>
-      <%= f.number_field :response_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>
+      <%= f.number_field :odds_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>
       <h4>Your number choice</h4>
-      <%= f.number_field :response_actor_number, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
-      <%= hidden_field_tag :challenge_request_id, @challenge_request.id %>
-      <%= hidden_field_tag :challenge_action, @challenge_request.action %>
+      <%= f.number_field :number_chosen, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
+      <%= f.hidden_field :odds_are_id, value: @challenge_request.odds_are.id %>
       <%= f.submit "Send response", class: "btn btn-primary" %>
     <% end %>
   </div>

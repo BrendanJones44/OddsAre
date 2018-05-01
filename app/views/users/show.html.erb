@@ -15,7 +15,7 @@
         <% if current_user.pending_friends.include?(@user) %>
           <h5>Friend request pending </h5>
         <% elsif current_user.requested_friends.include?(@user) %>
-          <%= button_to "Accept Friend", accept_friend_request_url(:user_name => @user.user_name), class: "btn btn-sm btn-primary" %>
+          <%= button_to "Accept Friend", accept_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
         <% elsif current_user.friends.include?(@user) %>
           <%= button_to "Send Odds Are", new_challenge_request_path, method: :get, class: "btn btn-sm btn-primary" %>
         <% else %>
