@@ -9,7 +9,7 @@ class ChallengeResponse < ApplicationRecord
   # validate :odds_out_of_min
   # validate :number_chosen_not_middle
   # validate :number_chosen_in_bounds
-  # has_one :notification, as: :notifiable
+  has_one :notification, as: :notifiable
   #
   # def actor_test_method
   #   User.find(challenge_request.recipient_id)

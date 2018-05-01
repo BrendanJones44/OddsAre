@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card offset-sm-3 col-sm-6">
+    <div class="card-block">
+      <h1 class="card-title">
+        <% if @odds_are.task.nil? %>
+        Nobody won/lost
+        <% elsif @odds_are.task.loser == current_user %>
+        You lost!
+        <% elsif @odds_are.task.winner == current_user %>
+        You won!
+        <% end %>
+      </h1>
+    </div>
+    <div class="card-block">
+      <h3>The odds were to: <%= @odds_are.challenge_request.action %></h3>
+      <h4>The odds were set out of: <%= @odds_are.challenge_response.odds_out_of %></h4>
+      <% if current_user == @odds_are.initiator %>
+        <h5>You choose: <%= @odds_are.challenge_finalization.number_guessed %></h5>
+        <h5>They chose: <%= @odds_are.challenge_response.number_chosen %></h5>
+      <% elsif current_user == @odds_are.recipient %>
+        <h5>You chose: <%= @odds_are.challenge_response.number_chosen %></h5>
+        <h5>They chose: <%= @odds_are. challenge_finalization.number_guessed %></h5>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -4,5 +4,6 @@ class OddsAre < ApplicationRecord
   has_one :challenge_request
   has_one :challenge_response
   has_one :challenge_finalization
-  has_one :challenge_task
+  has_one :task
+  has_one :notification, as: :notifiable
 end

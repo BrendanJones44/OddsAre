@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :challenge_results
   resources :challenge_finalizations
   #resources :accept_friend_requests
-  resources :odds_are
+  resources :odds_ares
 
 
   get '/challenge_requests/show_current', to: 'challenge_requests#show_current', as: 'challenge_requests_show_current'

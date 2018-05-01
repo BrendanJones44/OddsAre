@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501171319) do
+ActiveRecord::Schema.define(version: 20180501190721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,17 +93,21 @@ ActiveRecord::Schema.define(version: 20180501171319) do
     t.integer  "challenge_request_id"
     t.datetime "responded_to_at"
     t.datetime "finalized_at"
+    t.integer  "task_id"
     t.index ["challenge_request_id"], name: "index_odds_ares_on_challenge_request_id", using: :btree
     t.index ["initiator_id"], name: "index_odds_ares_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_odds_ares_on_recipient_id", using: :btree
+    t.index ["task_id"], name: "index_odds_ares_on_task_id", using: :btree
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "winner_id"
     t.integer  "loser_id"
     t.string   "action"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "odds_are_id"
+    t.index ["odds_are_id"], name: "index_tasks_on_odds_are_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

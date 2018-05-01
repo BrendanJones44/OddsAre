@@ -95,11 +95,16 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           FactoryGirl.create(:user)
         }
 
+        let(:notification) {
+          FactoryGirl.create(:notification)
+        }
+
         let(:challenge_response) {
           FactoryGirl.create(:challenge_response,
           :odds_are_id => 1,
           :number_chosen => 10,
-          :odds_out_of => 50
+          :odds_out_of => 50,
+          :notification => notification
           )
         }
         let(:associated_odds_are) {
@@ -149,11 +154,16 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           :action => "Test odds are")
         }
 
+        let(:notification) {
+          FactoryGirl.create(:notification)
+        }
+
         let(:challenge_response) {
           FactoryGirl.create(:challenge_response,
           :odds_are_id => 1,
           :number_chosen => 10,
-          :odds_out_of => 50
+          :odds_out_of => 50,
+          :notification => notification
           )
         }
         let(:associated_odds_are) {
@@ -217,8 +227,13 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           FactoryGirl.create(:challenge_response,
           :odds_are_id => 1,
           :number_chosen => 10,
-          :odds_out_of => 50
+          :odds_out_of => 50,
+          :notification => notification
           )
+        }
+
+        let(:notification) {
+          FactoryGirl.create(:notification)
         }
         let(:associated_odds_are) {
           FactoryGirl.create(:odds_are, :initiator => user, :recipient => recipient, :challenge_response => challenge_response, :challenge_request => challenge_request)
