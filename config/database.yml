@@ -24,6 +24,7 @@ test: &test
   encoding: unicode
   pool: 5
   username: brendanjones44
+  database: odds_are_test
 
 production:
   adapter: postgresql
