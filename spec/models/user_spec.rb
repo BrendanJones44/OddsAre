@@ -28,47 +28,25 @@ RSpec.describe User, type: :model do
 
     describe "#has_friends" do
       context "user has no friends" do
-        user_a = FactoryGirl.create :user
-        it { expect( user_a.has_friends ).to be false }
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.has_friends ).to be false }
       end
 
       context "user has friends" do
-        before(:each) do
-          user_with-friends = get_user_with_friends()
-          it { expect( user_with_friends.has_friends ).to be true }
-        end
+        subject{ get_user_with_friends() }
+        it { expect( subject.has_friends ).to be true }
       end
     end
 
     describe "#has_friend_requests" do
       context "user has no friend requests" do
-        user_without_friend_requests = FactoryGirl.create :user
-        it { expect( user_without_friend_requests.has_friend_requests ).to be false }
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.has_friend_requests ).to be false }
       end
 
       context "user has a friend request" do
-        before(:each) do
-          user_with_friend_request = get_user_with_friend_request()
-          it { expect( user_with_friend_request.has_friend_requests ).to be true }
-        end
-      end
-    end
-
-    describe "#anchor" do
-      it "returns the users anchor" do
-        user = FactoryGirl.create :user
-        user.update_attribute(:user_name, "sam")
-        expect(user.anchor).to eql("(@sam)")
-      end
-    end
-
-    describe "#to_s" do
-      it "returns the expected to_s" do
-        user = FactoryGirl.create :user
-        user.update_attribute(:user_name, "sam")
-        user.update_attribute(:first_name, "bob")
-        user.update_attribute(:last_name, "mill")
-        expect(user.to_s).to eql("Bob Mill (@sam)")
+        subject{ get_user_with_friend_request() }
+        it { expect( subject.has_friend_requests ).to be true }
       end
     end
 
@@ -93,6 +71,322 @@ RSpec.describe User, type: :model do
         subject{ FactoryGirl.create :user }
         before { subject.update_attribute(:last_name, "fuck") }
         it { expect(subject).to be_invalid }
+      end
+    end
+
+    describe "#total_odds_ares" do
+      context "where user has no odds ares" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.total_odds_ares).to eql [] }
+      end
+
+      context "where user has multiple odds ares" do
+        subject{ get_user_with_complete_odds_are_where_nobody_wins() }
+        it { expect( subject.total_odds_ares.size ).to eql 1 }
+      end
+    end
+
+    describe "#completed_odds_ares" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.completed_odds_ares).to eql [] }
+      end
+
+      context "where user had an odds are with no response" do
+        subject{ get_user_with_unresponded_odds_are() }
+        it { expect(subject.completed_odds_ares).to eql [] }
+      end
+
+      context "where user has an odds are with no finalization" do
+        subject{ get_user_with_unfinalized_odds_are() }
+        it { expect(subject.completed_odds_ares).to eql [] }
+      end
+
+      context "where user has an odds are that's been completed" do
+        subject{ get_user_with_complete_odds_are_where_nobody_wins() }
+        it { expect( subject.completed_odds_ares.size ).to eql 1 }
+      end
+    end
+
+    describe "#has_lost_odds_ares" do
+      context "where user has no odds ares" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.has_lost_odds_ares).to be false }
+      end
+
+      context "where user has lost odds ares" do
+        subject{ get_user_with_lost_odds_are() }
+        it { expect(subject.has_lost_odds_ares). to be true }
+      end
+
+      context "where user only has won odds ares" do
+        subject{ get_user_with_won_odds_are() }
+        it { expect(subject.has_lost_odds_ares). to be false }
+      end
+    end
+
+    describe "#has_current_odds_ares" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.has_current_odds_ares ).to be false }
+      end
+
+      context "where user had an odds are with no response" do
+        subject{ get_user_with_unresponded_odds_are() }
+        it { expect(subject.has_current_odds_ares ).to be true }
+      end
+
+      context "where user has an odds are with no finalization" do
+        subject{ get_user_with_unfinalized_odds_are() }
+        it { expect(subject.has_current_odds_ares ).to be true }
+      end
+
+      context "where user has an odds are that's been completed" do
+        subject{ get_user_with_complete_odds_are_where_nobody_wins() }
+        it { expect( subject.has_current_odds_ares ).to be false }
+      end
+    end
+
+    describe "#num_current_odds_ares" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.num_current_odds_ares ).to eql 0 }
+      end
+
+      context "where user had an odds are with no response" do
+        subject{ get_user_with_unresponded_odds_are() }
+        it { expect(subject.num_current_odds_ares ).to eql 1 }
+      end
+
+      context "where user has an odds are with no finalization" do
+        subject{ get_user_with_unfinalized_odds_are() }
+        it { expect(subject.num_current_odds_ares ).to eql 1 }
+      end
+
+      context "where user has an odds are that's been completed" do
+        subject{ get_user_with_complete_odds_are_where_nobody_wins() }
+        it { expect( subject.num_current_odds_ares ).to eql 0 }
+      end
+    end
+
+    describe "#dares_completed" do
+      context "where user has no odds ares" do
+        subject{ FactoryGirl.create :user }
+        it { expect(subject.dares_completed ).to match_array([]) }
+      end
+
+      context "where user is the winner" do
+        subject{ get_user_with_won_odds_are() }
+        it { expect(subject.dares_completed). to match_array([]) }
+      end
+
+      context "where user is the loser" do
+        subject{ get_user_with_lost_odds_are() }
+        context "and user hasn't reported the dare complete" do
+          before do
+            subject.lost_odds_ares.first.update_attribute(:loser_marked_completed_at, nil)
+          end
+          it { expect(subject.dares_completed). to match_array([]) }
+          context "and winner has reported the dare complete" do
+            before do
+              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, Time.zone.now)
+            end
+            it { expect(subject.dares_completed). to match_array([]) }
+          end
+
+          context "and winner hasn't reported the dare complete" do
+            before do
+              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, nil)
+            end
+            it { expect(subject.dares_completed). to match_array([]) }
+          end
+        end
+
+        context "and user has reported the dare complete" do
+          before do
+            subject.lost_odds_ares.first.update_attribute(:loser_marked_completed_at, Time.zone.now)
+          end
+          it { expect(subject.dares_completed). to match_array([]) }
+          context "and winner has reported the dare complete" do
+            before do
+              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, Time.zone.now)
+            end
+            it { expect(subject.dares_completed). to match_array(subject.lost_odds_ares) }
+          end
+
+          context "and winner hasn't reported the dare complete" do
+            before do
+              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, nil)
+            end
+            it { expect(subject.dares_completed). to match_array([]) }
+          end
+        end
+
+
+      end
+    end
+
+    describe "#challenge_requests_waiting_on_user_to_set" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+      end
+
+      context "where user is initiator of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_initiating_odds_are_with_no_response }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_initiating_odds_are_with_no_finalization }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_initiating_odds_are_that_is_complete }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+        end
+      end
+
+      context "where user is recipient of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_receiving_odds_are_with_no_response }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array(subject.received_odds_ares.first.challenge_request)}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_receiving_odds_are_with_no_finalization }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_receiving_odds_are_that_is_complete }
+          it { expect( subject.challenge_requests_waiting_on_user_to_set). to match_array([])}
+        end
+      end
+    end
+
+    describe "#challenge_responses_waiting_on_user_to_complete" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+      end
+
+      context "where user is initiator of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_initiating_odds_are_with_no_response }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_initiating_odds_are_with_no_finalization }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array(subject.sent_odds_ares.first.challenge_response)}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_initiating_odds_are_that_is_complete }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+        end
+      end
+
+      context "where user is recipient of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_receiving_odds_are_with_no_response }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_receiving_odds_are_with_no_finalization }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_receiving_odds_are_that_is_complete }
+          it { expect( subject.challenge_responses_waiting_on_user_to_complete). to match_array([])}
+        end
+      end
+    end
+
+    describe "#challenge_requests_waiting_on_friends_to_set" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+      end
+
+      context "where user is initiator of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_initiating_odds_are_with_no_response }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array(subject.sent_odds_ares.first.challenge_request)}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_initiating_odds_are_with_no_finalization }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_initiating_odds_are_that_is_complete }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+        end
+      end
+
+      context "where user is recipient of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_receiving_odds_are_with_no_response }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_receiving_odds_are_with_no_finalization }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_receiving_odds_are_that_is_complete }
+          it { expect( subject.challenge_requests_waiting_on_friends_to_set). to match_array([])}
+        end
+      end
+    end
+
+    describe "#challenge_responses_waiting_on_friends_to_complete" do
+      context "where user has no odds ares at all" do
+        subject{ FactoryGirl.create :user }
+        it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+      end
+
+      context "where user is initiator of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_initiating_odds_are_with_no_response }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_initiating_odds_are_with_no_finalization }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_initiating_odds_are_that_is_complete }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+        end
+      end
+
+      context "where user is recipient of the odds are" do
+        context "where there is no response" do
+          subject{ get_user_receiving_odds_are_with_no_response }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+        end
+
+        context "where there is no finalization" do
+          subject{ get_user_receiving_odds_are_with_no_finalization }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array(subject.received_odds_ares.first.challenge_response)}
+        end
+
+        context "where the odds are is finalzed" do
+          subject{ get_user_receiving_odds_are_that_is_complete }
+          it { expect( subject.challenge_responses_waiting_on_friends_to_complete). to match_array([])}
+        end
       end
     end
   end

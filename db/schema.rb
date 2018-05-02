@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501190721) do
+ActiveRecord::Schema.define(version: 20180502211429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,9 +104,11 @@ ActiveRecord::Schema.define(version: 20180501190721) do
     t.integer  "winner_id"
     t.integer  "loser_id"
     t.string   "action"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "odds_are_id"
+    t.datetime "loser_marked_completed_at"
+    t.datetime "winner_marked_completed_at"
     t.index ["odds_are_id"], name: "index_tasks_on_odds_are_id", using: :btree
   end
 

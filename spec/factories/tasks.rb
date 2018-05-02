@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :task do
-    user nil
-user nil
-action "MyString"
+    association :winner, factory: :user
+    association :loser, factory: :user
+    action "MyString"
   end
 
 end
