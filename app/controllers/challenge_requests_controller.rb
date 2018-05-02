@@ -33,7 +33,7 @@ class ChallengeRequestsController < ApplicationController
                             notifiable: @challenge_request)
         odds_are.save
         flash[:notice] = "Odds are sent to " + recipient.full_name
-        redirect_back(fallback_location: root_path)
+        redirect_to challenge_requests_show_current_path(show_friends: "active")
   		else
   			@friends = current_user.friends
   			render 'new'
@@ -53,6 +53,11 @@ class ChallengeRequestsController < ApplicationController
   end
 
   def show_current
+    if(params[:show_friends])
+      @show_friends = "active"
+      @style_hide = "display:none"
+      @style_show = "display:inline"
+    end
     @requests_waiting_on_user_to_set = current_user.challenge_requests_waiting_on_user_to_set
     @requests_waiting_on_friends_to_set = current_user.challenge_requests_waiting_on_friends_to_set
     @responses_waiting_on_friends_to_complete = current_user.challenge_responses_waiting_on_friends_to_complete

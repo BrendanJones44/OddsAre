@@ -3,13 +3,13 @@
     <h1 class="card-title">Current Odds Ares</h1>
     <ul class="nav nav-tabs justify-content-center">
       <li id=class="nav-item">
-        <a id="current-odds-waiting-on-user-link" class="nav-link active">Waiting on you</a>
+        <a id="current-odds-waiting-on-user-link" class="nav-link <%= @show_user %>">Waiting on you</a>
       </li>
       <li class="nav-item">
-        <a id="current-odds-waiting-on-friends-link" class="nav-link">Waiting on friends</a>
+        <a id="current-odds-waiting-on-friends-link" class="nav-link <%= @show_friends %>">Waiting on friends</a>
       </li>
     </ul>
-    <div id="current-odds-waiting-on-user-wrapper">
+    <div id="current-odds-waiting-on-user-wrapper" style="<%= @style_hide %>">
       <% if @requests_waiting_on_user_to_set.empty? and @responses_waiting_on_user_to_complete.empty? %>
         <h5>You have no odds ares waiting on you!</h5>
       <% else %>
@@ -20,7 +20,7 @@
           </div>
           <% @requests_waiting_on_user_to_set.each do |request| %>
             <li>
-              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.odds_are.actor.to_s%></a>
+              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.odds_are.initiator.to_s%></a>
             </li>
           <% end %>
         <% end %>
@@ -37,7 +37,7 @@
         <% end %>
       <% end %>
     </div><!-- end of current-odds-waiting-on-user-wrapper -->
-    <div id="current-odds-waiting-on-friends-wrapper">
+    <div id="current-odds-waiting-on-friends-wrapper" style="<%= @style_show %>">
       <% if @requests_waiting_on_friends_to_set.empty? and @responses_waiting_on_friends_to_complete.empty? %>
         <h5>You have no odds ares waiting on friends!</h5>
       <% else %>

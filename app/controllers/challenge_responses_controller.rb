@@ -14,7 +14,7 @@ class ChallengeResponsesController < ApplicationController
           action: "responded to your odds are",
           notifiable: @challenge_response
         )
-        redirect_back(fallback_location: root_path)
+        redirect_to challenge_requests_show_current_path(show_friends: "active")
       else
         render '/challenge_requests/show'
       end
@@ -32,7 +32,8 @@ class ChallengeResponsesController < ApplicationController
     @other_user = odds_are.recipient
     @response_out_of = challenge_response.odds_out_of
     @response_id = challenge_response.id
-    if odds_are.initiator == current_user && odds_are.finalized_at.nil?
+    
+    if odds_are.recipient == current_user && odds_are.finalized_at.nil?
       @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
     else
       # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
