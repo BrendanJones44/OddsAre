@@ -19,7 +19,11 @@
         <h5>They chose: <%= @odds_are.challenge_response.number_chosen %></h5>
       <% elsif current_user == @odds_are.recipient %>
         <h5>You chose: <%= @odds_are.challenge_response.number_chosen %></h5>
-        <h5>They chose: <%= @odds_are. challenge_finalization.number_guessed %></h5>
+        <% if @odds_are.finalized_at? %>
+          <h5>They chose: <%= @odds_are. challenge_finalization.number_guessed %></h5>
+        <% else %>
+          <h5>Awaiting their response!</h5>
+        <% end %>
       <% end %>
     </div>
   </div>
