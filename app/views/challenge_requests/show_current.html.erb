@@ -20,7 +20,7 @@
           </div>
           <% @requests_waiting_on_user_to_set.each do |request| %>
             <li>
-              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.actor.to_s%></a>
+              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.odds_are.actor.to_s%></a>
             </li>
           <% end %>
         <% end %>
@@ -28,7 +28,7 @@
           <h5>Odds Ares you need need to pick a number... </h5>
           <% @responses_waiting_on_user_to_complete.each do |response| %>
             <li>
-              <a href="<%= challenge_response_path(response) %>">Odds are from: <%=%></a>
+              <a href="<%= challenge_response_path(response) %>">Odds are responded to by: <%= response.odds_are.recipient.full_name%></a>
             </li>
           <% end %>
           <div class="progress">
@@ -48,7 +48,7 @@
           </div>
           <% @responses_waiting_on_friends_to_complete.each do |response| %>
             <li>
-              <a href="<%= challenge_response_path(response) %>">Odds are to: <%=%></a>
+              <a href="<%= challenge_response_path(response) %>">Odds are sent by: <%= response.odds_are.initiator.to_s %></a>
             </li>
           <% end %>
         <% end %>
@@ -59,7 +59,7 @@
           </div>
           <% @requests_waiting_on_friends_to_set.each do |request| %>
             <li>
-              <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.recipient.to_s%></a>
+              <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.odds_are.recipient.to_s%></a>
             </li>
           <% end %>
         <% end %>

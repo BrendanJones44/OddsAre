@@ -38,7 +38,7 @@ class ChallengeResponsesController < ApplicationController
       # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
       @challenge_response = challenge_response
       @odds_are = challenge_response.odds_are
-      render 'show_as_actor'
+      render 'odds_ares/show'
     end
   end
 

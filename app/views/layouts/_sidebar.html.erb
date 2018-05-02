@@ -59,7 +59,7 @@
         </span>
         <span class="sidebar-link-text">
           Lost
-          <% if current_user.lost_odds_ares != 0 %>
+          <% if current_user.lost_odds_ares.size != 0 %>
             <b>(<%= current_user.lost_odds_ares.size %>)</b>
           <% end %>
         </span></a>

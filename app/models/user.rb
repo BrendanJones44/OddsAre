@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :recipient_id
   has_many :sent_odds_ares, class_name: "OddsAre", foreign_key: :initiator_id, dependent: :delete_all
   has_many :received_odds_ares, class_name: "OddsAre", foreign_key: :recipient_id, dependent: :delete_all
+  has_many :lost_odds_ares, class_name: "Task", foreign_key: :loser_id
+  has_many :won_odds_ares, class_name: "Task", foreign_key: :winner_id
   has_many :challenge_response, foreign_key: :recipient_id
   has_many :friend_requests, foreign_key: :targeting_user
 
@@ -73,34 +75,42 @@ class User < ApplicationRecord
   #       challenge_responses_waiting_on_user_to_complete.size +
   #         challenge_responses_waiting_on_friends_to_complete.size
   # end
+
+  def total_odds_ares
+    sent_odds_ares + received_odds_ares
+  end
+
+  def completed_odds_ares
+    sent_odds_ares.where.not(finalized_at: nil) + received_odds_ares.where.not(finalized_at: nil)
+  end
   #
-  def lost_odds_ares
-    []
-  #   ChallengeResult.where(lost_user_id: id)
+  def has_lost_odds_ares
   end
   #
   def has_current_odds_ares
   #   num_current_odds_ares != 0
     false
   end
-  #
-  def challenge_requests_waiting_on_friends_to_set
-    sent_odds_ares
-    #ChallengeRequest.where(responded_to_at: nil).joins(:odds_are).merge(sent_odds_ares)
-    #sent_odds_ares.joins(:challenge_request).merge(:challenge_request).where(responded_to_at: nil)
+
+  def tasks_completed
+    []
   end
   #
-  # def challenge_requests_waiting_on_user_to_set
-  #   received_challenge_requests.where(responded_to_at: nil)
-  # end
+  def challenge_requests_waiting_on_friends_to_set
+    sent_odds_ares.where(responded_to_at: nil).joins(:challenge_request).collect(&:challenge_request)
+  end
   #
-  # def challenge_responses_waiting_on_user_to_complete
-  #   ChallengeResponse.where(finalized_at: nil).joins(:challenge_request).merge(sent_challenge_requests)
-  # end
+  def challenge_requests_waiting_on_user_to_set
+    received_odds_ares.where(responded_to_at: nil).joins(:challenge_request).collect(&:challenge_request)
+  end
   #
-  # def challenge_responses_waiting_on_friends_to_complete
-  #   ChallengeResponse.where(finalized_at: nil).joins(:challenge_request).merge(received_challenge_requests)
-  # end
+  def challenge_responses_waiting_on_user_to_complete
+    sent_odds_ares.where(finalized_at: nil).joins(:challenge_response).collect(&:challenge_response)
+  end
+  #
+  def challenge_responses_waiting_on_friends_to_complete
+    received_odds_ares.where(finalized_at: nil).joins(:challenge_response).collect(&:challenge_response)
+  end
 
    private
      def generate_slug
