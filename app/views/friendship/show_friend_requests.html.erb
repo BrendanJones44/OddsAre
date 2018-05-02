@@ -7,7 +7,7 @@
 			<li>
 				Request From:
 				<%= friend_request.to_s %>
-				<%= button_to "Accept Friend", accept_friend_request_url(:user_name => friend_request.user_name), class: "btn btn-sm btn-primary" %>
+				<%= button_to "Accept Friend", accept_friend_request_url(:user_id => friend_request.id), class: "btn btn-sm btn-primary" %>
 			</li>
 		</ul>
 	<% end %> <!-- End of friend_request each loop -->
