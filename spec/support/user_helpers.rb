@@ -50,12 +50,10 @@ module UserHelpers
 
   def get_user_receiving_odds_are_with_no_response
     OddsAreHelpers.get_odds_are_with_no_response.recipient
-    get_user_with_unresponded_odds_are_as_initiator(false)
   end
 
   def get_user_receiving_odds_are_with_no_finalization
     OddsAreHelpers.get_odds_are_with_no_finalization.recipient
-    get_user_with_unfinalized_odds_are_as_initiator(false)
   end
 
   def get_user_receiving_odds_are_that_is_complete

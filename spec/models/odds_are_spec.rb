@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OddsAre, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "has a valid factory" do
+    odds_are = build(:odds_are)
+    expect( odds_are ).to be_valid
+  end
 end
