@@ -35,11 +35,13 @@ class ChallengeResponsesController < ApplicationController
 
     if odds_are.initiator == current_user && odds_are.finalized_at.nil?
       @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
-    else
+    elsif (odds_are.recipient == current_user || odds_are.initiator == current_user ) && odds_are.finalized_at
       # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
       @challenge_response = challenge_response
       @odds_are = challenge_response.odds_are
       render 'odds_ares/show'
+    else
+      render 'pages/expired'
     end
   end
 

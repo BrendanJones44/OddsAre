@@ -128,6 +128,122 @@ RSpec.describe ChallengeResponsesController, type: :controller do
           expect( Notification.first.acted_upon_at).to be_a( Time )
         end
       end
+
+      context "requests with invalid challenge response" do
+        # Cascade associations to setup valid challenge response
+        let(:valid_notification) {
+          FactoryGirl.create(:notification,
+                             :recipient => user)
+        }
+        let(:valid_challenge_request) {
+          FactoryGirl.create(:challenge_request,
+                             :notification => valid_notification)
+
+        }
+        let(:valid_odds_are) {
+          FactoryGirl.create(:odds_are,
+                             :recipient => user,
+                             :challenge_request => valid_challenge_request)
+        }
+        let(:invalid_challenge_response) {
+          FactoryGirl.attributes_for(:challenge_response,
+            :odds_are_id => valid_odds_are.id,
+            :number_chosen => 0,
+            :odds_out_of => 50
+          )
+        }
+        before do
+          post :create, :params => {
+            :challenge_response => invalid_challenge_response
+          }
+        end
+
+        it "should redirect user to challenge response form" do
+          expect( response ).to render_template( "challenge_requests/show/" )
+        end
+      end
+    end
+  end
+
+  describe "GET #show" do
+    context "anonymous user" do
+      let(:odds_are) { FactoryGirl.create(:odds_are) }
+      let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                    :odds_are => odds_are) }
+      it "should be redirected to signin" do
+        get :show, params: { id: challenge_response.id }
+        expect( response ).to redirect_to( new_user_session_path )
+      end
+    end
+
+    context "authenticated user" do
+      let(:user) { FactoryGirl.create(:user) }
+      before(:each) do
+        sign_in user
+      end
+      context "with unfinalized odds are" do
+        context "who isn't associated to the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render expired link" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "pages/expired" )
+          end
+        end
+
+        context "who is the recipient of the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are, :recipient => user) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render the page" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "pages/expired" )
+          end
+        end
+
+        context "who is the initiator of the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are, :initiator => user) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render the page" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "show" )
+          end
+        end
+      end
+
+      context "finalized odds are" do
+        context "who isn't associated to the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are, :finalized_at => Time.zone.now) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render expired link" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "pages/expired" )
+          end
+        end
+
+        context "who is the recipient of the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are, :finalized_at => Time.zone.now, :recipient => user) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render the page" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "odds_ares/show" )
+          end
+        end
+
+        context "who is the initiator of the odds are" do
+          let(:odds_are) { FactoryGirl.create(:odds_are, :finalized_at => Time.zone.now, :initiator => user) }
+          let(:challenge_response) { FactoryGirl.create(:challenge_response,
+                                                       :odds_are => odds_are) }
+          it "should render the page" do
+            get :show, params: { id: challenge_response.id }
+            expect( response ).to render_template( "odds_ares/show" )
+          end
+        end
+      end
     end
   end
 end
