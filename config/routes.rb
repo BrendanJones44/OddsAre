@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   resources :challenge_responses
   resources :challenge_finalizations
+  get '/odds_ares/show_current', to: 'odds_ares#show_current', as: 'odds_ares_show_current'
   resources :odds_ares
-
-  get '/challenge_requests/show_current', to: 'challenge_requests#show_current', as: 'challenge_requests_show_current'
   resources :challenge_requests
-  
+
   root to: 'pages#index'
   devise_for :users, :controllers => { :registrations => "users/registrations" }
   post '/notifications/:id/mark_as_read' => 'notifications#mark_as_read', as: 'mark_notification_as_read'
