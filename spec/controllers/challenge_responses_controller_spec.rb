@@ -72,13 +72,14 @@ RSpec.describe ChallengeResponsesController, type: :controller do
 
       context "requests with valid challenge response" do
         # Cascade associations to setup valid challenge response
-        let(:valid_challenge_request) {
-          FactoryGirl.create(:challenge_request)
-        }
         let(:valid_notification) {
           FactoryGirl.create(:notification,
-                             :notifiable => valid_challenge_request,
                              :recipient => user)
+        }
+        let(:valid_challenge_request) {
+          FactoryGirl.create(:challenge_request,
+                             :notification => valid_notification)
+
         }
         let(:valid_odds_are) {
           FactoryGirl.create(:odds_are,
@@ -109,6 +110,10 @@ RSpec.describe ChallengeResponsesController, type: :controller do
 
         it "should update the odds are's association" do
           expect( OddsAre.first.challenge_response ).to be_a( ChallengeResponse )
+        end
+
+        it "should update the notification created from the request" do
+          expect( OddsAre.first.challenge_request.notification.acted_upon_at ).to be_a( Time )
         end
 
         it "should redirect user back" do
