@@ -14,7 +14,7 @@ class ChallengeResponsesController < ApplicationController
           action: "responded to your odds are",
           notifiable: @challenge_response
         )
-        redirect_to challenge_requests_show_current_path(show_friends: "active")
+        redirect_to odds_ares_show_current_path(show_friends: "active")
       else
         render '/challenge_requests/show'
       end
