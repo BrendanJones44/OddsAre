@@ -16,9 +16,7 @@ class ChallengeRequestsController < ApplicationController
 
     recipient = User.find(params.require(:recipient_id))
 
-    if recipient.blank?
-      raise Exception.new('No user found with user_id: ' + recipient_id)
-    elsif not current_user.friends.include? recipient
+    if not current_user.friends.include? recipient
         raise Exception.new(
           'You must be friends with the recpient to odds are them')
     else

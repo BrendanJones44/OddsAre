@@ -145,6 +145,27 @@ RSpec.describe ChallengeRequestsController, type: :controller do
           end
         end
       end
+
+      context "with invalid challenge request" do
+
+        let(:user_receiving_odds_are) { FactoryGirl.create(:user) }
+        let(:invalid_challenge_request) {
+          FactoryGirl.attributes_for(:challenge_request, :action => nil)
+        }
+
+        before do
+          user.friend_request(user_receiving_odds_are)
+          user_receiving_odds_are.accept_request(user)
+          post :create, :params => {
+            :challenge_request => invalid_challenge_request,
+            :recipient_id => user_receiving_odds_are.id
+          }
+        end
+
+        it "should redirect user to challenge request form" do
+          expect( response ).to render_template( "challenge_requests/new/" )
+        end
+      end
     end
   end
 end
