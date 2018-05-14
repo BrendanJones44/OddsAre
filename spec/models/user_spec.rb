@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
       end
 
       context 'user has friends' do
-        subject { get_user_with_friends }
+        subject { user_with_friends }
         it { expect(subject.has_friends).to be true }
       end
     end
@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
       end
 
       context 'user has a friend request' do
-        subject { get_user_with_friend_request }
+        subject { user_with_friend_request }
         it { expect(subject.has_friend_requests).to be true }
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user has multiple odds ares' do
-        subject { get_user_with_complete_odds_are_where_nobody_wins }
+        subject { user_with_complete_odds_are_where_nobody_wins }
         it { expect(subject.total_odds_ares.size).to eql 1 }
       end
     end
@@ -93,17 +93,17 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user had an odds are with no response' do
-        subject { get_user_with_unresponded_odds_are }
+        subject { user_with_unresponded_odds_are }
         it { expect(subject.completed_odds_ares).to eql [] }
       end
 
       context 'where user has an odds are with no finalization' do
-        subject { get_user_with_unfinalized_odds_are }
+        subject { user_with_unfinalized_odds_are }
         it { expect(subject.completed_odds_ares).to eql [] }
       end
 
       context 'where user has an odds are that has been completed' do
-        subject { get_user_with_complete_odds_are_where_nobody_wins }
+        subject { user_with_complete_odds_are_where_nobody_wins }
         it { expect(subject.completed_odds_ares.size).to eql 1 }
       end
     end
@@ -115,12 +115,12 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user has lost odds ares' do
-        subject { get_user_with_lost_odds_are }
+        subject { user_with_lost_odds_are }
         it { expect(subject.has_lost_odds_ares). to be true }
       end
 
       context 'where user only has won odds ares' do
-        subject { get_user_with_won_odds_are }
+        subject { user_with_won_odds_are }
         it { expect(subject.has_lost_odds_ares). to be false }
       end
     end
@@ -132,17 +132,17 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user had an odds are with no response' do
-        subject { get_user_with_unresponded_odds_are }
+        subject { user_with_unresponded_odds_are }
         it { expect(subject.has_current_odds_ares).to be true }
       end
 
       context 'where user has an odds are with no finalization' do
-        subject { get_user_with_unfinalized_odds_are }
+        subject { user_with_unfinalized_odds_are }
         it { expect(subject.has_current_odds_ares).to be true }
       end
 
       context 'where user has an odds are that has been completed' do
-        subject { get_user_with_complete_odds_are_where_nobody_wins }
+        subject { user_with_complete_odds_are_where_nobody_wins }
         it { expect(subject.has_current_odds_ares).to be false }
       end
     end
@@ -154,17 +154,17 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user had an odds are with no response' do
-        subject { get_user_with_unresponded_odds_are }
+        subject { user_with_unresponded_odds_are }
         it { expect(subject.num_current_odds_ares).to eql 1 }
       end
 
       context 'where user has an odds are with no finalization' do
-        subject { get_user_with_unfinalized_odds_are }
+        subject { user_with_unfinalized_odds_are }
         it { expect(subject.num_current_odds_ares).to eql 1 }
       end
 
       context 'where user has an odds are that has been completed' do
-        subject { get_user_with_complete_odds_are_where_nobody_wins }
+        subject { user_with_complete_odds_are_where_nobody_wins }
         it { expect(subject.num_current_odds_ares).to eql 0 }
       end
     end
@@ -176,12 +176,12 @@ RSpec.describe User, type: :model do
       end
 
       context 'where user is the winner' do
-        subject { get_user_with_won_odds_are }
+        subject { user_with_won_odds_are }
         it { expect(subject.dares_completed). to match_array([]) }
       end
 
       context 'where user is the loser' do
-        subject { get_user_with_lost_odds_are }
+        subject { user_with_lost_odds_are }
         context 'and user has not reported the dare complete' do
           before do
             subject.lost_odds_ares.first.update_attribute(:loser_marked_completed_at, nil)
@@ -232,34 +232,34 @@ RSpec.describe User, type: :model do
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
-          subject { get_user_initiating_odds_are_with_no_response }
+          subject { user_initiating_odds_are_with_no_response }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_initiating_odds_are_with_no_finalization }
+          subject { user_initiating_odds_are_with_no_finalization }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_initiating_odds_are_that_is_complete }
+          subject { user_initiating_odds_are_that_is_complete }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
-          subject { get_user_receiving_odds_are_with_no_response }
+          subject { user_receiving_odds_are_with_no_response }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array(subject.received_odds_ares.first.challenge_request) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_receiving_odds_are_with_no_finalization }
+          subject { user_receiving_odds_are_with_no_finalization }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_receiving_odds_are_that_is_complete }
+          subject { user_receiving_odds_are_that_is_complete }
           it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
         end
       end
@@ -273,34 +273,34 @@ RSpec.describe User, type: :model do
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
-          subject { get_user_initiating_odds_are_with_no_response }
+          subject { user_initiating_odds_are_with_no_response }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_initiating_odds_are_with_no_finalization }
+          subject { user_initiating_odds_are_with_no_finalization }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array(subject.sent_odds_ares.first.challenge_response) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_initiating_odds_are_that_is_complete }
+          subject { user_initiating_odds_are_that_is_complete }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
-          subject { get_user_receiving_odds_are_with_no_response }
+          subject { user_receiving_odds_are_with_no_response }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_receiving_odds_are_with_no_finalization }
+          subject { user_receiving_odds_are_with_no_finalization }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_receiving_odds_are_that_is_complete }
+          subject { user_receiving_odds_are_that_is_complete }
           it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
         end
       end
@@ -314,34 +314,34 @@ RSpec.describe User, type: :model do
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
-          subject { get_user_initiating_odds_are_with_no_response }
+          subject { user_initiating_odds_are_with_no_response }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array(subject.sent_odds_ares.first.challenge_request) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_initiating_odds_are_with_no_finalization }
+          subject { user_initiating_odds_are_with_no_finalization }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_initiating_odds_are_that_is_complete }
+          subject { user_initiating_odds_are_that_is_complete }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
-          subject { get_user_receiving_odds_are_with_no_response }
+          subject { user_receiving_odds_are_with_no_response }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_receiving_odds_are_with_no_finalization }
+          subject { user_receiving_odds_are_with_no_finalization }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_receiving_odds_are_that_is_complete }
+          subject { user_receiving_odds_are_that_is_complete }
           it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
         end
       end
@@ -355,34 +355,34 @@ RSpec.describe User, type: :model do
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
-          subject { get_user_initiating_odds_are_with_no_response }
+          subject { user_initiating_odds_are_with_no_response }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_initiating_odds_are_with_no_finalization }
+          subject { user_initiating_odds_are_with_no_finalization }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_initiating_odds_are_that_is_complete }
+          subject { user_initiating_odds_are_that_is_complete }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
-          subject { get_user_receiving_odds_are_with_no_response }
+          subject { user_receiving_odds_are_with_no_response }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
         end
 
         context 'where there is no finalization' do
-          subject { get_user_receiving_odds_are_with_no_finalization }
+          subject { user_receiving_odds_are_with_no_finalization }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array(subject.received_odds_ares.first.challenge_response) }
         end
 
         context 'where the odds are is finalzed' do
-          subject { get_user_receiving_odds_are_that_is_complete }
+          subject { user_receiving_odds_are_that_is_complete }
           it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
         end
       end

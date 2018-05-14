@@ -27,7 +27,6 @@ RSpec.describe ChallengeRequestsController, type: :controller do
 
     context 'authenticated user with friends' do
       before(:each) do
-        user_with_friends = get_user_with_friends
         sign_in user_with_friends
         get :new
       end

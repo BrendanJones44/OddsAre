@@ -59,7 +59,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'authenticated user' do
-      let(:user) { get_user_with_friends }
+      let(:user) { user_with_friends }
       before do
         sign_in user
         get :friends

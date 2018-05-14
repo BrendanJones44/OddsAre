@@ -31,10 +31,18 @@ RSpec.describe OddsAresController, type: :controller do
         end
 
         context 'and the notification has already been read' do
-          subject { FactoryGirl.create(:notification, recipient: user, acted_upon_at: Time.zone.now) }
-          let(:odds_are) { FactoryGirl.create(:odds_are, notification: subject) }
+          subject do
+            FactoryGirl.create(:notification,
+                               recipient: user, acted_upon_at: Time.zone.now)
+          end
+          let(:odds_are) do
+            FactoryGirl.create(:odds_are,
+                               notification: subject)
+          end
           it 'should not override the notifications timestamp' do
-            expect { get :show, params: { id: odds_are.id } }.to_not change { subject.acted_upon_at }
+            expect { get :show, params: { id: odds_are.id } }.to_not change {
+                                                                       subject.acted_upon_at
+                                                                     }
           end
         end
       end
@@ -43,7 +51,9 @@ RSpec.describe OddsAresController, type: :controller do
         subject { FactoryGirl.create(:notification, acted_upon_at: Time.zone.now) }
         let(:odds_are) { FactoryGirl.create(:odds_are, notification: subject) }
         it 'should not override the notifications timestamp' do
-          expect { get :show, params: { id: odds_are.id } }.to_not change { subject.acted_upon_at }
+          expect { get :show, params: { id: odds_are.id } }.to_not change {
+                                                                     subject.acted_upon_at
+                                                                   }
         end
       end
     end
@@ -59,7 +69,7 @@ RSpec.describe OddsAresController, type: :controller do
 
     context 'authenticated user' do
       context 'with odds ares waiting on them to set' do
-        let(:user) { get_user_receiving_odds_are_with_no_response }
+        let(:user) { user_receiving_odds_are_with_no_response }
         before do
           sign_in user
         end
@@ -70,7 +80,7 @@ RSpec.describe OddsAresController, type: :controller do
       end
 
       context 'with odds ares waiting on friends to set' do
-        let(:user) { get_user_initiating_odds_are_with_no_response }
+        let(:user) { user_initiating_odds_are_with_no_response }
         before do
           sign_in user
         end
@@ -81,7 +91,7 @@ RSpec.describe OddsAresController, type: :controller do
       end
 
       context 'with odds ares waiting on them to complete' do
-        let(:user) { get_user_initiating_odds_are_with_no_response }
+        let(:user) { user_initiating_odds_are_with_no_response }
         before do
           sign_in user
         end
@@ -92,7 +102,7 @@ RSpec.describe OddsAresController, type: :controller do
       end
 
       context 'with odds ares waiting on friends to complete' do
-        let(:user) { get_user_initiating_odds_are_with_no_response }
+        let(:user) { user_initiating_odds_are_with_no_response }
         before do
           sign_in user
         end

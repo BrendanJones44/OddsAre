@@ -1,5 +1,5 @@
 module OddsAreHelpers
-  def get_odds_are_with_no_response
+  def odds_are_with_no_response
     user_a = FactoryGirl.create :user
     user_b = FactoryGirl.create :user
 
@@ -13,7 +13,7 @@ module OddsAreHelpers
                        challenge_request: challenge_request)
   end
 
-  def get_odds_are_with_no_finalization
+  def odds_are_with_no_finalization
     user_a = FactoryGirl.create :user
     user_b = FactoryGirl.create :user
 
@@ -35,7 +35,7 @@ module OddsAreHelpers
                        responded_to_at: Time.zone.now)
   end
 
-  def get_odds_are_with_winner
+  def odds_are_with_winner
     user_a = FactoryGirl.create :user
     user_b = FactoryGirl.create :user
 
@@ -68,7 +68,7 @@ module OddsAreHelpers
                        task: task)
   end
 
-  def get_odds_are_with_no_winner
+  def odds_are_with_no_winner
     user_a = FactoryGirl.create :user
     user_b = FactoryGirl.create :user
 
@@ -95,8 +95,8 @@ module OddsAreHelpers
                        challenge_finalization:                          challenge_finalization,
                        finalized_at: Time.zone.now)
   end
-  module_function :get_odds_are_with_no_response
-  module_function :get_odds_are_with_no_finalization
-  module_function :get_odds_are_with_winner
-  module_function :get_odds_are_with_no_winner
+  module_function :odds_are_with_no_response
+  module_function :odds_are_with_no_finalization
+  module_function :odds_are_with_winner
+  module_function :odds_are_with_no_winner
 end

@@ -18,7 +18,10 @@ RSpec.describe NotificationsController, type: :controller do
 
       context 'and notification does not exist' do
         it 'should throw an exception' do
-          expect { post :mark_as_read, params: { id: 10_000 } }.to raise_error ActiveRecord::RecordNotFound
+          expect do
+            post :mark_as_read,
+                 params: { id: 10_000 }
+          end .to raise_error ActiveRecord::RecordNotFound
         end
       end
 
