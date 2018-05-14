@@ -239,9 +239,11 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           FactoryGirl.create(:notification)
         end
         let(:associated_odds_are) do
-          FactoryGirl.create(:odds_are, initiator: user, recipient: recipient,
-                                        challenge_response: challenge_response, challenge_request:
-             challenge_request)
+          FactoryGirl.create(:odds_are,
+                             initiator: user,
+                             recipient: recipient,
+                             challenge_response: challenge_response,
+                             challenge_request: challenge_request)
         end
 
         let(:challenge_finalization) do

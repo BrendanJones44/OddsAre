@@ -184,19 +184,22 @@ RSpec.describe User, type: :model do
         subject { user_with_lost_odds_are }
         context 'and user has not reported the dare complete' do
           before do
-            subject.lost_odds_ares.first.update_attribute(:loser_marked_completed_at, nil)
+            subject.lost_odds_ares.first
+                   .update_attribute(:loser_marked_completed_at, nil)
           end
           it { expect(subject.dares_completed). to match_array([]) }
           context 'and winner has reported the dare complete' do
             before do
-              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, Time.zone.now)
+              subject.lost_odds_ares.first
+                     .update_attribute(:winner_marked_completed_at, Time.zone.now)
             end
             it { expect(subject.dares_completed). to match_array([]) }
           end
 
           context 'and winner has not reported the dare complete' do
             before do
-              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, nil)
+              subject.lost_odds_ares.first
+                     .update_attribute(:winner_marked_completed_at, nil)
             end
             it { expect(subject.dares_completed). to match_array([]) }
           end
@@ -204,21 +207,30 @@ RSpec.describe User, type: :model do
 
         context 'and user has reported the dare complete' do
           before do
-            subject.lost_odds_ares.first.update_attribute(:loser_marked_completed_at, Time.zone.now)
+            subject.lost_odds_ares.first
+                   .update_attribute(:loser_marked_completed_at, Time.zone.now)
           end
           it { expect(subject.dares_completed). to match_array([]) }
           context 'and winner has reported the dare complete' do
             before do
-              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, Time.zone.now)
+              subject.lost_odds_ares.first
+                     .update_attribute(:winner_marked_completed_at, Time.zone.now)
             end
-            it { expect(subject.dares_completed). to match_array(subject.lost_odds_ares) }
+            it {
+              expect(subject.dares_completed)
+                .to match_array(subject.lost_odds_ares)
+            }
           end
 
           context 'and winner has not reported the dare complete' do
             before do
-              subject.lost_odds_ares.first.update_attribute(:winner_marked_completed_at, nil)
+              subject.lost_odds_ares.first
+                     .update_attribute(:winner_marked_completed_at, nil)
             end
-            it { expect(subject.dares_completed). to match_array([]) }
+            it {
+              expect(subject.dares_completed)
+                .to match_array([])
+            }
           end
         end
       end
@@ -227,40 +239,61 @@ RSpec.describe User, type: :model do
     describe '#challenge_requests_waiting_on_user_to_set' do
       context 'where user has no odds ares at all' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+        it {
+          expect(subject.challenge_requests_waiting_on_user_to_set)
+            .to match_array([])
+        }
       end
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
           subject { user_initiating_odds_are_with_no_response }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_initiating_odds_are_with_no_finalization }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_initiating_odds_are_that_is_complete }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array([])
+          }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
           subject { user_receiving_odds_are_with_no_response }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array(subject.received_odds_ares.first.challenge_request) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array(subject.received_odds_ares.first.challenge_request)
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_receiving_odds_are_with_no_finalization }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_receiving_odds_are_that_is_complete }
-          it { expect(subject.challenge_requests_waiting_on_user_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_user_to_set)
+              .to match_array([])
+          }
         end
       end
     end
@@ -268,40 +301,61 @@ RSpec.describe User, type: :model do
     describe '#challenge_responses_waiting_on_user_to_complete' do
       context 'where user has no odds ares at all' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+        it {
+          expect(subject.challenge_responses_waiting_on_user_to_complete)
+            .to match_array([])
+        }
       end
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
           subject { user_initiating_odds_are_with_no_response }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_initiating_odds_are_with_no_finalization }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array(subject.sent_odds_ares.first.challenge_response) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array(subject.sent_odds_ares.first.challenge_response)
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_initiating_odds_are_that_is_complete }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array([])
+          }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
           subject { user_receiving_odds_are_with_no_response }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_receiving_odds_are_with_no_finalization }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_receiving_odds_are_that_is_complete }
-          it { expect(subject.challenge_responses_waiting_on_user_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_user_to_complete)
+              .to match_array([])
+          }
         end
       end
     end
@@ -309,40 +363,61 @@ RSpec.describe User, type: :model do
     describe '#challenge_requests_waiting_on_friends_to_set' do
       context 'where user has no odds ares at all' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+        it {
+          expect(subject.challenge_requests_waiting_on_friends_to_set)
+            .to match_array([])
+        }
       end
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
           subject { user_initiating_odds_are_with_no_response }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array(subject.sent_odds_ares.first.challenge_request) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array(subject.sent_odds_ares.first.challenge_request)
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_initiating_odds_are_with_no_finalization }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_initiating_odds_are_that_is_complete }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array([])
+          }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
           subject { user_receiving_odds_are_with_no_response }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_receiving_odds_are_with_no_finalization }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_receiving_odds_are_that_is_complete }
-          it { expect(subject.challenge_requests_waiting_on_friends_to_set). to match_array([]) }
+          it {
+            expect(subject.challenge_requests_waiting_on_friends_to_set)
+              .to match_array([])
+          }
         end
       end
     end
@@ -350,40 +425,61 @@ RSpec.describe User, type: :model do
     describe '#challenge_responses_waiting_on_friends_to_complete' do
       context 'where user has no odds ares at all' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+        it {
+          expect(subject.challenge_responses_waiting_on_friends_to_complete)
+            .to match_array([])
+        }
       end
 
       context 'where user is initiator of the odds are' do
         context 'where there is no response' do
           subject { user_initiating_odds_are_with_no_response }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_initiating_odds_are_with_no_finalization }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_initiating_odds_are_that_is_complete }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array([])
+          }
         end
       end
 
       context 'where user is recipient of the odds are' do
         context 'where there is no response' do
           subject { user_receiving_odds_are_with_no_response }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array([])
+          }
         end
 
         context 'where there is no finalization' do
           subject { user_receiving_odds_are_with_no_finalization }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array(subject.received_odds_ares.first.challenge_response) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array(subject.received_odds_ares.first.challenge_response)
+          }
         end
 
         context 'where the odds are is finalzed' do
           subject { user_receiving_odds_are_that_is_complete }
-          it { expect(subject.challenge_responses_waiting_on_friends_to_complete). to match_array([]) }
+          it {
+            expect(subject.challenge_responses_waiting_on_friends_to_complete)
+              .to match_array([])
+          }
         end
       end
     end

@@ -63,7 +63,7 @@ module OddsAreHelpers
                        challenge_request: challenge_request,
                        challenge_response: challenge_response,
                        responded_to_at: Time.zone.now,
-                       challenge_finalization:                           challenge_finalization,
+                       challenge_finalization: challenge_finalization,
                        finalized_at: Time.zone.now,
                        task: task)
   end
@@ -92,7 +92,7 @@ module OddsAreHelpers
                        challenge_request: challenge_request,
                        challenge_response: challenge_response,
                        responded_to_at: Time.zone.now,
-                       challenge_finalization:                          challenge_finalization,
+                       challenge_finalization: challenge_finalization,
                        finalized_at: Time.zone.now)
   end
   module_function :odds_are_with_no_response

@@ -19,13 +19,15 @@ RSpec.describe FriendshipController, type: :controller do
 
       context 'requests with no parameters' do
         it 'raises an exception' do
-          expect { post(:send_friend_request, {}) }.to raise_error ActionController::ParameterMissing
+          expect { post(:send_friend_request, {}) }
+            .to raise_error ActionController::ParameterMissing
         end
       end
 
       context 'requests with non-existent user_id' do
         it 'raises an exception' do
-          expect { post :send_friend_request, params: { user_id: 10_000 } }.to raise_error ActiveRecord::RecordNotFound
+          expect { post :send_friend_request, params: { user_id: 10_000 } }
+            .to raise_error ActiveRecord::RecordNotFound
         end
       end
 
@@ -39,7 +41,11 @@ RSpec.describe FriendshipController, type: :controller do
           end
 
           it 'should respond with an error' do
-            expect { post :send_friend_request, params: { user_id: other_user.id } }. to raise_error 'Friendship already exists'
+            expect do
+              post :send_friend_request,
+                   params: { user_id: other_user.id }
+            end
+              .to raise_error 'Friendship already exists'
           end
         end
 
@@ -82,22 +88,29 @@ RSpec.describe FriendshipController, type: :controller do
 
       context 'requests with no parameters' do
         it 'raises an exception' do
-          expect { post(:accept_friend_request, {}) }.to raise_error ActionController::ParameterMissing
+          expect { post(:accept_friend_request, {}) }
+            .to raise_error ActionController::ParameterMissing
         end
       end
 
       context 'requests with non-existent user_id' do
         it 'raises an exception' do
-          expect { post :send_friend_request, params: { user_id: 10_000 } }.to raise_error ActiveRecord::RecordNotFound
+          expect { post :send_friend_request, params: { user_id: 10_000 } }
+            .to raise_error ActiveRecord::RecordNotFound
         end
       end
 
       context 'requests with existing alternate user' do
         let(:other_user) { FactoryGirl.create :user }
 
-        context 'and accepting user did not receive a friend request from other user' do
+        context 'and accepting user did not receive a friend request from' \
+                ' other user' do
           it 'should respond with an error' do
-            expect { post :accept_friend_request, params: { user_id: other_user.id } }. to raise_error 'No friend request exists to accept'
+            expect do
+              post :accept_friend_request,
+                   params: { user_id: other_user.id }
+            end
+              . to raise_error 'No friend request exists to accept'
           end
         end
 
@@ -108,7 +121,11 @@ RSpec.describe FriendshipController, type: :controller do
           end
 
           it 'should respond with an error' do
-            expect { post :accept_friend_request, params: { user_id: other_user.id } }. to raise_error 'Friendship already exists'
+            expect do
+              post :accept_friend_request,
+                   params: { user_id: other_user.id }
+            end
+              .to raise_error 'Friendship already exists'
           end
         end
 

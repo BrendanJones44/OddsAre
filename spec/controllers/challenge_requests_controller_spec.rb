@@ -99,7 +99,8 @@ RSpec.describe ChallengeRequestsController, type: :controller do
                 challenge_request: valid_challenge_request,
                 recipient_id: user_receiving_odds_are.id
               }
-            end.to raise_error 'You must be friends with the recpient to odds are them'
+            end.to raise_error 'You must be friends with the recpient to odds' \
+                               ' are them'
           end
 
           context 'and the users are friends' do
@@ -121,8 +122,10 @@ RSpec.describe ChallengeRequestsController, type: :controller do
               expect(OddsAre.all.size).to eql 1
             end
 
-            it 'should associate the created odds with the created challenge request' do
-              expect(OddsAre.first.challenge_request).to eql ChallengeRequest.first
+            it 'should associate the created odds with the created challenge' \
+               'request' do
+              expect(OddsAre.first.challenge_request)
+                .to eql ChallengeRequest.first
             end
 
             it 'should create a notification for receiving user' do

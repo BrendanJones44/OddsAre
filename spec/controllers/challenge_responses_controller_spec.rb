@@ -46,8 +46,9 @@ RSpec.describe ChallengeResponsesController, type: :controller do
         end
         it 'throws an error' do
           expect do
-            post :create, params: { odds_are_id: 1,
-                                    challenge_response: invalid_challenge_response }
+            post :create,
+                 params: { odds_are_id: 1,
+                           challenge_response: invalid_challenge_response }
           end.to raise_error ActiveRecord::RecordNotFound
         end
       end
@@ -66,7 +67,8 @@ RSpec.describe ChallengeResponsesController, type: :controller do
             post :create, params: {
               challenge_response: invalid_challenge_response
             }
-          end.to raise_error 'You must be the recipient off the odds are to respond'
+          end.to raise_error 'You must be the recipient off the odds are ' \
+                             'to respond'
         end
       end
 
@@ -111,11 +113,13 @@ RSpec.describe ChallengeResponsesController, type: :controller do
         end
 
         it 'should update the notification created from the request' do
-          expect(OddsAre.first.challenge_request.notification.acted_upon_at).to be_a(Time)
+          expect(OddsAre.first.challenge_request.notification.acted_upon_at)
+            .to be_a(Time)
         end
 
         it 'should redirect user back' do
-          expect(response).to redirect_to(odds_ares_show_current_path(show_friends: 'active'))
+          expect(response)
+            .to redirect_to(odds_ares_show_current_path(show_friends: 'active'))
         end
 
         it 'should create a notification for the odds are initiator' do
@@ -219,7 +223,10 @@ RSpec.describe ChallengeResponsesController, type: :controller do
 
       context 'finalized odds are' do
         context 'who is not associated to the odds are' do
-          let(:odds_are) { FactoryGirl.create(:odds_are, finalized_at: Time.zone.now) }
+          let(:odds_are) do
+            FactoryGirl.create(:odds_are,
+                               finalized_at: Time.zone.now)
+          end
           let(:challenge_response) do
             FactoryGirl.create(:challenge_response,
                                odds_are: odds_are)
@@ -231,7 +238,10 @@ RSpec.describe ChallengeResponsesController, type: :controller do
         end
 
         context 'who is the recipient of the odds are' do
-          let(:odds_are) { FactoryGirl.create(:odds_are, finalized_at: Time.zone.now, recipient: user) }
+          let(:odds_are) do
+            FactoryGirl.create(:odds_are,
+                               finalized_at: Time.zone.now, recipient: user)
+          end
           let(:challenge_response) do
             FactoryGirl.create(:challenge_response,
                                odds_are: odds_are)
@@ -243,7 +253,10 @@ RSpec.describe ChallengeResponsesController, type: :controller do
         end
 
         context 'who is the initiator of the odds are' do
-          let(:odds_are) { FactoryGirl.create(:odds_are, finalized_at: Time.zone.now, initiator: user) }
+          let(:odds_are) do
+            FactoryGirl.create(:odds_are,
+                               finalized_at: Time.zone.now, initiator: user)
+          end
           let(:challenge_response) do
             FactoryGirl.create(:challenge_response,
                                odds_are: odds_are)

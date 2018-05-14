@@ -40,20 +40,21 @@ RSpec.describe OddsAresController, type: :controller do
                                notification: subject)
           end
           it 'should not override the notifications timestamp' do
-            expect { get :show, params: { id: odds_are.id } }.to_not change {
-                                                                       subject.acted_upon_at
-                                                                     }
+            expect { get :show, params: { id: odds_are.id } }
+              .to_not change { subject.acted_upon_at }
           end
         end
       end
 
       context 'who is is not the recipient of the notification' do
-        subject { FactoryGirl.create(:notification, acted_upon_at: Time.zone.now) }
+        subject do
+          FactoryGirl.create(:notification,
+                             acted_upon_at: Time.zone.now)
+        end
         let(:odds_are) { FactoryGirl.create(:odds_are, notification: subject) }
         it 'should not override the notifications timestamp' do
-          expect { get :show, params: { id: odds_are.id } }.to_not change {
-                                                                     subject.acted_upon_at
-                                                                   }
+          expect { get :show, params: { id: odds_are.id } }
+            .to_not change { subject.acted_upon_at }
         end
       end
     end
@@ -75,7 +76,8 @@ RSpec.describe OddsAresController, type: :controller do
         end
         it 'assigns the challenge requests waiting on the user properly' do
           get :show_current
-          expect(assigns(:requests_waiting_on_user_to_set)).to eql user.challenge_requests_waiting_on_user_to_set
+          expect(assigns(:requests_waiting_on_user_to_set))
+            .to eql user.challenge_requests_waiting_on_user_to_set
         end
       end
 
@@ -86,7 +88,8 @@ RSpec.describe OddsAresController, type: :controller do
         end
         it 'assigns the challenge requests waiting on friends properly' do
           get :show_current
-          expect(assigns(:requests_waiting_on_friends_to_set)).to eql user.challenge_requests_waiting_on_friends_to_set
+          expect(assigns(:requests_waiting_on_friends_to_set))
+            .to eql user.challenge_requests_waiting_on_friends_to_set
         end
       end
 
@@ -97,7 +100,8 @@ RSpec.describe OddsAresController, type: :controller do
         end
         it 'assigns the challenge responses waiting on the user properly' do
           get :show_current
-          expect(assigns(:responses_waiting_on_user_to_complete)).to eql user.challenge_responses_waiting_on_friends_to_complete
+          expect(assigns(:responses_waiting_on_user_to_complete))
+            .to eql user.challenge_responses_waiting_on_friends_to_complete
         end
       end
 
@@ -108,7 +112,8 @@ RSpec.describe OddsAresController, type: :controller do
         end
         it 'assigns the challenge responses waiting on friends properly' do
           get :show_current
-          expect(assigns(:responses_waiting_on_friends_to_complete)).to eql user.challenge_responses_waiting_on_user_to_complete
+          expect(assigns(:responses_waiting_on_friends_to_complete))
+            .to eql user.challenge_responses_waiting_on_user_to_complete
         end
       end
 
