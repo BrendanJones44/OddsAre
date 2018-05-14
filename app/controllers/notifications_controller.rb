@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
-  #POST /notifications/:id/mark_as_read
+  # POST /notifications/:id/mark_as_read
   def mark_as_read
     notification = Notification.find(params.require(:id))
     if notification.user_can_update(current_user)
@@ -10,5 +10,4 @@ class NotificationsController < ApplicationController
       return head(:forbidden)
     end
   end
-
 end

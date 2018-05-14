@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 ruby '2.3.4'
 
-
 gem 'pg'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -22,6 +21,8 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 
 gem 'react-rails'
 
+gem 'rubocop', '~> 0.56.0', require: false
+
 gem 'language_filter'
 
 # Use jquery as the JavaScript library
@@ -31,8 +32,8 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-gem 'font-awesome-rails'
 gem 'devise'
+gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'has_friendship'
 gem 'jquery-turbolinks'
@@ -46,27 +47,27 @@ gem 'language_filter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :test do
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
-  gem 'shoulda-matchers', '~> 3.0', require: false
   gem 'database_cleaner', '~> 1.5'
   gem 'faker', '~> 1.8.7'
-  gem 'simplecov', :require => false
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'simplecov', require: false
 end
 
 group :development, :test do
-  gem 'rack-mini-profiler', require: false
-  gem 'rspec-rails', '~> 3.4'
+  gem 'byebug', platform: :mri
   gem 'capybara', '~> 2.5'
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'byebug', platform: :mri
+  gem 'rack-mini-profiler', require: false
+  gem 'rspec-rails', '~> 3.4'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

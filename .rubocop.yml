@@ -1,0 +1,8 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'spec/rails_helper.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']

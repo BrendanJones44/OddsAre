@@ -4,6 +4,5 @@ class ChallengeRequest < ApplicationRecord
   belongs_to :odds_are
 
   ### Validations ###
-  validates_presence_of :action, :message => 'You must say what the odds are is'
-
+  validates_presence_of :action, message: 'You must say what the odds are is'
 end

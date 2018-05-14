@@ -11,17 +11,15 @@ class ChallengeResponsesController < ApplicationController
         Notification.create(
           recipient: odds_are.initiator,
           actor: current_user,
-          action: "responded to your odds are",
+          action: 'responded to your odds are',
           notifiable: @challenge_response
         )
-        redirect_to odds_ares_show_current_path(show_friends: "active")
+        redirect_to odds_ares_show_current_path(show_friends: 'active')
       else
         render '/challenge_requests/show'
       end
     else
-      raise Exception.new(
-        'You must be the recipient off the odds are to respond'
-      )
+      raise Exception, 'You must be the recipient off the odds are to respond'
     end
   end
 
@@ -35,7 +33,7 @@ class ChallengeResponsesController < ApplicationController
 
     if odds_are.initiator == current_user && odds_are.finalized_at.nil?
       @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
-    elsif (odds_are.recipient == current_user || odds_are.initiator == current_user ) && odds_are.finalized_at
+    elsif (odds_are.recipient == current_user || odds_are.initiator == current_user) && odds_are.finalized_at
       # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
       @challenge_response = challenge_response
       @odds_are = challenge_response.odds_are
@@ -46,9 +44,10 @@ class ChallengeResponsesController < ApplicationController
   end
 
   private
-    def challenge_response_params
-      params.require(:challenge_response).permit(:odds_out_of,
-                                                 :number_chosen,
-                                                 :odds_are_id)
-    end
+
+  def challenge_response_params
+    params.require(:challenge_response).permit(:odds_out_of,
+                                               :number_chosen,
+                                               :odds_are_id)
+  end
 end

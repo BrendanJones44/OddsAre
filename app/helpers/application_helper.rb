@@ -4,7 +4,7 @@ module ApplicationHelper
     when 'notice' then 'success'
     when 'alert'  then 'danger'
     else name
-      ''
+         ''
     end
   end
 end

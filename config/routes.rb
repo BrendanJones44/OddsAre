@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :challenge_requests
 
   root to: 'pages#index'
-  devise_for :users, :controllers => { :registrations => "users/registrations" }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   post '/notifications/:id/mark_as_read' => 'notifications#mark_as_read', as: 'mark_notification_as_read'
 
   post '/friendship/send_friend_request' => 'friendship#send_friend_request', as: 'send_friend_request'

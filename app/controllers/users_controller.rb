@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   end
 
   def all
-    @view_type = "All Users"
+    @view_type = 'All Users'
     @users = User.where.not(id: current_user.id)
   end
 
   def friends
-    @view_type = "Your Friends"
+    @view_type = 'Your Friends'
     @users = current_user.friends
     render 'users/all'
   end
