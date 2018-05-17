@@ -16,8 +16,6 @@ class ChallengeFinalizationsController < ApplicationController
 
       if @challenge_finalization.save
 
-        challenge_response = odds_are.challenge_response
-
         if odds_are.recipient_won
           task = Task.create(loser: odds_are.initiator,
                              winner: odds_are.recipient,

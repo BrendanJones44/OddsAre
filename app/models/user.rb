@@ -34,6 +34,24 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   ### Helper methods ###
+  def can_accept_friend_request_from(user)
+    if friends.include? user
+      raise Exception, 'Friendship already exists'
+    elsif user.pending_friends.include? self
+      true
+    else
+      raise Exception, 'No friend request exists to accept'
+    end
+  end
+
+  def can_send_friend_request_to(user)
+    if friends.include? user
+      raise Exception, 'Friendship already exists'
+    else
+      true
+    end
+  end
+
   def full_name
     first_name + ' ' + last_name
   end

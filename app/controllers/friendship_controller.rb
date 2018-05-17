@@ -6,10 +6,7 @@ class FriendshipController < ApplicationController
   # POST /friendship/send_friend_request
   def send_friend_request
     recipient = User.find(params.require(:user_id))
-    unless recipient.blank?
-      if current_user.friends.include? recipient
-        raise Exception, 'Friendship already exists'
-      end
+    if current_user.can_send_friend_request_to recipient
       current_user.friend_request(recipient)
       Notification.create(recipient: recipient,
                           actor: current_user,
@@ -23,20 +20,13 @@ class FriendshipController < ApplicationController
   # POST /friendship/accept_friend_request
   def accept_friend_request
     actor = User.find(params.require(:user_id))
-    unless actor.blank?
-      if current_user.friends.include? actor
-        raise Exception, 'Friendship already exists'
-      end
-      if actor.pending_friends.include? current_user
-        current_user.accept_request(actor)
-        Notification.create(recipient: actor,
-                            actor: current_user,
-                            action: 'accepted your friend request',
-                            notifiable: current_user,
-                            dismiss_type: 'on_click')
-      else
-        raise Exception, 'No friend request exists to accept'
-      end
+    if current_user.can_accept_friend_request_from actor
+      current_user.accept_request(actor)
+      Notification.create(recipient: actor,
+                          actor: current_user,
+                          action: 'accepted your friend request',
+                          notifiable: current_user,
+                          dismiss_type: 'on_click')
     end
     redirect_back(fallback_location: root_path)
   end

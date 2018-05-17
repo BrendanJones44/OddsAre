@@ -74,6 +74,55 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#can_accept_friend_request_from' do
+      context 'where users are already friends' do
+        subject { user_with_friends }
+        it 'should raise an exception' do
+          expect do
+            subject.can_accept_friend_request_from(subject.friends.first)
+          end.to raise_error 'Friendship already exists'
+        end
+      end
+
+      context 'where users are not friends' do
+        it 'should raise an exception' do
+          expect do
+            subject.can_accept_friend_request_from(build(:user))
+          end.to raise_error 'No friend request exists to accept'
+        end
+      end
+
+      context 'where user has a friend request from the other user' do
+        let(:requesting_user) { create(:user) }
+        let(:user) { create(:user) }
+        before do
+          requesting_user.friend_request(user)
+        end
+        it 'should be true' do
+          expect do
+            user.can_accept_friend_request_from(requesting_user).to be true
+          end
+        end
+      end
+    end
+
+    describe '#can_send_friend_request_to' do
+      context 'where users are already friends' do
+        subject { user_with_friends }
+        it 'should raise an exception' do
+          expect do
+            subject.can_send_friend_request_to(subject.friends.first)
+          end.to raise_error 'Friendship already exists'
+        end
+      end
+
+      context 'where users are not friends' do
+        subject { build(:user) }
+        it 'should be true' do
+          expect(subject.can_send_friend_request_to(build(:user))).to be true
+        end
+      end
+    end
     describe '#total_odds_ares' do
       context 'where user has no odds ares' do
         subject { FactoryGirl.create :user }
