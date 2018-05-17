@@ -10,7 +10,9 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
-
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/user.rb'
 Metrics/ModuleLength:
   Exclude:
     - 'spec/support/**'

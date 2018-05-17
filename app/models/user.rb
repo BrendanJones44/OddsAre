@@ -38,11 +38,11 @@ class User < ApplicationRecord
     first_name + ' ' + last_name
   end
 
-  def has_friends
+  def friends?
     friends.any?
   end
 
-  def has_friend_requests
+  def friend_requests?
     requested_friends.any?
   end
 
@@ -51,15 +51,17 @@ class User < ApplicationRecord
   end
 
   def completed_odds_ares
-    sent_odds_ares.where.not(finalized_at: nil) + received_odds_ares.where.not(finalized_at: nil)
+    sent_odds_ares.where.not(finalized_at: nil) + \
+      received_odds_ares.where.not(finalized_at: nil)
   end
 
-  def has_lost_odds_ares
+  def lost_odds_ares?
     !lost_odds_ares.empty?
   end
 
-  def has_current_odds_ares
-    (sent_odds_ares.where(finalized_at: nil) + received_odds_ares.where(finalized_at: nil)).any?
+  def current_odds_ares?
+    (sent_odds_ares.where(finalized_at: nil) + \
+      received_odds_ares.where(finalized_at: nil)).any?
   end
 
   def num_current_odds_ares
@@ -68,7 +70,8 @@ class User < ApplicationRecord
   end
 
   def dares_completed
-    lost_odds_ares.where.not(loser_marked_completed_at: nil, winner_marked_completed_at: nil)
+    lost_odds_ares.where.not(loser_marked_completed_at: nil,
+                             winner_marked_completed_at: nil)
   end
 
   def challenge_requests_waiting_on_friends_to_set
@@ -100,7 +103,7 @@ class User < ApplicationRecord
     profanity_filter = LanguageFilter::Filter.new matchlist: :profanity
     if profanity_filter.match? user_name
       errors.add(:user_name, "The following language is inappropriate in a
-         username: #{profanity_filter.matched(user_name).join(', ')}")
+       username: #{profanity_filter.matched(user_name).join(', ')}")
     end
   end
 

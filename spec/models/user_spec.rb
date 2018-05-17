@@ -26,27 +26,27 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '#has_friends' do
+    describe '#friends?' do
       context 'user has no friends' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.has_friends).to be false }
+        it { expect(subject.friends?).to be false }
       end
 
       context 'user has friends' do
         subject { user_with_friends }
-        it { expect(subject.has_friends).to be true }
+        it { expect(subject.friends?).to be true }
       end
     end
 
-    describe '#has_friend_requests' do
+    describe '#friend_requests?' do
       context 'user has no friend requests' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.has_friend_requests).to be false }
+        it { expect(subject.friend_requests?).to be false }
       end
 
       context 'user has a friend request' do
         subject { user_with_friend_request }
-        it { expect(subject.has_friend_requests).to be true }
+        it { expect(subject.friend_requests?).to be true }
       end
     end
 
@@ -108,42 +108,42 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '#has_lost_odds_ares' do
+    describe '#lost_odds_ares?' do
       context 'where user has no odds ares' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.has_lost_odds_ares).to be false }
+        it { expect(subject.lost_odds_ares?).to be false }
       end
 
       context 'where user has lost odds ares' do
         subject { user_with_lost_odds_are }
-        it { expect(subject.has_lost_odds_ares). to be true }
+        it { expect(subject.lost_odds_ares?). to be true }
       end
 
       context 'where user only has won odds ares' do
         subject { user_with_won_odds_are }
-        it { expect(subject.has_lost_odds_ares). to be false }
+        it { expect(subject.lost_odds_ares?). to be false }
       end
     end
 
-    describe '#has_current_odds_ares' do
+    describe '#current_odds_ares' do
       context 'where user has no odds ares at all' do
         subject { FactoryGirl.create :user }
-        it { expect(subject.has_current_odds_ares).to be false }
+        it { expect(subject.current_odds_ares?).to be false }
       end
 
       context 'where user had an odds are with no response' do
         subject { user_with_unresponded_odds_are }
-        it { expect(subject.has_current_odds_ares).to be true }
+        it { expect(subject.current_odds_ares?).to be true }
       end
 
       context 'where user has an odds are with no finalization' do
         subject { user_with_unfinalized_odds_are }
-        it { expect(subject.has_current_odds_ares).to be true }
+        it { expect(subject.current_odds_ares?).to be true }
       end
 
       context 'where user has an odds are that has been completed' do
         subject { user_with_complete_odds_are_where_nobody_wins }
-        it { expect(subject.has_current_odds_ares).to be false }
+        it { expect(subject.current_odds_ares?).to be false }
       end
     end
 
