@@ -17,6 +17,7 @@ Metrics/ModuleLength:
   Exclude:
     - 'spec/support/**'
 Metrics/MethodLength:
+  Max: 15
   Exclude:
     - 'spec/support/**'
 Metrics/AbcSize:
