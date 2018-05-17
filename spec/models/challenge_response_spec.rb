@@ -18,46 +18,78 @@ RSpec.describe ChallengeResponse, type: :model do
 
   describe '#odds_out_of_min' do
     context 'with odds out of being too small' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 1, odds_out_of: 2) }
-      it { expect(challenge_response.errors[:odds_out_of].first).to eq 'Odds are must be out of a minimum of 3' }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 1, odds_out_of: 2)
+      end
+      it {
+        expect(challenge_response.errors[:odds_out_of].first)
+          .to eq 'Odds are must be out of a minimum of 3'
+      }
     end
 
     context 'with odds out of being in range' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 1, odds_out_of: 3) }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 1, odds_out_of: 3)
+      end
       it { expect(challenge_response.errors[:odds_out_of].size).to eq 0 }
     end
   end
 
   describe '#number_chosen_not_middle' do
     context 'with number chosen being in the middle' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 2, odds_out_of: 4) }
-      it { expect(challenge_response.errors[:number_chosen].first).to eq 'Your number cannot be the middle number (if the challenger chooses this, both of you would lose)' }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 2, odds_out_of: 4)
+      end
+      it {
+        expect(challenge_response.errors[:number_chosen].first)
+          .to eq 'Your number cannot be the middle number' \
+        ' (if the challenger chooses this, both of you would lose)'
+      }
     end
 
     context 'with number chosen not being in the middle' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 1, odds_out_of: 3) }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 1, odds_out_of: 3)
+      end
       it { expect(challenge_response.errors[:number_chosen].size).to eq 0 }
     end
   end
 
   describe '#number_chosen_in_bounds' do
     context 'with number chosen being equal to what it is set out of' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 3, odds_out_of: 3) }
-      it { expect(challenge_response.errors[:number_chosen].first).to eq 'Your number must be less than what the odds are out of' }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 3, odds_out_of: 3)
+      end
+      it {
+        expect(challenge_response.errors[:number_chosen].first)
+          .to eq 'Your number must be less than what the odds are out of'
+      }
     end
 
     context 'with number chosen being greater than what it is set out of' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 4, odds_out_of: 3) }
-      it { expect(challenge_response.errors[:number_chosen].first).to eq 'Your number must be less than what the odds are out of' }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 4, odds_out_of: 3)
+      end
+      it {
+        expect(challenge_response.errors[:number_chosen].first)
+          .to eq 'Your number must be less than what the odds are out of'
+      }
     end
 
     context 'with number chosen being smaller than 1' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 0, odds_out_of: 3) }
-      it { expect(challenge_response.errors[:number_chosen].first).to eq 'Your number must be at least 1' }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 0, odds_out_of: 3)
+      end
+      it {
+        expect(challenge_response.errors[:number_chosen].first)
+          .to eq 'Your number must be at least 1'
+      }
     end
 
     context 'with number chosen being in range' do
-      let(:challenge_response) { ChallengeResponse.create(number_chosen: 1, odds_out_of: 3) }
+      let(:challenge_response) do
+        ChallengeResponse.create(number_chosen: 1, odds_out_of: 3)
+      end
       it { expect(challenge_response.errors[:number_chosen].size).to eq 0 }
     end
   end

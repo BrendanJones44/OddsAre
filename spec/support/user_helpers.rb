@@ -29,11 +29,11 @@ module UserHelpers
   end
 
   def user_with_won_odds_are
-    OddsAreHelpers.odds_are_with_winner.task.winner
+    OddsAreHelpers.odds_are_where_initiator_won.task.winner
   end
 
   def user_with_lost_odds_are
-    OddsAreHelpers.odds_are_with_winner.task.loser
+    OddsAreHelpers.odds_are_where_initiator_won.task.loser
   end
 
   def user_initiating_odds_are_with_no_response

@@ -185,13 +185,17 @@ RSpec.describe User, type: :model do
         context 'and user has not reported the dare complete' do
           before do
             subject.lost_odds_ares.first
-                   .update_attribute(:loser_marked_completed_at, nil)
+                   .update_attribute(
+                     :loser_marked_completed_at, nil
+                   )
           end
           it { expect(subject.dares_completed). to match_array([]) }
           context 'and winner has reported the dare complete' do
             before do
               subject.lost_odds_ares.first
-                     .update_attribute(:winner_marked_completed_at, Time.zone.now)
+                     .update_attribute(
+                       :winner_marked_completed_at, Time.zone.now
+                     )
             end
             it { expect(subject.dares_completed). to match_array([]) }
           end
@@ -214,7 +218,9 @@ RSpec.describe User, type: :model do
           context 'and winner has reported the dare complete' do
             before do
               subject.lost_odds_ares.first
-                     .update_attribute(:winner_marked_completed_at, Time.zone.now)
+                     .update_attribute(
+                       :winner_marked_completed_at, Time.zone.now
+                     )
             end
             it {
               expect(subject.dares_completed)
@@ -276,7 +282,9 @@ RSpec.describe User, type: :model do
           subject { user_receiving_odds_are_with_no_response }
           it {
             expect(subject.challenge_requests_waiting_on_user_to_set)
-              .to match_array(subject.received_odds_ares.first.challenge_request)
+              .to match_array(
+                subject.received_odds_ares.first.challenge_request
+              )
           }
         end
 
@@ -470,7 +478,9 @@ RSpec.describe User, type: :model do
           subject { user_receiving_odds_are_with_no_finalization }
           it {
             expect(subject.challenge_responses_waiting_on_friends_to_complete)
-              .to match_array(subject.received_odds_ares.first.challenge_response)
+              .to match_array(
+                subject.received_odds_ares.first.challenge_response
+              )
           }
         end
 

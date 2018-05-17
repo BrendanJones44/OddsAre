@@ -2,10 +2,14 @@ class User < ApplicationRecord
   ### Associations ###
   has_friendship
   has_many :notifications, foreign_key: :recipient_id
-  has_many :sent_odds_ares, class_name: 'OddsAre',
-                            foreign_key: :initiator_id, dependent: :delete_all
-  has_many :received_odds_ares, class_name: 'OddsAre',
-                                foreign_key: :recipient_id, dependent: :delete_all
+  has_many :sent_odds_ares,
+           class_name: 'OddsAre',
+           foreign_key: :initiator_id,
+           dependent: :delete_all
+  has_many :received_odds_ares,
+           class_name: 'OddsAre',
+           foreign_key: :recipient_id,
+           dependent: :delete_all
   has_many :lost_odds_ares, class_name: 'Task', foreign_key: :loser_id
   has_many :won_odds_ares, class_name: 'Task', foreign_key: :winner_id
 

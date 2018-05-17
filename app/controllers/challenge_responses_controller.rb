@@ -6,7 +6,8 @@ class ChallengeResponsesController < ApplicationController
     if current_user == odds_are.recipient
       if @challenge_response.save
         odds_are.update(responded_to_at: Time.zone.now)
-        odds_are.challenge_request.notification.update(acted_upon_at: Time.zone.now)
+        odds_are.challenge_request.notification
+                .update(acted_upon_at: Time.zone.now)
         odds_are.challenge_response = @challenge_response
         Notification.create(
           recipient: odds_are.initiator,
@@ -33,8 +34,7 @@ class ChallengeResponsesController < ApplicationController
 
     if odds_are.initiator == current_user && odds_are.finalized_at.nil?
       @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
-    elsif (odds_are.recipient == current_user || odds_are.initiator == current_user) && odds_are.finalized_at
-      # Only set the instance variable if the user is the actor. Don't want to expose the data otherwise
+    elsif odds_are.user_can_view(current_user)
       @challenge_response = challenge_response
       @odds_are = challenge_response.odds_are
       render 'odds_ares/show'
