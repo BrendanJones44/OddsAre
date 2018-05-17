@@ -57,6 +57,12 @@ module OddsAreHelpers
                               winner: user_b,
                               loser: user_a)
 
+    notification = FactoryGirl.create(:notification,
+                                      recipient: user_b,
+                                      actor: user_a,
+                                      action: 'completed an odds are',
+                                      acted_upon_at: nil)
+
     FactoryGirl.create(:odds_are,
                        initiator: user_a,
                        recipient: user_b,
@@ -65,7 +71,8 @@ module OddsAreHelpers
                        responded_to_at: Time.zone.now,
                        challenge_finalization: challenge_finalization,
                        finalized_at: Time.zone.now,
-                       task: task)
+                       task: task,
+                       notification: notification)
   end
 
   def odds_are_where_initiator_won
@@ -90,6 +97,12 @@ module OddsAreHelpers
                               winner: user_a,
                               loser: user_b)
 
+    notification = FactoryGirl.create(:notification,
+                                      recipient: user_b,
+                                      actor: user_a,
+                                      action: 'completed an odds are',
+                                      acted_upon_at: nil)
+
     FactoryGirl.create(:odds_are,
                        initiator: user_a,
                        recipient: user_b,
@@ -98,7 +111,8 @@ module OddsAreHelpers
                        responded_to_at: Time.zone.now,
                        challenge_finalization: challenge_finalization,
                        finalized_at: Time.zone.now,
-                       task: task)
+                       task: task,
+                       notification: notification)
   end
 
   def odds_are_with_no_winner

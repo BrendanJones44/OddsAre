@@ -32,4 +32,13 @@ class OddsAre < ApplicationRecord
       false
     end
   end
+
+  def should_update_notification(user)
+    if notification
+      notification.recipient == user && \
+        notification.acted_upon_at.nil?
+    else
+      false
+    end
+  end
 end

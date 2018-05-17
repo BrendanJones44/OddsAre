@@ -104,4 +104,77 @@ RSpec.describe OddsAre, type: :model do
       it { expect(subject.recipient_won).to be true }
     end
   end
+
+  describe '#should_update_notification' do
+    context 'odds are is not finalized' do
+      subject { odds_are_with_no_finalization }
+      context 'and user is the recipient' do
+        it 'should be false' do
+          expect(subject.should_update_notification(subject.recipient))
+            .to be false
+        end
+      end
+
+      context 'and user is the initiator' do
+        it 'should be false' do
+          expect(subject.should_update_notification(subject.initiator))
+            .to be false
+        end
+      end
+
+      context 'and user is not associated with the odds are' do
+        it 'should be false' do
+          expect(subject.should_update_notification(build(:user)))
+            .to be false
+        end      end
+    end
+
+    context 'odds are is finalized' do
+      subject { odds_are_where_initiator_won }
+      context 'and user is the recipient' do
+        it 'should be true' do
+          expect(subject.should_update_notification(subject.recipient))
+            .to be true
+        end
+      end
+
+      context 'and user is the initiator' do
+        it 'should be false' do
+          expect(subject.should_update_notification(subject.initiator))
+            .to be false
+        end
+      end
+
+      context 'and user is not associated with the odds are' do
+        it 'should be false' do
+          expect(subject.should_update_notification(build(:user)))
+            .to be false
+        end
+      end
+
+      context 'and notification has already been marked' do
+        before { subject.notification.update(acted_upon_at: Time.zone.now) }
+        context 'and user is the recipient' do
+          it 'should be false' do
+            expect(subject.should_update_notification(subject.recipient))
+              .to be false
+          end
+        end
+
+        context 'and user is the initiator' do
+          it 'should be false' do
+            expect(subject.should_update_notification(subject.initiator))
+              .to be false
+          end
+        end
+
+        context 'and user is not associated with the odds are' do
+          it 'should be false' do
+            expect(subject.should_update_notification(build(:user)))
+              .to be false
+          end
+        end
+      end
+    end
+  end
 end
