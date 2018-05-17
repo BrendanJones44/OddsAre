@@ -1,3 +1,5 @@
+# Controller for handling and viewing user friendships
+# Makes use of the FriendlyId gem that users extend
 class FriendshipController < ApplicationController
   before_action :authenticate_user!
 

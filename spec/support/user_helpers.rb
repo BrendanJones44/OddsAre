@@ -1,5 +1,7 @@
 require_relative './odds_are_helpers'
 
+# Collection of helper methods to get various instances of a user
+# Each instance has a slightly modified state/association
 module UserHelpers
   def user_with_friends
     user_a = FactoryGirl.create :user

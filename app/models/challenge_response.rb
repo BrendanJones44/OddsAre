@@ -1,3 +1,4 @@
+# The response from the recipient of the OddsAre
 class ChallengeResponse < ApplicationRecord
   belongs_to :odds_are
   validates_presence_of :odds_out_of, message: 'You must say what the odds '\

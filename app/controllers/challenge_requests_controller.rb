@@ -1,3 +1,4 @@
+# Controller for handling the initiator's request for an Odds Are
 class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!
 

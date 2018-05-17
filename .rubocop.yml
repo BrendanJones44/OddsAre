@@ -10,6 +10,16 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/support/**'
 Metrics/MethodLength:
   Exclude:
     - 'spec/support/**'
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/support/**'
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/controllers/**'

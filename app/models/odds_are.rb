@@ -1,3 +1,4 @@
+# The central association associating together all parts of an OddsAre challenge
 class OddsAre < ApplicationRecord
   ### Associations ###
   belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'

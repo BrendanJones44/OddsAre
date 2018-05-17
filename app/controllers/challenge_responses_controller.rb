@@ -1,3 +1,4 @@
+# Controller for handling the recipient's response of an odds are
 class ChallengeResponsesController < ApplicationController
   before_action :authenticate_user!
   def create

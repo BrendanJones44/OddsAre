@@ -1,3 +1,4 @@
+# Controller for handling the finalization of the Odds Are by the initiator
 class ChallengeFinalizationsController < ApplicationController
   before_action :authenticate_user!
 

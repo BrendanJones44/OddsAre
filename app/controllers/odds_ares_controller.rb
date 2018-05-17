@@ -1,3 +1,4 @@
+# Controller for viewing Odds Ares
 class OddsAresController < ApplicationController
   before_action :authenticate_user!
   def show

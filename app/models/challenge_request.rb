@@ -1,3 +1,4 @@
+# The initial dare starting an OddsAre challenge
 class ChallengeRequest < ApplicationRecord
   ### Associations ###
   has_one :notification, as: :notifiable

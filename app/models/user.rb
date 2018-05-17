@@ -1,3 +1,4 @@
+# The class encapsulating all end user behavior and associations
 class User < ApplicationRecord
   ### Associations ###
   has_friendship
