@@ -4,7 +4,8 @@ class ChallengeFinalizationsController < ApplicationController
 
   def create
     params.require(:challenge_finalization)
-    @challenge_finalization = ChallengeFinalization.new(finalize_challenge_params)
+    @challenge_finalization = ChallengeFinalization
+                              .new(finalize_challenge_params)
     odds_are = OddsAre.find(@challenge_finalization.odds_are_id)
     if odds_are.finalized_at?
       raise Exception, 'This odds are has already been completed'
@@ -12,7 +13,8 @@ class ChallengeFinalizationsController < ApplicationController
     if odds_are.initiator != current_user
       raise Exception, 'You must be the initiator of the odds are to respond'
     else
-      @challenge_finalization = ChallengeFinalization.new(finalize_challenge_params)
+      @challenge_finalization = ChallengeFinalization
+                                .new(finalize_challenge_params)
 
       if @challenge_finalization.save
 

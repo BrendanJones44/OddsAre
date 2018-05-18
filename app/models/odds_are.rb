@@ -42,4 +42,8 @@ class OddsAre < ApplicationRecord
       false
     end
   end
+
+  def should_create_response(user)
+    responded_to_at.nil? && recipient == user
+  end
 end

@@ -99,9 +99,8 @@ RSpec.describe User, type: :model do
           requesting_user.friend_request(user)
         end
         it 'should be true' do
-          expect do
-            user.can_accept_friend_request_from(requesting_user).to be true
-          end
+          expect(user.can_accept_friend_request_from(requesting_user))
+            .to be true
         end
       end
     end

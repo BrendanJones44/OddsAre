@@ -30,3 +30,8 @@ Lint/AmbiguousBlockAssociation:
 Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/users/registrations_controller.rb'
+Style/GuardClause:
+  Exclude:
+    - 'app/models/user.rb'
+    - 'app/controllers/notifications_controller.rb'
+    - 'app/controllers/odds_ares_controller.rb'

@@ -4,22 +4,20 @@ class ChallengeResponsesController < ApplicationController
   def create
     @challenge_response = ChallengeResponse.new(challenge_response_params)
     odds_are = OddsAre.find(@challenge_response.odds_are_id)
-    if current_user == odds_are.recipient
-      if @challenge_response.save
-        odds_are.update(responded_to_at: Time.zone.now)
-        odds_are.challenge_request.notification
-                .update(acted_upon_at: Time.zone.now)
-        odds_are.challenge_response = @challenge_response
-        Notification.create(
-          recipient: odds_are.initiator,
-          actor: current_user,
-          action: 'responded to your odds are',
-          notifiable: @challenge_response
-        )
-        redirect_to odds_ares_show_current_path(show_friends: 'active')
-      else
-        render '/challenge_requests/show'
-      end
+    if current_user == odds_are.recipient && @challenge_response.save
+      odds_are.update(responded_to_at: Time.zone.now)
+      odds_are.challenge_request.notification
+              .update(acted_upon_at: Time.zone.now)
+      odds_are.challenge_response = @challenge_response
+      Notification.create(
+        recipient: odds_are.initiator,
+        actor: current_user,
+        action: 'responded to your odds are',
+        notifiable: @challenge_response
+      )
+      redirect_to odds_ares_show_current_path(show_friends: 'active')
+    elsif current_user == odds_are.recipient
+      render '/challenge_requests/show'
     else
       raise Exception, 'You must be the recipient off the odds are to respond'
     end
