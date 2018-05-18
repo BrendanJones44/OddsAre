@@ -1,5 +1,6 @@
 require './app/services/odds_ares/new_odds_are_service'
-require './app/services/notifications/new_challenge_request_notification_service'
+require './app/services/notifications/' \
+  'new_challenge_request_notification_service'
 # Controller for handling the initiator's request for an Odds Are
 class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!

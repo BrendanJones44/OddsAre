@@ -1,3 +1,6 @@
+require './app/services/notifications/' \
+         'new_challenge_response_notification_service'
+require './app/services/odds_ares/update_odds_are_with_response_service'
 # Controller for handling the recipient's response of an odds are
 class ChallengeResponsesController < ApplicationController
   before_action :authenticate_user!
@@ -5,16 +8,8 @@ class ChallengeResponsesController < ApplicationController
     @challenge_response = ChallengeResponse.new(challenge_response_params)
     odds_are = OddsAre.find(@challenge_response.odds_are_id)
     if current_user == odds_are.recipient && @challenge_response.save
-      odds_are.update(responded_to_at: Time.zone.now)
-      odds_are.challenge_request.notification
-              .update(acted_upon_at: Time.zone.now)
-      odds_are.challenge_response = @challenge_response
-      Notification.create(
-        recipient: odds_are.initiator,
-        actor: current_user,
-        action: 'responded to your odds are',
-        notifiable: @challenge_response
-      )
+      UpdateOddsAreWithResponseService.new(odds_are, @challenge_response).call
+      NewChallengeResponseNotificationService.new(@challenge_response).call
       redirect_to odds_ares_show_current_path(show_friends: 'active')
     elsif current_user == odds_are.recipient
       render '/challenge_requests/show'

@@ -1,3 +1,7 @@
+require './app/services/notifications/' \
+        'new_challenge_finalization_notification_service'
+require './app/services/tasks/new_task_service'
+require './app/services/odds_ares/update_odds_are_with_finalization_service'
 # Controller for handling the finalization of the Odds Are by the initiator
 class ChallengeFinalizationsController < ApplicationController
   before_action :authenticate_user!
@@ -17,26 +21,9 @@ class ChallengeFinalizationsController < ApplicationController
                                 .new(finalize_challenge_params)
 
       if @challenge_finalization.save
-
-        if odds_are.recipient_won
-          task = Task.create(loser: odds_are.initiator,
-                             winner: odds_are.recipient,
-                             action: odds_are.challenge_request.action)
-          odds_are.update(task: task)
-        elsif odds_are.initiator_won
-          task = Task.create(loser: odds_are.recipient,
-                             winner: odds_are.initiator,
-                             action: odds_are.challenge_request.action)
-          odds_are.update(task: task)
-        end
-
-        odds_are.update(finalized_at: Time.zone.now)
-        odds_are.challenge_response.notification
-                .update(acted_upon_at: Time.zone.now)
-        Notification.create(recipient: odds_are.recipient,
-                            actor: current_user,
-                            action: 'completed an odds are',
-                            notifiable: odds_are)
+        task = NewTaskService.new(odds_are).call
+        UpdateOddsAreWithFinalizationService.new(odds_are, task).call
+        NewChallengeFinalizationNotificationService.new(odds_are).call
         redirect_back(fallback_location: root_path)
       end
     end
