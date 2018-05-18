@@ -1,3 +1,5 @@
+require './app/services/odds_ares/new_odds_are_service'
+require './app/services/notifications/new_challenge_request_notification_service'
 # Controller for handling the initiator's request for an Odds Are
 class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!
@@ -14,21 +16,13 @@ class ChallengeRequestsController < ApplicationController
 
   def create
     @challenge_request = ChallengeRequest.new(challenge_params)
-
     recipient = User.find(odds_are_params)
 
     if !current_user.friends.include? recipient
       raise Exception, 'You must be friends with the recpient to odds are them'
     elsif @challenge_request.save
-      odds_are = OddsAre.new
-      odds_are.initiator = current_user
-      odds_are.challenge_request = @challenge_request
-      odds_are.recipient_id = params.require(:recipient_id)
-      Notification.create(recipient: odds_are.recipient,
-                          actor: current_user,
-                          action: 'sent you an odds are',
-                          notifiable: @challenge_request)
-      odds_are.save
+      NewOddsAreService.new(@challenge_request, current_user, recipient).call
+      NewChallengeRequestNotificationService.new(@challenge_request).call
       flash[:notice] = 'Odds are sent to ' + recipient.full_name
       redirect_to odds_ares_show_current_path(show_friends: 'active')
     else
