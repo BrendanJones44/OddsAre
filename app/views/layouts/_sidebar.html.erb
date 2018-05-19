@@ -43,7 +43,7 @@
         </span>
         <span class="sidebar-link-text">
           Current
-          <% if current_user.has_current_odds_ares %>
+          <% if current_user.current_odds_ares? %>
             <b>(<%=current_user.num_current_odds_ares%>)</b>
           <% end %>
         </span>
@@ -77,7 +77,7 @@
         </span>
         <span class="sidebar-link-text">
           Requests
-          <% if current_user.has_friend_requests %>
+          <% if current_user.friend_requests? %>
            <b>(<%= current_user.requested_friends.size %>)</b>
           <% end %>
         </span>

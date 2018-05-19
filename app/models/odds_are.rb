@@ -46,4 +46,8 @@ class OddsAre < ApplicationRecord
   def should_create_response(user)
     responded_to_at.nil? && recipient == user
   end
+
+  def should_finalize(user)
+    # ToDo
+  end
 end
