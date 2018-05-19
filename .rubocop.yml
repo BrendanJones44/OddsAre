@@ -21,6 +21,7 @@ Metrics/MethodLength:
   Exclude:
     - 'spec/support/**'
 Metrics/AbcSize:
+  Max: 20
   Exclude:
     - 'spec/support/**'
 Lint/AmbiguousBlockAssociation:

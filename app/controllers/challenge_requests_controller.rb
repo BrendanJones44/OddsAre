@@ -1,7 +1,5 @@
-require './app/services/odds_ares/new_odds_are_service'
-require './app/services/notifications/' \
-  'new_challenge_request_notification_service'
 require './app/services/users/check_friendship_service'
+require './app/services/challenge_requests/challenge_request_after_save_service'
 # Controller for handling the initiator's request for an Odds Are
 class ChallengeRequestsController < ApplicationController
   before_action :authenticate_user!
@@ -21,8 +19,9 @@ class ChallengeRequestsController < ApplicationController
     recipient = User.find(odds_are_params)
     CheckFriendshipService.new(current_user, recipient).call
     if @challenge_request.save
-      NewOddsAreService.new(@challenge_request, current_user, recipient).call
-      NewChallengeRequestNotificationService.new(@challenge_request).call
+      ChallengeRequestAfterSaveService.new(current_user,
+                                           recipient,
+                                           @challenge_request).call
       flash[:notice] = 'Odds are sent to ' + recipient.full_name
       redirect_to odds_ares_show_current_path(show_friends: 'active')
     else
