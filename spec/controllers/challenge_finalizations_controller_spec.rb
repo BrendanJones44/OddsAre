@@ -63,12 +63,10 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           FactoryGirl.attributes_for(:challenge_finalization,
                                      odds_are_id: already_finalized_odds_are.id)
         end
-        it 'throws an error' do
-          expect do
-            post :create, params: {
-              challenge_finalization: challenge_finalization
-            }
-          end.to raise_error 'This odds are has already been completed'
+        it 'renders an expired link' do
+          expect(post(:create, params: {
+                        challenge_finalization: challenge_finalization
+                      })).to render_template('pages/expired')
         end
       end
 
@@ -81,13 +79,10 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
           FactoryGirl.attributes_for(:challenge_finalization,
                                      odds_are_id: non_associated_odds_are.id)
         end
-        it 'throws an error' do
-          expect do
-            post :create, params: {
-              challenge_finalization: invalid_challenge_finalization
-            }
-          end.to raise_error 'You must be the initiator of the odds are ' \
-                             'to respond'
+        it 'renders an expired link' do
+          expect(post(:create, params: {
+                        challenge_finalization: invalid_challenge_finalization
+                      })).to render_template('pages/expired')
         end
       end
 

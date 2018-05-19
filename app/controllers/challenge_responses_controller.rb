@@ -1,6 +1,8 @@
 require './app/services/notifications/' \
          'new_challenge_response_notification_service'
 require './app/services/odds_ares/update_odds_are_with_response_service'
+require './app/services/challenge_responses/' \
+         'set_challenge_response_fields_service'
 # Controller for handling the recipient's response of an odds are
 class ChallengeResponsesController < ApplicationController
   before_action :authenticate_user!
@@ -21,20 +23,11 @@ class ChallengeResponsesController < ApplicationController
   def show
     challenge_response = ChallengeResponse.find(params[:id])
     odds_are = challenge_response.odds_are
-    @challenge_action = odds_are.challenge_request.action
-    @other_user = odds_are.recipient
-    @response_out_of = challenge_response.odds_out_of
-    @response_id = challenge_response.id
-
-    if odds_are.initiator == current_user && odds_are.finalized_at.nil?
-      @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
-    elsif odds_are.user_can_view(current_user)
-      @challenge_response = challenge_response
-      @odds_are = challenge_response.odds_are
-      render 'odds_ares/show'
-    else
-      render 'pages/expired'
-    end
+    SetChallengeResponseFieldsService.new(odds_are, current_user).call
+    return render '/challenge_responses/show' if odds_are
+                                                 .should_finalize(current_user)
+    return render '/odds_ares/show' if odds_are.user_can_view(current_user)
+    return render '/pages/expired' unless odds_are.should_finalize(current_user)
   end
 
   private

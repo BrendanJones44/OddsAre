@@ -48,6 +48,6 @@ class OddsAre < ApplicationRecord
   end
 
   def should_finalize(user)
-    # ToDo
+    (!finalized_at? && initiator == user)
   end
 end

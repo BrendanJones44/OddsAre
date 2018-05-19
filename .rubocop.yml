@@ -33,5 +33,7 @@ Style/ClassAndModuleChildren:
 Style/GuardClause:
   Exclude:
     - 'app/models/user.rb'
+    - 'app/models/odds_are.rb'
     - 'app/controllers/notifications_controller.rb'
     - 'app/controllers/odds_ares_controller.rb'
+    - 'app/services/users/check_friendship_service.rb'
