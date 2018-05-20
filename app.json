@@ -2,7 +2,8 @@
   "environments": {
     "test": {
       "scripts": {
-        "test-setup": "gem install rubocop",
+        "test-setup": "bundle",
+        "test-setup": "rake db:migrate",
         "test": "rubocop"
       }
     }
