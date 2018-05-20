@@ -3,7 +3,7 @@
     "test": {
       "scripts": {
         "test-setup": "gem install rubocop",
-        "test": "bundle exec rspec",
+        "test": "rubocop"
       }
     }
   }
