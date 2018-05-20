@@ -24,7 +24,6 @@ gem 'react-rails'
 gem 'rubocop', '~> 0.56.0', require: false
 
 gem 'language_filter'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

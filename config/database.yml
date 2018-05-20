@@ -22,12 +22,12 @@ development:
 test: &test
   adapter: postgresql
   encoding: unicode
-  host: oddsaretestdb.cwexrtnr4l4i.us-east-2.rds.amazonaws.com
+  host: ec2-54-225-200-15.compute-1.amazonaws.com
   port: 5432
   pool: 5
-  username: brendan
-  password: School0430!!!
-  database: odds_are_test
+  username: pyizgbnknywcwl
+  password: 7867819ee7d26914aba21373c9f638bbf3e776a4d5cd2d23096585bd0b09b651
+  database: d15r34kggsrns
 
 production:
   adapter: postgresql
