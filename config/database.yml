@@ -22,15 +22,22 @@ development:
 test: &test
   adapter: postgresql
   encoding: unicode
+  host: ec2-54-225-200-15.compute-1.amazonaws.com
+  port: 5432
   pool: 5
-  username: brendanjones44
-  database: odds_are_test
+  username: pyizgbnknywcwl
+  password: 7867819ee7d26914aba21373c9f638bbf3e776a4d5cd2d23096585bd0b09b651
+  database: d15r34kggsrns
 
 production:
   adapter: postgresql
   encoding: unicode
+  host: ec2-54-225-249-161.compute-1.amazonaws.com
+  port: 5432
   pool: 5
-  username: brendanjones44
+  username: evwmfhkvgcpadt
+  password: ed3d3969fa93ee1bf0be3bc8bab02a22c66a4351314c0d3cdbb2802945e441b0
+  database: df0nk8tu4li5he
 
 cucumber:
   <<: *test
