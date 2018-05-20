@@ -1,19 +1,17 @@
-<div class="card offset-sm-3 col-sm-6">
-  <div class="card-block">
-    <h1 class="card-title">
-      Odds are to: <%= @challenge_request.odds_are.recipient.full_name %>
-    </h1>
-    <h3 class="card-subtitle">
-      Odds are they: <%= @challenge_request.action %>
-    </h3>
-    <% if @challenge_request.odds_are.responded_to_at.nil? %>
-      <h5 class="card-centered-content">
-         They have not responsed yet
-      <h5>
-    <% else %>
-      <h5>
-         They responded to you
-      </h5>
-    <% end %>
-  </div>
+<div class="card-block">
+  <h1 class="card-title">
+    Odds are to: <%= @challenge_request.odds_are.recipient.full_name %>
+  </h1>
+  <h3 class="card-subtitle">
+    Odds are they: <%= @challenge_request.action %>
+  </h3>
+  <% if @challenge_request.odds_are.responded_to_at.nil? %>
+    <h5 class="card-centered-content">
+       They have not responsed yet
+    <h5>
+  <% else %>
+    <h5>
+       They responded to you
+    </h5>
+  <% end %>
 </div>

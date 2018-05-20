@@ -1,32 +1,30 @@
-<div class="card offset-sm-3 col-sm-6">
-  <div class="card-block">
-    <h1 class="card-title">
-      Send an Odds Are Challenge
-    </h1>
+<div class="card-block">
+  <h1 class="card-title">
+    Send an Odds Are Challenge
+  </h1>
 
-    <% if @challenge_request.errors.any? %>
-        <div id="error_explanation">
-          <div class="alert alert-danger" role="alert" text-align="center">
-            <% @challenge_request.errors.each do |attr,msg| %>
-              <strong text-align="center">
-                <%= msg %>
-              </strong>
-            <% end %>
-          </div>
+  <% if @challenge_request.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-danger" role="alert" text-align="center">
+          <% @challenge_request.errors.each do |attr,msg| %>
+            <strong text-align="center">
+              <%= msg %>
+            </strong>
+          <% end %>
         </div>
-    <% end %><!-- end of error box -->
+      </div>
+  <% end %><!-- end of error box -->
 
-    <h4>Select a friend</h4>
-    <%= form_for @challenge_request do |f| %>
-      <%= select_tag :recipient_id,
-            options_from_collection_for_select(@friends, "id", "full_name"),
-            {class: "form form-group form-control"} %>
-      <h4>
-        Odds are they...
-      </h4>
-        <%= f.text_field :action, class: "form form-group form-control" %>
-        <%= f.submit "Send challenge", class: "btn btn-primary" %>
-    <% end %><!-- end of challenge_request form -->
-    
-  </div><!-- end of card-block -->
-</div><!-- end of card -->
+  <h4>Select a friend</h4>
+  <%= form_for @challenge_request do |f| %>
+    <%= select_tag :recipient_id,
+          options_from_collection_for_select(@friends, "id", "full_name"),
+          {class: "form form-group form-control"} %>
+    <h4>
+      Odds are they...
+    </h4>
+      <%= f.text_field :action, class: "form form-group form-control" %>
+      <%= f.submit "Send challenge", class: "btn btn-primary" %>
+  <% end %><!-- end of challenge_request form -->
+
+</div><!-- end of card-block -->

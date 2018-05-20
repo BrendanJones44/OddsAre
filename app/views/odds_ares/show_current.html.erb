@@ -1,69 +1,67 @@
-<div class="card offset-sm-3 col-sm-6">
-  <div class="card-block">
-    <h1 class="card-title">Current Odds Ares</h1>
-    <ul class="nav nav-tabs justify-content-center">
-      <li id=class="nav-item">
-        <a id="current-odds-waiting-on-user-link" class="nav-link <%= @show_user %>">Waiting on you</a>
-      </li>
-      <li class="nav-item">
-        <a id="current-odds-waiting-on-friends-link" class="nav-link <%= @show_friends %>">Waiting on friends</a>
-      </li>
-    </ul>
-    <div id="current-odds-waiting-on-user-wrapper" style="<%= @style_hide %>">
-      <% if @requests_waiting_on_user_to_set.empty? and @responses_waiting_on_user_to_complete.empty? %>
-        <h5>You have no odds ares waiting on you!</h5>
-      <% else %>
-        <% if not @requests_waiting_on_user_to_set.empty? %>
-          <h5 id="current-odds-not-set">Odds Ares you need to set the odds out of...</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <% @requests_waiting_on_user_to_set.each do |request| %>
-            <li>
-              <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.odds_are.initiator.full_name%></a>
-            </li>
-          <% end %>
-        <% end %>
-        <% if not @responses_waiting_on_user_to_complete.empty? %>
-          <h5>Odds Ares you need need to pick a number... </h5>
-          <% @responses_waiting_on_user_to_complete.each do |response| %>
-            <li>
-              <a href="<%= challenge_response_path(response) %>">Odds are responded to by: <%= response.odds_are.recipient.full_name%></a>
-            </li>
-          <% end %>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
+<div class="card-block">
+  <h1 class="card-title">Current Odds Ares</h1>
+  <ul class="nav nav-tabs justify-content-center">
+    <li id=class="nav-item">
+      <a id="current-odds-waiting-on-user-link" class="nav-link <%= @show_user %>">Waiting on you</a>
+    </li>
+    <li class="nav-item">
+      <a id="current-odds-waiting-on-friends-link" class="nav-link <%= @show_friends %>">Waiting on friends</a>
+    </li>
+  </ul>
+  <div id="current-odds-waiting-on-user-wrapper" style="<%= @style_hide %>">
+    <% if @requests_waiting_on_user_to_set.empty? and @responses_waiting_on_user_to_complete.empty? %>
+      <h5>You have no odds ares waiting on you!</h5>
+    <% else %>
+      <% if not @requests_waiting_on_user_to_set.empty? %>
+        <h5 id="current-odds-not-set">Odds Ares you need to set the odds out of...</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <% @requests_waiting_on_user_to_set.each do |request| %>
+          <li>
+            <a href="<%= challenge_request_path(request) %>">Odds are from: <%=request.odds_are.initiator.full_name%></a>
+          </li>
         <% end %>
       <% end %>
-    </div><!-- end of current-odds-waiting-on-user-wrapper -->
-    <div id="current-odds-waiting-on-friends-wrapper" style="<%= @style_show %>">
-      <% if @requests_waiting_on_friends_to_set.empty? and @responses_waiting_on_friends_to_complete.empty? %>
-        <h5>You have no odds ares waiting on friends!</h5>
-      <% else %>
-        <% if not @responses_waiting_on_friends_to_complete.empty? %>
-          <h5>Odds Ares friends need to pick a number...</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <% @responses_waiting_on_friends_to_complete.each do |response| %>
-            <li>
-              <a href="<%= challenge_response_path(response) %>">Odds are sent by: <%= response.odds_are.initiator.full_name %></a>
-            </li>
-          <% end %>
+      <% if not @responses_waiting_on_user_to_complete.empty? %>
+        <h5>Odds Ares you need need to pick a number... </h5>
+        <% @responses_waiting_on_user_to_complete.each do |response| %>
+          <li>
+            <a href="<%= challenge_response_path(response) %>">Odds are responded to by: <%= response.odds_are.recipient.full_name%></a>
+          </li>
         <% end %>
-        <% if not @requests_waiting_on_friends_to_set.empty? %>
-          <h5>Odds Ares friends need to set the odds out of...</h5>
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <% @requests_waiting_on_friends_to_set.each do |request| %>
-            <li>
-              <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.odds_are.recipient.full_name %></a>
-            </li>
-          <% end %>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div><!-- end of current-odds-waiting-on-user-wrapper -->
+  <div id="current-odds-waiting-on-friends-wrapper" style="<%= @style_show %>">
+    <% if @requests_waiting_on_friends_to_set.empty? and @responses_waiting_on_friends_to_complete.empty? %>
+      <h5>You have no odds ares waiting on friends!</h5>
+    <% else %>
+      <% if not @responses_waiting_on_friends_to_complete.empty? %>
+        <h5>Odds Ares friends need to pick a number...</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <% @responses_waiting_on_friends_to_complete.each do |response| %>
+          <li>
+            <a href="<%= challenge_response_path(response) %>">Odds are sent by: <%= response.odds_are.initiator.full_name %></a>
+          </li>
         <% end %>
       <% end %>
-    </div><!-- end of current-odds-waiting-on-friends-wrapper -->
-  </div>
+      <% if not @requests_waiting_on_friends_to_set.empty? %>
+        <h5>Odds Ares friends need to set the odds out of...</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <% @requests_waiting_on_friends_to_set.each do |request| %>
+          <li>
+            <a href="<%= challenge_request_path(request) %>">Odds are to: <%=request.odds_are.recipient.full_name %></a>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div><!-- end of current-odds-waiting-on-friends-wrapper -->
 </div>

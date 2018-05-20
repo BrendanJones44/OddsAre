@@ -1,64 +1,62 @@
 <div class="container">
-  <div class="card offset-sm-3 col-sm-6">
-    <div class="card-block">
+  <div class="card-block">
 
-      <h2 class="card-title">Sign up</h2>
+    <h2 class="card-title">Sign up</h2>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <div class="alert alert-danger" role="alert" text-align="center">
-              <p><strong><%= pluralize(@user.errors.count, 'error') %> must be fixed to sign up.</strong></p>
-                <% @user.errors.full_messages.each do |msg| %>
-                  <%= msg %></br>
-                <% end %>
-            </div>
-          </div>
-        <% end %>
-        <div class="field">
-          <%= f.label :user_name %><br />
-          <%= f.text_field :user_name, class: "form form-group form-control" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :first_name %><br />
-          <%= f.text_field :first_name, class: "form form-group form-control"  %>
-        </div>
-
-        <div class="field">
-          <%= f.label :last_name %><br />
-          <%= f.text_field :last_name, class: "form form-group form-control"   %>
-        </div>
-
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, class: "form form-group form-control" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "off", class: "form form-group form-control"  %>
-        </div>
-
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form form-group form-control"  %>
-        </div>
-
-
-        <div class="actions">
-          <div class="row">
-            <div class="col-md-5 col-md-offset-7"></div>
-              <%= f.submit "Sign up", class: "btn btn-primary"  %>
-            </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger" role="alert" text-align="center">
+            <p><strong><%= pluralize(@user.errors.count, 'error') %> must be fixed to sign up.</strong></p>
+              <% @user.errors.full_messages.each do |msg| %>
+                <%= msg %></br>
+              <% end %>
           </div>
         </div>
       <% end %>
+      <div class="field">
+        <%= f.label :user_name %><br />
+        <%= f.text_field :user_name, class: "form form-group form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name, class: "form form-group form-control"  %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name, class: "form form-group form-control"   %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class: "form form-group form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form form-group form-control"  %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form form-group form-control"  %>
+      </div>
 
 
-    </div>
+      <div class="actions">
+        <div class="row">
+          <div class="col-md-5 col-md-offset-7"></div>
+            <%= f.submit "Sign up", class: "btn btn-primary"  %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+
   </div>
 </div>
