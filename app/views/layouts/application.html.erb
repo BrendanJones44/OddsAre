@@ -9,15 +9,14 @@
   </head>
 
   <body>
+  <% if current_user %>
     <div id="top-navbar-wrapper">
       <%= render "layouts/navbar" %>
     </div>
     <div id="wrapper">
-      <% if current_user %>
-        <div id="left-sidebar-wrapper">
-          <%= render "layouts/sidebar" %>
-        </div>
-      <% end %>
+      <div id="left-sidebar-wrapper">
+        <%= render "layouts/sidebar" %>
+      </div>
       <div id="content-wrapper">
         <div id="main-content-container" class="container">
           <div class="row">
@@ -39,5 +38,27 @@
         </div>
       </div>
     </div>
+  <% else %>
+    <div id="content-wrapper">
+      <div id="main-content-container" class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <% flash.each do |name, msg| %>
+              <% if msg.is_a?(String) %>
+                <div class="alert alert-<%= flash_class_name(name) %>" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="card offset-sm-3 col-sm-6">
+            <%= yield %>
+          <div>
+      </div>
+    </div>
+  <% end %>
   </body>
 </html>
