@@ -30,4 +30,5 @@ jobs:
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker-compose up
+          docker-compose up -d
+          docker exec oddsare_web_1 bundle exec rspec
