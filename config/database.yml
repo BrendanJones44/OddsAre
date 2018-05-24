@@ -10,31 +10,18 @@ default: &default
   pool: 5
   username: brendanjones44
 
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password:
+  pool: 5
+
 development:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  username: brendanjones44
+  <<: *default
+  database: myapp_development
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
-  adapter: postgresql
-  encoding: unicode
-  host: ec2-54-225-200-15.compute-1.amazonaws.com
-  port: 5432
-  pool: 5
-  username: pyizgbnknywcwl
-  password: 7867819ee7d26914aba21373c9f638bbf3e776a4d5cd2d23096585bd0b09b651
-  database: d15r34kggsrns
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  host: ec2-54-225-249-161.compute-1.amazonaws.com
-  port: 5432
-  pool: 5
-  username: evwmfhkvgcpadt
-  password: ed3d3969fa93ee1bf0be3bc8bab02a22c66a4351314c0d3cdbb2802945e441b0
-  database: df0nk8tu4li5he
+  <<: *default
+  database: myapp_test
