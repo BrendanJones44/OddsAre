@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: oddsare_web
+      - image: circleci/ruby:2.3.3-node-browsers
     working_directory: ~/repo
 
     steps:
