@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.3.3-node-browsers
-    working_directory: ~/repo
+    working_directory: ~/odds_are
 
     steps:
       - checkout
@@ -40,4 +40,4 @@ jobs:
 
       - run:
           name: Execute unit tests
-          command: docker exec oddsare_web_1 bundle exec rspec
+          command: docker exec odds_are_web_1 bundle exec rspec
