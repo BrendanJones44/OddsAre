@@ -5,27 +5,27 @@
 version: 2
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-       - image: circleci/ruby:2.3.3-node-browsers
-       - image: circleci/postgres:9.6
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
     working_directory: ~/repo
 
     steps:
       - checkout
+      # ... steps for building/testing app ...
 
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      # use a primary image that already has Docker (recommended)
+      # or install it during a build like we do here
       - run:
-          name: install dependencies
+          name: Install Docker client
           command: |
-            docker-compose up
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
 
-      # run tests!
+      # build and push Docker image
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker-compose up
