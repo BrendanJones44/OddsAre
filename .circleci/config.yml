@@ -47,3 +47,7 @@ jobs:
       - run:
           name: Execute unit tests
           command: docker exec oddsare_web_1 bundle exec rspec
+
+      - run:
+          name: Code analysis
+          command: docker exec odds_are_web_1 rubocop
