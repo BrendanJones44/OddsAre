@@ -50,4 +50,4 @@ jobs:
 
       - run:
           name: Code analysis
-          command: docker exec odds_are_web_1 rubocop
+          command: docker exec oddsare_web_1 rubocop
