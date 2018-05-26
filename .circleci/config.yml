@@ -39,5 +39,9 @@ jobs:
           command: docker-compose up -d
 
       - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+    
+      - run:
           name: Execute unit tests
           command: docker exec oddsare_web_1 bundle exec rspec
