@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def all
     @view_type = 'All Users'
-    @users = User.where.not(id: current_user.id)
+    @users = User.where.not(id: current_user.id).order(:first_name)
   end
 
   def friends

@@ -6,15 +6,9 @@
       <h1 class="card-title"><%= @user.full_name %></h1>
     <% end %>
     <h4 class="card-subtitle">@<%= @user.user_name %></h4>
-    <div id="user-stats-wrapper">
-      <span class="badge badge-pill badge-info">Total: <%= @user.total_odds_ares.size %> </span>
-      <span class="badge badge-pill badge-success">Won: <%= @user.won_odds_ares.size %> </span>
-      <span class="badge badge-pill badge-danger">Lost: <%= @user.lost_odds_ares.size %> </span>
-      <span class="badge badge-pill badge-primary">Completed: <%= @user.completed_odds_ares.size %> </span>
-      <span class="badge badge-pill badge-warning">Dares completed: <%= @user.dares_completed.size %> </span>
-    </div>
+    <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
     <%if @user != current_user %>
-      <div class="user-button">
+      <div class="card-button">
       <% if current_user.pending_friends.include?(@user) %>
         <h5>Friend request pending </h5>
       <% elsif current_user.requested_friends.include?(@user) %>

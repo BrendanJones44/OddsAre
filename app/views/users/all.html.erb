@@ -1,18 +1,21 @@
 <h1 class="card-title"> <%= @view_type %> </h1>
 <% @users.each do |user| %>
-	<div class="jumbotron">
+	<div class="card-list">
 		<ul>
-			<h2><%= user.full_name %></h2>
+			<h2 class="card-centered-content"><%= user.full_name %></h2>
+			<%= render(:partial => "users/scorecard", :locals => {:user => user})%>
+			<div class="card-button">
 				<% if current_user.friends_with?(user) %>
 					(Friends with)
 
 				<% elsif user.requested_friends.include?(current_user) %>
 					(Request sent)
 				<% elsif current_user.requested_friends.include?(user) %>
-					<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary" %>
+					<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
 				<% else %>
-					<%= button_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary" %>
+					<%= button_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
 				<% end %>
+			</div>
 		</ul>
 	</div>
 <% end %>
