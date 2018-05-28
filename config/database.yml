@@ -19,8 +19,10 @@ default: &default
   pool: 5
 
 development:
-  <<: *default
-  database: myapp_development
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: brendanjones44
 
 test:
   <<: *default

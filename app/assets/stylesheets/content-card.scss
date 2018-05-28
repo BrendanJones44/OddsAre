@@ -3,6 +3,7 @@
 }
 .card-title {
     text-align: center;
+    margin-top: 10px;
 }
 .card-block {
     font-family: "Trebuchet MS", Helvetica, sans-serif;
@@ -10,6 +11,10 @@
 .card-subtitle {
     text-align: center;
     margin-bottom: 15px;
+}
+
+.card-content-row {
+  margin-bottom: 15px;
 }
 .card-centered-content {
     text-align: center;
