@@ -7,7 +7,7 @@ class ChallengeRequestsController < ApplicationController
   def new
     @friends = current_user.friends
     if @friends.empty?
-      @action = 'send an odds are'
+      @action = 'send an Odds Are'
       render 'pages/need_friends'
     else
       @challenge_request = ChallengeRequest.new
