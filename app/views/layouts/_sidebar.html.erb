@@ -24,10 +24,10 @@
     <% end %>
   </li><!-- nav-item for login/logout link -->
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
+      <a href="/"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
     </li>
     <li class="nav-item">
-      <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
+      <a href="/users/settings"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
     </li>
   </ul>
   <ul class="nav flex-column sidebar-group">
@@ -36,7 +36,7 @@
       <a href="<%= new_challenge_request_url %>">
           <span class="sidebar-link-favicon"><%= fa_icon "pencil-square-o" %></span><span class="sidebar-link-text">Create</span></a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a href="<%= odds_ares_show_current_url %>">
         <span class="sidebar-link-favicon">
           <%= fa_icon "exchange" %>
@@ -48,7 +48,7 @@
           <% end %>
         </span>
       </a>
-    </li>
+    </li> -->
     <li class="nav-item">
       <a href="#"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
     </li>
