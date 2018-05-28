@@ -23,7 +23,7 @@ class ChallengeResponsesController < ApplicationController
   def show
     challenge_response = ChallengeResponse.find(params[:id])
     odds_are = challenge_response.odds_are
-    SetChallengeResponseFieldsService.new(odds_are, current_user).call
+    @challenge_response_fields = SetChallengeResponseFieldsService.new(odds_are, current_user)
     return render '/challenge_responses/show' if odds_are
                                                  .should_finalize(current_user)
     return render '/odds_ares/show' if odds_are.user_can_view(current_user)
