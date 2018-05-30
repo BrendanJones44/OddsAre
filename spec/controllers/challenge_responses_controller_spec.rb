@@ -119,7 +119,7 @@ RSpec.describe ChallengeResponsesController, type: :controller do
 
         it 'should redirect user back' do
           expect(response)
-            .to redirect_to(odds_ares_show_current_path(show_friends: 'active'))
+            .to redirect_to OddsAre.first
         end
 
         it 'should create a notification for the odds are initiator' do

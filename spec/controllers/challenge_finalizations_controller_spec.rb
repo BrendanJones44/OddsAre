@@ -129,7 +129,7 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
         end
 
         it 'should redirect user back' do
-          expect(response).to redirect_to 'base_path'
+          expect(response).to redirect_to associated_odds_are
         end
 
         it 'should notify the other user the odds are is completed' do
@@ -206,7 +206,7 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
         end
 
         it 'should redirect user back' do
-          expect(response).to redirect_to 'base_path'
+          expect(response).to redirect_to associated_odds_are
         end
 
         it 'should notify the other user the odds are is completed' do
@@ -279,7 +279,7 @@ RSpec.describe ChallengeFinalizationsController, type: :controller do
         end
 
         it 'should redirect user back' do
-          expect(response).to redirect_to 'base_path'
+          expect(response).to redirect_to associated_odds_are
         end
 
         it 'should notify the other user the odds are is completed' do

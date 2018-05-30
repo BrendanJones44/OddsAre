@@ -14,7 +14,7 @@ class ChallengeFinalizationsController < ApplicationController
       task = NewTaskService.new(odds_are).call
       UpdateOddsAreWithFinalizationService.new(odds_are, task).call
       NewChallengeFinalizationNotificationService.new(odds_are).call
-      redirect_back(fallback_location: root_path)
+      redirect_to odds_are
     elsif !odds_are.should_finalize(current_user)
       return render '/pages/expired'
     end

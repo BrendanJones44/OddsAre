@@ -12,7 +12,7 @@ class ChallengeResponsesController < ApplicationController
     if current_user == odds_are.recipient && @challenge_response.save
       UpdateOddsAreWithResponseService.new(odds_are, @challenge_response).call
       NewChallengeResponseNotificationService.new(@challenge_response).call
-      redirect_to odds_ares_show_current_path(show_friends: 'active')
+      redirect_to odds_are
     elsif current_user == odds_are.recipient
       render '/challenge_requests/show'
     else
@@ -25,10 +25,10 @@ class ChallengeResponsesController < ApplicationController
     odds_are = challenge_response.odds_are
     @challenge_response_fields = SetChallengeResponseFieldsService
                                  .new(odds_are, current_user)
-    return render '/challenge_responses/show' if odds_are
-                                                 .should_finalize(current_user)
+
     return render '/odds_ares/show' if odds_are.user_can_view(current_user)
     return render '/pages/expired' unless odds_are.should_finalize(current_user)
+    render '/challenge_responses/show'
   end
 
   private
