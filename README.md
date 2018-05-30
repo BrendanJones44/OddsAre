@@ -1,9 +1,7 @@
 # README
+[![CircleCI](https://circleci.com/gh/BrendanJones44/OddsAre.svg?style=svg)](https://circleci.com/gh/BrendanJones44/OddsAre)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+Things to cover:
 
 * Ruby version
 
@@ -16,9 +14,3 @@ Things you may want to cover:
 * Database initialization
 
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
