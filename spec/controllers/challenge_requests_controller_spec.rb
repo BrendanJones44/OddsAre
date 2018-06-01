@@ -141,9 +141,7 @@ RSpec.describe ChallengeRequestsController, type: :controller do
             end
 
             it 'should redirect user back' do
-              expect(response).to redirect_to(odds_ares_show_current_path(
-                                                show_friends: 'active'
-                                              ))
+              expect(response).to redirect_to('/')
             end
           end
         end

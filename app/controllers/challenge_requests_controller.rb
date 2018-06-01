@@ -23,7 +23,7 @@ class ChallengeRequestsController < ApplicationController
                                            recipient,
                                            @challenge_request).call
       flash[:notice] = 'Odds are sent to ' + recipient.full_name
-      redirect_to odds_ares_show_current_path(show_friends: 'active')
+      redirect_to '/'
     else
       @friends = current_user.friends
       render 'new'
