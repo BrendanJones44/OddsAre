@@ -23,4 +23,8 @@ class OddsAresController < ApplicationController
     @responses_waiting_on_user_to_complete =
       current_user.challenge_responses_waiting_on_user_to_complete
   end
+
+  def show_completed
+    @odds_ares = current_user.completed_odds_ares
+  end
 end

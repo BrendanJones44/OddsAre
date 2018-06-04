@@ -131,4 +131,82 @@ RSpec.describe OddsAresController, type: :controller do
       end
     end
   end
+
+  describe '#show_completed' do
+    context 'unauthenticated user' do
+      let(:odds_are) { FactoryGirl.create(:odds_are) }
+      it 'should be redirected to signin' do
+        get :show_completed, params: { id: odds_are.id }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    context 'authenticated user' do
+      context 'with odds ares waiting on them to set' do
+        let(:user) { user_receiving_odds_are_with_no_response }
+        before do
+          sign_in user
+        end
+        it 'has no completed odds ares' do
+          get :show_completed
+          expect(assigns(:odds_ares)).to eql []
+        end
+      end
+
+      context 'with odds ares waiting on friends to set' do
+        let(:user) { user_initiating_odds_are_with_no_response }
+        before do
+          sign_in user
+        end
+        it 'has no completed odds ares' do
+          get :show_completed
+          expect(assigns(:odds_ares)).to eql []
+        end
+      end
+
+      context 'with odds ares waiting on them to complete' do
+        let(:user) { user_receiving_odds_are_with_no_finalization }
+        before do
+          sign_in user
+        end
+        it 'has no completed odds ares' do
+          get :show_completed
+          expect(assigns(:odds_ares)).to eql []
+        end
+      end
+
+      context 'with odds ares waiting on friends to complete' do
+        let(:user) { user_initiating_odds_are_with_no_finalization }
+        before do
+          sign_in user
+        end
+        it 'has no completed odds ares' do
+          get :show_completed
+          expect(assigns(:odds_ares)).to eql []
+        end
+      end
+
+      context 'with completed odds are they initiated' do
+        let(:user) { user_initiating_odds_are_that_is_complete }
+        before do
+          sign_in user
+        end
+        it 'shows the completed odds are' do
+          get :show_completed
+          expect(assigns(:odds_ares)).to eql [OddsAre.first]
+        end
+      end
+
+      context 'with completed odds are the other user initiated' do
+        let(:user) { user_receiving_odds_are_that_is_complete }
+        before do
+          sign_in user
+        end
+        it 'shows the cokpleted odds are' do
+          get :show_completed
+          expect(assigns(:odds_ares)). to eql [OddsAre.first]
+        end
+      end
+    end
+  end
 end

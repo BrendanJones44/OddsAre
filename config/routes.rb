@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :challenge_finalizations
   get '/odds_ares/show_current',
    to: 'odds_ares#show_current', as: 'odds_ares_show_current'
+  get '/odds_ares/show_completed',
+    to: 'odds_ares#show_completed', as: 'odds_ares_show_completed'
   resources :odds_ares
   resources :challenge_requests
 

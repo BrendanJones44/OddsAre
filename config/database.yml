@@ -26,7 +26,7 @@ development:
 test:
   <<: *default
   database: myapp_test
-# Switch to this test for local testing
+#Switch to this test for local testing
 # test:
 #   adapter: postgresql
 #   encoding: unicode
