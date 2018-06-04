@@ -46,7 +46,7 @@ jobs:
 
       - run:
           name: Execute unit tests
-          command: docker exec oddsare_web_1 bundle exec rspec RAILS_ENV=staging
+          command: docker exec oddsare_web_1 bundle exec rspec
 
       - run:
           name: Code analysis
