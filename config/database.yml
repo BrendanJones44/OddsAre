@@ -23,13 +23,12 @@ development:
   encoding: unicode
   pool: 5
   username: brendanjones44
-test:
+staging:
   <<: *default
   database: myapp_test
-#Switch to this test for local testing
-# test:
-#   adapter: postgresql
-#   encoding: unicode
-#   pool: 5
-#   username: brendanjones44
-#   database: odds_are_test
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: brendanjones44
+  database: odds_are_test

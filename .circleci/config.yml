@@ -41,12 +41,12 @@ jobs:
       - run:
           name: Database setup
           command: |
-            docker exec oddsare_web_1 bin/rails db:create RAILS_ENV=test --trace
-            docker exec oddsare_web_1 bin/rails db:migrate RAILS_ENV=test
+            docker exec oddsare_web_1 bin/rails db:create RAILS_ENV=staging --trace
+            docker exec oddsare_web_1 bin/rails db:migrate RAILS_ENV=staging
 
       - run:
           name: Execute unit tests
-          command: docker exec oddsare_web_1 bundle exec rspec
+          command: docker exec oddsare_web_1 bundle exec rspec RAILS_ENV=staging
 
       - run:
           name: Code analysis
