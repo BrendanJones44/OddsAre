@@ -44,7 +44,7 @@ gem 'jquery-turbolinks'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-group :test do
+group :test, :staging do
   gem 'cucumber-rails', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '~> 1.5'
@@ -54,7 +54,7 @@ group :test do
   gem 'simplecov', require: false
 end
 
-group :development, :test do
+group :development, :test, :staging do
   gem 'byebug', platform: :mri
   gem 'capybara', '~> 2.5'
   gem 'factory_girl_rails', '~> 4.5.0'
