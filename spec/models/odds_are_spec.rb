@@ -177,4 +177,102 @@ RSpec.describe OddsAre, type: :model do
       end
     end
   end
+
+  describe '#other_user' do
+    context 'as recipient' do
+      subject { odds_are_where_recipient_won }
+      it {
+        expect(subject.other_user(subject.recipient))
+          .to be subject.initiator
+      }
+    end
+
+    context 'as initiator' do
+      subject { odds_are_where_initiator_won }
+      it {
+        expect(subject.other_user(subject.initiator))
+          .to be subject.recipient
+      }
+    end
+
+    context 'as a non-associated user' do
+      subject { odds_are_where_initiator_won }
+      it { expect(subject.other_user(build(:user))).to be nil }
+    end
+  end
+
+  describe '#result' do
+    context 'with incomplete odds are' do
+      subject { odds_are_with_no_finalization }
+      it { expect(subject.result(subject.initiator)).to eql 'In progress' }
+    end
+
+    context 'with no winner' do
+      subject { odds_are_with_no_winner }
+      it { expect(subject.result(subject.initiator)).to eql 'Nobody won' }
+    end
+
+    context 'as winner' do
+      subject { odds_are_where_initiator_won }
+      it { expect(subject.result(subject.initiator)).to eql 'You won!' }
+    end
+
+    context 'as loser' do
+      subject { odds_are_where_initiator_won }
+      it { expect(subject.result(subject.recipient)).to eql 'You lost!' }
+    end
+
+    context 'as a non-associated user' do
+      subject { odds_are_where_initiator_won }
+      it { expect(subject.result(build(:user))).to be nil }
+    end
+  end
+
+  describe '#responder_name' do
+    context 'with no response' do
+      subject { odds_are_with_no_response }
+      it {
+        expect(subject.responder_name(subject.recipient))
+          .to eql 'Nobody responded'
+      }
+    end
+
+    context 'as the initiator' do
+      subject { odds_are_where_initiator_won }
+      it {
+        expect(subject.responder_name(subject.initiator))
+          .to eql subject.recipient.full_name
+      }
+    end
+
+    context 'as the recipient' do
+      subject { odds_are_where_recipient_won }
+      it { expect(subject.responder_name(subject.recipient)).to eql 'You' }
+    end
+
+    context 'as a non-associated user' do
+      subject { odds_are_where_recipient_won }
+      it { expect(subject.responder_name(build(:user))).to be nil }
+    end
+  end
+
+  describe '#initiator_name' do
+    context 'as the initiator' do
+      subject { odds_are_where_initiator_won }
+      it { expect(subject.initiator_name(subject.initiator)).to eql 'You' }
+    end
+
+    context 'as the recipient' do
+      subject { odds_are_where_recipient_won }
+      it {
+        expect(subject.initiator_name(subject.recipient))
+          .to eql subject.initiator.full_name
+      }
+    end
+
+    context 'as a non-associated user' do
+      subject { odds_are_where_recipient_won }
+      it { expect(subject.initiator_name(build(:user))).to be nil }
+    end
+  end
 end

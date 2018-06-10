@@ -60,6 +60,7 @@ class OddsAre < ApplicationRecord
   end
 
   def result(current_user)
+    return 'In progress' unless challenge_finalization
     return 'Nobody won' unless task
     if task.loser == current_user
       'You lost!'
@@ -78,10 +79,9 @@ class OddsAre < ApplicationRecord
   end
 
   def initiator_name(current_user)
-    return 'Nobody initiated' unless initiator
     if initiator == current_user
       'You'
-    else
+    elsif recipient == current_user
       initiator.full_name
     end
   end
