@@ -60,27 +60,27 @@ class OddsAre < ApplicationRecord
   end
 
   def result(current_user)
-    return "Nobody won" unless task
+    return 'Nobody won' unless task
     if task.loser == current_user
-      "You lost!"
+      'You lost!'
     elsif task.winner == current_user
-      "You won!"
+      'You won!'
     end
   end
 
   def responder_name(current_user)
-    return "Nobody responded" unless challenge_response
+    return 'Nobody responded' unless challenge_response
     if initiator == current_user
       recipient.full_name
     elsif recipient == current_user
-      "You"
+      'You'
     end
   end
 
   def initiator_name(current_user)
-    return "Nobody initiated" unless initiator
+    return 'Nobody initiated' unless initiator
     if initiator == current_user
-      "You"
+      'You'
     else
       initiator.full_name
     end
