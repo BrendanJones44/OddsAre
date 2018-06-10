@@ -1,1 +1,4 @@
 <h1 class="card-title">Completed Odds Ares</h1>
+<% @odds_ares.each do |odds_are| %>
+  <%= render(:partial => "odds_ares/card_item", :locals => {:odds_are => odds_are})%>
+<% end %>

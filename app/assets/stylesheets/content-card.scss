@@ -35,3 +35,48 @@
   padding-right: 30px;
   align-self: center;
 }
+
+.odds-are-item {
+  background-color: #eceeef;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  min-width: 400px;
+}
+
+.odds-are-initiator {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.odds-are-responder {
+  margin-right: 10px;
+  margin-top: 5px;
+  float: right;
+}
+
+.odds-are-out-of {
+  margin-right: 30px;
+  margin-top: 5px;
+  float: right;
+}
+
+.odds-are-number-chosen {
+  margin-right: 30px;
+  margin-top: 5px;
+  float: right;
+}
+
+.odds-are-action {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.odds-are-icon-right {
+  margin-left: 5px;
+}
+
+.odds-are-number-guessed {
+  margin-left: 30px;
+  margin-top: 5px;
+}

@@ -50,4 +50,39 @@ class OddsAre < ApplicationRecord
   def should_finalize(user)
     (!finalized_at? && initiator == user)
   end
+
+  def other_user(current_user)
+    if current_user == initiator
+      recipient
+    elsif current_user == recipient
+      initiator
+    end
+  end
+
+  def result(current_user)
+    return "Nobody won" unless task
+    if task.loser == current_user
+      "You lost!"
+    elsif task.winner == current_user
+      "You won!"
+    end
+  end
+
+  def responder_name(current_user)
+    return "Nobody responded" unless challenge_response
+    if initiator == current_user
+      recipient.full_name
+    elsif recipient == current_user
+      "You"
+    end
+  end
+
+  def initiator_name(current_user)
+    return "Nobody initiated" unless initiator
+    if initiator == current_user
+      "You"
+    else
+      initiator.full_name
+    end
+  end
 end

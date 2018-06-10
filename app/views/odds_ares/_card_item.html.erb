@@ -1,0 +1,21 @@
+<div class="odds-are-item">
+  <span class="h4 odds-are-initiator"><%= odds_are.initiator_name(current_user) %></span>
+  <span class="h4 odds-are-responder"><%= odds_are.responder_name(current_user) %></span>
+  <div class="h5 odds-are-action">Odds are you <%= odds_are.challenge_request.action %></div>
+  <% if odds_are.challenge_response %>
+    <div class="row">
+      <div class="col-12">
+        <div class="h5 odds-are-out-of">Odds out of: <%= odds_are.challenge_response.odds_out_of %></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="h5 odds-are-number-chosen">(Chose <%= odds_are.challenge_response.number_chosen %>)</div>
+      </div>
+    </div>
+  <% end %>
+  <% if odds_are.challenge_finalization %>
+    <div class="h5 odds-are-number-guessed">Guessed: <%= odds_are.challenge_finalization.number_guessed %></div>
+    <h4 class="card-centered-content"><%= odds_are.result(current_user) %></h4>
+  <% end %>
+</div>
