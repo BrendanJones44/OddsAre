@@ -1,4 +1,10 @@
 <div class="container">
+  <h1 class="card-title">Odds are in progress</h1>
+  <div class="card-block">
+    <%= render(:partial => "odds_ares/card_item", :locals => {:odds_are => @odds_are})%>
+  </div>
+</div>
+<!-- <div class="container">
   <div class="card-block">
     <h1 class="card-title">
       <% if !@odds_are.finalized_at? %>
@@ -25,4 +31,4 @@
       <% end %>
     <% end %>
   </div>
-</div>
+</div> -->

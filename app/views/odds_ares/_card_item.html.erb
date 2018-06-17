@@ -13,9 +13,20 @@
         <div class="h5 odds-are-number-chosen">(Chose <%= odds_are.challenge_response.number_chosen %>)</div>
       </div>
     </div>
+  <% else %>
+    <div class="row">
+      <div class="col-12">
+        <div class="h5 odds-are-out-of">Awaiting response</div>
+      </div>
+    </div>
   <% end %>
   <% if odds_are.challenge_finalization %>
     <div class="h5 odds-are-number-guessed">Guessed: <%= odds_are.challenge_finalization.number_guessed %></div>
     <h4 class="card-centered-content"><%= odds_are.result(current_user) %></h4>
+  <% else %>
+    <div class="row">
+      <div class="col-12">
+      <div class="h5 odds-are-number-guessed">Awaiting response</div>
+    </div>
   <% end %>
 </div>
