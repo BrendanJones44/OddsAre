@@ -1,34 +1,6 @@
 <div class="container">
-  <h1 class="card-title">Odds are in progress</h1>
+  <h1 class="card-title"><%= odds_are_title(@odds_are) %></h1>
   <div class="card-block">
     <%= render(:partial => "odds_ares/card_item", :locals => {:odds_are => @odds_are})%>
   </div>
 </div>
-<!-- <div class="container">
-  <div class="card-block">
-    <h1 class="card-title">
-      <% if !@odds_are.finalized_at? %>
-      Odds Are in Progress
-      <% elsif @odds_are.task.nil? %>
-      Nobody won/lost
-      <% elsif @odds_are.task.loser == current_user %>
-      You lost!
-      <% elsif @odds_are.task.winner == current_user %>
-      You won!
-      <% end %>
-    </h1>
-    <h3 class="card-centered-content">The odds were to: <%= @odds_are.challenge_request.action %></h3>
-    <h5 class="card-centered-content">The odds were set out of: <%= @odds_are.challenge_response.odds_out_of %></h5>
-    <% if current_user == @odds_are.initiator %>
-      <h5 class="card-centered-content">You choose: <%= @odds_are.challenge_finalization.number_guessed %></h5>
-      <h5 class="card-centered-content">They chose: <%= @odds_are.challenge_response.number_chosen %></h5>
-    <% elsif current_user == @odds_are.recipient %>
-      <h5 class="card-centered-content">You chose: <%= @odds_are.challenge_response.number_chosen %></h5>
-      <% if @odds_are.finalized_at? %>
-        <h5 class="card-centered-content">They chose: <%= @odds_are. challenge_finalization.number_guessed %></h5>
-      <% else %>
-        <h5 class="card-centered-content">Awaiting <%= @odds_are.initiator.full_name %>'s  reply</h5>
-      <% end %>
-    <% end %>
-  </div>
-</div> -->

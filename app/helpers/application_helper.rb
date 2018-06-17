@@ -8,4 +8,9 @@ module ApplicationHelper
       ''
     end
   end
+
+  def odds_are_title(odds_are)
+    return 'Odds Are in progress' if odds_are.finalized_at.nil?
+    'Completed Odds Are'
+  end
 end
