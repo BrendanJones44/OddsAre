@@ -26,8 +26,7 @@ Metrics/AbcSize:
     - 'spec/support/**'
 Lint/AmbiguousBlockAssociation:
   Exclude:
-    - 'spec/controllers/**'
-
+    - "spec/**/*"
 Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/users/registrations_controller.rb'

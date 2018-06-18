@@ -3,7 +3,21 @@ Views:
   - Lost odds are link in side bar
   - Centering content as you resize the window (research flex box)
 Testing:
-  - Service test cases
+  - Service test cases:
+    - Challenge Requests:
+      - After Save
+    - Challenge Responses:
+      - Set Response Fields
+    - Notifications
+      - Challenge Finalization
+      - Challenge Request
+      - Challenge Response
+    - Odds Ares
+      - New
+      - Update with finalization
+      - Update with response
+    - Users
+      - Check Friendship
   - View tests
   - Integration tests?
 Controllers:
