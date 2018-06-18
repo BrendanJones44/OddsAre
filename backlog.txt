@@ -16,8 +16,6 @@ Testing:
       - New
       - Update with finalization
       - Update with response
-    - Users
-      - Check Friendship
   - View tests
   - Integration tests?
 Controllers:
