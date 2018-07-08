@@ -2,7 +2,21 @@ Views:
   - Viewing an odds are request needs touching up Style (sending the response)
   - Lost odds are link in side bar
   - Completed odds ares, if empty, should display a message
-  - 
+  - Have mobile hamburger menu
+  - Move notifications to profile view
+  - Your friends view shouldn't view the label (friends with), maybe have a "send odds" link?
+    - Have params in the new-odds controller, preload friend send_to
+  - Your friends view and all friends should have rows
+  - "Round" the buttons/labels in the user-card-view
+  - Request friend button should be updated to the new colorscheme
+  - Inspect Black text vs. dark blue on the user cards
+  - Collapse the sign-up page to fit on 13" page as one view
+    - Maybe have First and Last name on the same row?
+  - Initially when you logout, you can go "back" and be logged in
+  - Log in page needs:
+    - New colorcheme on the button
+    - Centered content
+    - Sign up / forgot password as one row? 
 Testing:
   - Service test cases:
     - Challenge Requests:
