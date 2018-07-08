@@ -2,15 +2,23 @@
   min-width: 380px;
 }
 .card-title {
-    text-align: center;
-    margin-top: 10px;
-    color: #112d4e;
+  text-align: center;
+  margin-top: 10px;
+  color: #112d4e;
+  flex: 100%;
 }
 .card-block {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   color: #112d4e;
   display: flex;
   flex-flow: column wrap;
+}
+.card-block-row {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  color: #112d4e;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 #card-button-wrapper {
   min-width: 200px;
@@ -43,6 +51,7 @@
 
 .card-list {
   max-width: 400px;
+  min-width: 300px;
   max-height: 150px;
   background-color: #eceeef;
   margin-bottom: 20px;
@@ -50,6 +59,10 @@
   text-align: center;
   padding-right: 30px;
   align-self: center;
+  flex: 1;
+  flex: 40%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .odds-are-item {
