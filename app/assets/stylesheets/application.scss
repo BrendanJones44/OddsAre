@@ -2,10 +2,13 @@
 @import "font-awesome";
 @import "sidebar";
 @import "page-layout";
-@import "navbar";
 @import "content-card";
-@import "alert-notification";
 @import "user";
 @import "current-odds";
-@import "response-actor-view";
-@import "homepage";
+@import "navbar";
+@import "welcome";
+
+/* No links should be underlined throughout the app */
+a:hover {
+   text-decoration: none;
+}

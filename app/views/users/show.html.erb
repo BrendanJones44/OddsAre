@@ -1,24 +1,21 @@
-<div class="container">
-  <div class="card-block">
-    <% if @user == current_user %>
-      <h1 class="card-title">Your Profile</h1>
+<div class="card-block">
+  <% if @user == current_user %>
+    <h1 class="card-title">Your Profile</h1>
+  <% else %>
+    <h1 class="card-title"><%= @user.full_name %></h1>
+  <% end %>
+  <h4 class="card-subtitle">@<%= @user.user_name %></h4>
+  <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
+  <%if @user != current_user %>
+    <div class="card-button">
+    <% if current_user.pending_friends.include?(@user) %>
+      <h5>Friend request pending </h5>
+    <% elsif current_user.requested_friends.include?(@user) %>
+      <%= button_to "Accept Friend", accept_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
+    <% elsif current_user.friends.include?(@user) %>
+      <%= button_to "Send Odds Are", new_challenge_request_path, method: :get, class: "btn btn-sm btn-primary" %>
     <% else %>
-      <h1 class="card-title"><%= @user.full_name %></h1>
+      <%= button_to "Add Friend", send_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
     <% end %>
-    <h4 class="card-subtitle">@<%= @user.user_name %></h4>
-    <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
-    <%if @user != current_user %>
-      <div class="card-button">
-      <% if current_user.pending_friends.include?(@user) %>
-        <h5>Friend request pending </h5>
-      <% elsif current_user.requested_friends.include?(@user) %>
-        <%= button_to "Accept Friend", accept_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
-      <% elsif current_user.friends.include?(@user) %>
-        <%= button_to "Send Odds Are", new_challenge_request_path, method: :get, class: "btn btn-sm btn-primary" %>
-      <% else %>
-        <%= button_to "Add Friend", send_friend_request_url(:user_id => @user.id), class: "btn btn-sm btn-primary" %>
-      <% end %>
-    <% end %><!-- end of external user view -->
-  </div>
-</div>
+  <% end %><!-- end of external user view -->
 </div>

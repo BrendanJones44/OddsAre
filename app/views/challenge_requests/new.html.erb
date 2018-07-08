@@ -1,30 +1,31 @@
 <div class="card-block">
   <h1 class="card-title">
-    Send an Odds Are Challenge
+    Send an Odds Are
   </h1>
-
-  <% if @challenge_request.errors.any? %>
-      <div id="error_explanation">
-        <div class="alert alert-danger" role="alert" text-align="center">
-          <% @challenge_request.errors.each do |attr,msg| %>
-            <strong text-align="center">
-              <%= msg %>
-            </strong>
-          <% end %>
+  <div class="card-form-wrapper">
+    <% if @challenge_request.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger" role="alert" text-align="center">
+            <% @challenge_request.errors.each do |attr,msg| %>
+              <strong text-align="center">
+                <%= msg %>
+              </strong>
+            <% end %>
+          </div>
         </div>
-      </div>
-  <% end %><!-- end of error box -->
-
-  <h4>Select a friend</h4>
-  <%= form_for @challenge_request do |f| %>
-    <%= select_tag :recipient_id,
-          options_from_collection_for_select(@friends, "id", "full_name"),
-          {class: "form form-group form-control"} %>
-    <h4>
-      Odds are they...
-    </h4>
+    <% end %><!-- end of error box -->
+    <h5>Select a friend</h5>
+    <%= form_for @challenge_request do |f| %>
+      <%= select_tag :recipient_id,
+            options_from_collection_for_select(@friends, "id", "full_name"),
+            { class: "form form-group form-control card-form-input" } %>
+      <h5>
+        Odds are they...
+      </h5>
       <%= f.text_field :action, class: "form form-group form-control" %>
-      <%= f.submit "Send challenge", class: "btn btn-primary" %>
-  <% end %><!-- end of challenge_request form -->
-
+      <div id="card-button-wrapper">
+        <%= f.submit "Send challenge", class: "btn card-button" %>
+      </div>
+    <% end %><!-- end of challenge_request form -->
+  </div><!-- end of card-form-wrapper-->
 </div><!-- end of card-block -->

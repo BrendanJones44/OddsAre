@@ -1,35 +1,3 @@
 .navbar-brand {
-  // Align with the sidebar
-  margin-right: 104px !important;
-}
-.dropdown-item:hover{
-  // Overrides the Cursor on the menu item text
-  cursor:pointer;
-}
-.close-notification-item {
-  float: right;
-}
-.dropdown-item {
-  //Allow space for the close notification link
-  min-width: 370px !important;
-}
-.dropdown-item:active:focus {
-  color: #ffffff !important;
-  background-color: #161617 !important;
-  border-color: #494F57 !important;
-}
-
-/* Override bootstrap's blue background */
-.dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: inherit !important;
-}
-
-#notification-count {
-  margin-left: 5px;
-}
-
-#notification-dropdown {
-  margin-top: 10px !important;
+  color: #112d4e;
 }

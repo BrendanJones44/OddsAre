@@ -1,9 +1,9 @@
-<nav class="left-sidebar">
-  <ul class="nav flex-column sidebar-group">
-    <label>Account</label>
-    <li class="nav-item">
-      <% if current_user %>
-        <a href="<%= destroy_user_session_path %>">
+<div id="left-sidebar-wrapper">
+  <nav class="left-sidebar">
+    <ul class="nav flex-column sidebar-group">
+      <label class="nav-label">Account</label>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= destroy_user_session_path %>">
           <span class="sidebar-link-favicon">
             <%= fa_icon "sign-in" %>
           </span>
@@ -11,81 +11,58 @@
             Log out
           </span>
         </a>
-      <% else %>
-      <!-- user not logged in -->
-        <a href="<%= new_user_session_path %>">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/settings"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
+      </li>
+    </ul>
+    <ul class="nav flex-column sidebar-group">
+      <label class="nav-label">Odds Ares</label>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= new_challenge_request_url %>">
+            <span class="sidebar-link-favicon"><%= fa_icon "pencil-square-o" %></span><span class="sidebar-link-text">Create</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/odds_ares/show_completed"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
           <span class="sidebar-link-favicon">
-            <%= fa_icon "sign-in" %>
+            <%= fa_icon "fire" %>
           </span>
           <span class="sidebar-link-text">
-            Log in
+            Lost
+            <% if current_user.lost_odds_ares.size != 0 %>
+              <b>(<%= current_user.lost_odds_ares.size %>)</b>
+            <% end %>
+          </span></a>
+      </li>
+    </ul>
+    <ul class="nav flex-column sidebar-group">
+      <label class="nav-label">Friends</label>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= users_friends_path %>"><span class="sidebar-link-favicon"><%= fa_icon "users" %></span><span class="sidebar-link-text">Your Friends</a></span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= friendship_show_friend_requests_path %>">
+          <span class="sidebar-link-favicon">
+            <%= fa_icon "plus-square" %>
+          </span>
+          <span class="sidebar-link-text">
+            Requests
+            <% if current_user.friend_requests? %>
+            <b>(<%= current_user.requested_friends.size %>)</b>
+            <% end %>
           </span>
         </a>
-    <% end %>
-  </li><!-- nav-item for login/logout link -->
-    <li class="nav-item">
-      <a href="/"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
-    </li>
-    <li class="nav-item">
-      <a href="/users/settings"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
-    </li>
-  </ul>
-  <ul class="nav flex-column sidebar-group">
-    <label>Odds Ares</label>
-    <li class="nav-item">
-      <a href="<%= new_challenge_request_url %>">
-          <span class="sidebar-link-favicon"><%= fa_icon "pencil-square-o" %></span><span class="sidebar-link-text">Create</span></a>
-    </li>
-    <!-- <li class="nav-item">
-      <a href="<%= odds_ares_show_current_url %>">
-        <span class="sidebar-link-favicon">
-          <%= fa_icon "exchange" %>
-        </span>
-        <span class="sidebar-link-text">
-          Current
-          <% if current_user.current_odds_ares? %>
-            <b>(<%=current_user.num_current_odds_ares%>)</b>
-          <% end %>
-        </span>
-      </a>
-    </li> -->
-    <li class="nav-item">
-      <a href="/odds_ares/show_completed"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
-    </li>
-    <li class="nav-item">
-      <a href="#">
-        <span class="sidebar-link-favicon">
-          <%= fa_icon "fire" %>
-        </span>
-        <span class="sidebar-link-text">
-          Lost
-          <% if current_user.lost_odds_ares.size != 0 %>
-            <b>(<%= current_user.lost_odds_ares.size %>)</b>
-          <% end %>
-        </span></a>
-    </li>
-  </ul>
-  <ul class="nav flex-column sidebar-group">
-    <label>Friends</label>
-    <li class="nav-item">
-      <a href="<%= users_friends_path %>"><span class="sidebar-link-favicon"><%= fa_icon "users" %></span><span class="sidebar-link-text">Your Friends</a></span>
-    </li>
-    <li class="nav-item">
-      <a href="<%= friendship_show_friend_requests_path %>">
-        <span class="sidebar-link-favicon">
-          <%= fa_icon "plus-square" %>
-        </span>
-        <span class="sidebar-link-text">
-          Requests
-          <% if current_user.friend_requests? %>
-           <b>(<%= current_user.requested_friends.size %>)</b>
-          <% end %>
-        </span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="<%= users_all_path %>"><span class="sidebar-link-favicon"><%= fa_icon "search" %></span><span class="sidebar-link-text">Search</a></span>
-    </li>
-  </ul>
-  </ul>
-</nav>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= users_all_path %>"><span class="sidebar-link-favicon"><%= fa_icon "search" %></span><span class="sidebar-link-text">Search</a></span>
+      </li>
+    </ul>
+    </ul>
+  </nav>
+</div>

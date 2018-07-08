@@ -2,6 +2,7 @@ Views:
   - Viewing an odds are request needs touching up Style (sending the response)
   - Lost odds are link in side bar
   - Centering content as you resize the window (research flex box)
+  - fix scrolling
 Testing:
   - Service test cases:
     - Challenge Requests:
@@ -25,3 +26,4 @@ Other:
   - Look into some of the rules silenced by rubocop
   - Add rule to rubocop to require controller methods to include a path and REST method
   - Add ReadME and documentation
+
