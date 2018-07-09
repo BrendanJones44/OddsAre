@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.friendly.find(params[:friendly])
     if current_user == @user
-      @notifcations = @user.notifications
+      @notifcations = @user.notifications.needs_action
       render 'users/profile_view'
     else
       render 'users/show'

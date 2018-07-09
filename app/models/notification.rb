@@ -14,4 +14,25 @@ class Notification < ApplicationRecord
   def to_s
     actor.first_name + ' ' + actor.last_name + ' ' + action
   end
+
+  def part_of_odds_are?
+    if notifiable.is_a? OddsAre
+      true
+    elsif notifiable.is_a? ChallengeRequest
+      true
+    elsif notifiable.is_a? ChallengeResponse
+      true
+    else
+      false
+    end
+  end
+
+  def odds_are
+    return unless part_of_odds_are?
+    if notifiable.is_a? OddsAre
+      notifiable
+    else
+      notifiable.odds_are
+    end
+  end
 end

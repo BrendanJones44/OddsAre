@@ -1,5 +1,9 @@
 require 'rails_helper'
+require './spec/support/notification_helpers'
 
+RSpec.configure do |c|
+  c.include NotificationHelpers
+end
 RSpec.describe Notification, type: :model do
   it 'has a valid factory' do
     notification = build(:notification)
@@ -46,5 +50,42 @@ RSpec.describe Notification, type: :model do
     end
 
     it { expect(subject.to_s).to eql 'Bob Smith told you to test the code' }
+  end
+
+  describe '#part_off_odds_are?' do
+    context 'when notification is for a receiving a friend request' do
+      subject { notification_from_receiving_friend_request }
+      it 'returns false' do
+        expect(subject.part_of_odds_are?).to be false
+      end
+    end
+
+    context 'when notifcation is for someone accepting a friend request' do
+      subject { notification_from_accepting_friend_request }
+      it 'returns false' do
+        expect(subject.part_of_odds_are?).to be false
+      end
+    end
+
+    context 'when notification is for initiating an odds are' do
+      subject { notification_from_initiating_odds_are }
+      it 'returns true' do
+        expect(subject.part_of_odds_are?).to be true
+      end
+    end
+
+    context 'when notification is for responding to an odds are' do
+      subject { notification_from_responding_odds_are }
+      it 'returns true' do
+        expect(subject.part_of_odds_are?).to be true
+      end
+    end
+
+    context 'when notification is for finalizing an odds are' do
+      subject { notification_from_finalizing_odds_are }
+      it 'returns true' do
+        expect(subject.part_of_odds_are?).to be true
+      end
+    end
   end
 end

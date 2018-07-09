@@ -1,4 +1,10 @@
 <div class="card-block">
   <h1 class="card-title">Your Profile</h1>
   <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
+  <% @notifications.each do |notification|%>
+    <% if notification.part_of_odds_are? %>
+      <%= render(:partial => "odds_ares/card_item",
+        :locals => {:odds_are => notification.odds_are}) %>
+    <% end %>
+  <% end %>
 </div>
