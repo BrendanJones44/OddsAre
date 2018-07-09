@@ -15,9 +15,9 @@ Views:
     - Maybe have First and Last name on the same row?
   - Initially when you logout, you can go "back" and be logged in
   - Log in page needs:
-    - New colorcheme on the button
-    - Centered content
-    - Sign up / forgot password as one row? 
+    - Sign up / forgot password as one row?
+    - To show errors on page
+  - Lost odds ares in color of wining (green) and losing (red)
 Testing:
   - Service test cases:
     - Challenge Requests:

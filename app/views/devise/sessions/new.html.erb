@@ -1,7 +1,15 @@
-<div class="container">
-  <div class="card-block">
-    <h2>Log in</h2>
-
+<div class="card-block">
+  <h2 class="card-title">Log in</h2>
+  <div class="card-form-wrapper">
+    <% if flash[:alert] %>
+      <div id="error_explanation">
+        <div class="alert alert-danger" role="alert" text-align="center">
+          <strong text-align="center">
+            <%= content_tag(:div, flash[:alert], :id => "flash_alert") %>
+          </strong>
+        </div>
+      </div>
+    <% end %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email %><br />
@@ -21,10 +29,11 @@
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in" , class: "btn btn-primary" %>
+        <%= f.submit "Log in" , class: "btn card-button" %>
       </div>
     <% end %>
-
     <%= render "devise/shared/links" %>
+  </div> 
   </div>
 </div>
+
