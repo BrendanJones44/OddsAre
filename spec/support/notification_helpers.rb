@@ -28,12 +28,11 @@ module NotificationHelpers
                        actor: initiator,
                        action: 'accepted your friend request',
                        acted_upon_at: nil)
-
   end
 
   def notification_from_initiating_odds_are
     odds_are = OddsAreHelpers.odds_are_with_no_response
-    
+
     FactoryGirl.create(:notification,
                        recipient: odds_are.recipient,
                        actor: odds_are.initiator,
@@ -49,7 +48,6 @@ module NotificationHelpers
                        actor: odds_are.recipient,
                        action: 'responded to your odds are',
                        notifiable: odds_are.challenge_response)
-
   end
 
   def notification_from_finalizing_odds_are
@@ -61,5 +59,4 @@ module NotificationHelpers
                        action: 'completed an odds are',
                        notifiable: odds_are)
   end
-
 end
