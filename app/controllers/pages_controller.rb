@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   def index
     return unless current_user
     @user = current_user
-    render 'users/show'
+    @notifications = @user.notifications
+    render 'users/profile_view'
   end
 end

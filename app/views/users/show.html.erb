@@ -1,12 +1,8 @@
 <div class="card-block">
-  <% if @user == current_user %>
-    <h1 class="card-title">Your Profile</h1>
-  <% else %>
-    <h1 class="card-title"><%= @user.full_name %></h1>
-  <% end %>
+  <h1 class="card-title"><%= @user.full_name %></h1>
   <h4 class="card-subtitle">@<%= @user.user_name %></h4>
   <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
-  <%if @user != current_user %>
+  <% if @user != current_user %>
     <div class="card-button">
     <% if current_user.pending_friends.include?(@user) %>
       <h5>Friend request pending </h5>

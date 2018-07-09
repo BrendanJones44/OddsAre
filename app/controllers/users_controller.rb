@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = User.friendly.find(params[:friendly])
+    if current_user == @user
+      @notifcations = @user.notifications
+      render 'users/profile_view'
+    else
+      render 'users/show'
+    end
   end
 
   def all
