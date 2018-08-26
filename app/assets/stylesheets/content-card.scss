@@ -4,6 +4,45 @@
   margin: auto !important;
   margin-top: 30px !important;
 }
+@media (max-width: 1080px) {
+  .card {
+    max-width: 750px;
+  }
+}
+@media (max-width: 975px) {
+  .card {
+    max-width: 650px;
+  }
+  .odds-are-item-wrapper {
+    max-width: 500px;
+  }
+}
+@media (max-width: 676px) {
+  .card {
+    margin-top: 15px !important;
+  }
+}
+@media (max-width: 875px) {
+  .card {
+    max-width: 520px;
+  }
+  .odds-are-item-wrapper {
+    max-width: 400px;
+  }
+}
+@media (max-width: 525px) {
+  .card {
+    margin-top: 0px !important;
+  }
+}
+@media (max-width: 450px) {
+  .odds-are-item-wrapper {
+    max-width: 350px !important;
+  }
+  .odds-are-item {
+    min-width: 350px !important;
+  }
+}
 .card-title {
   text-align: center;
   margin-top: 10px;
