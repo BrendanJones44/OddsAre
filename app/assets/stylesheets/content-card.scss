@@ -1,5 +1,8 @@
 .card {
   min-width: 380px;
+  max-width: 900px;
+  margin: auto !important;
+  margin-top: 30px !important;
 }
 .card-title {
   text-align: center;
@@ -79,6 +82,8 @@
 }
 
 .odds-are-item-wrapper {
+  width: 600px;
+  margin: auto;
   margin-top: 20px;
 }
 
