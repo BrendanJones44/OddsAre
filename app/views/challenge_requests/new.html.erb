@@ -15,7 +15,7 @@
     <h5>Select a friend</h5>
     <%= form_for @challenge_request do |f| %>
       <%= select_tag :recipient_id,
-            options_from_collection_for_select(@friends, "id", "full_name"),
+            options_from_collection_for_select(@friends, "id", "full_name", params[:recipient_id].to_i),
             { class: "form form-group form-control card-form-input" } %>
       <h5>
         Odds are they...
