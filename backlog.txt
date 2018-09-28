@@ -1,4 +1,11 @@
+Need to fix before release:
+
+  Controllers:
+  - Ability to view/update a task
+
+
 Views:
+  - Remove spacing when error has field on sign up page.
   - Viewing an odds are request needs touching up Style (sending the response)
   - Add event listener if there's a flash banner to hit escape to "x" out of it.
   - Sending a response with failures errors out
@@ -6,14 +13,11 @@ Views:
   - Completed odds ares, if empty, should display a message
   - Have mobile hamburger menu
   - Move notifications to profile view
-  - Your friends view shouldn't view the label (friends with), maybe have a "send odds" link?
-    - Have params in the new-odds controller, preload friend send_to
   - "Round" the buttons/labels in the user-card-view
   - Request friend button should be updated to the new colorscheme
   - Inspect Black text vs. dark blue on the user cards
   - Collapse the sign-up page to fit on 13" page as one view
     - Maybe have First and Last name on the same row?
-  - Initially when you logout, you can go "back" and be logged in
   - Log in page needs:
     - Sign up / forgot password as one row?
   - Lost odds ares in color of wining (green) and losing (red)
@@ -33,11 +37,11 @@ Testing:
       - Update with response
   - View tests
   - Integration tests?
-Controllers:
-  - Ability to view/update a task
+
 Other:
   - Add Asset compiling to build pipeline somehow
   - Look into some of the rules silenced by rubocop
   - Add rule to rubocop to require controller methods to include a path and REST method
   - Add ReadME and documentation
-
+  - Order odds ares by date, show "time ago"
+  - Binding.pry capability
