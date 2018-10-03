@@ -2,13 +2,16 @@
 <% if @friend_requests.empty? %>
 	<h5 class="card-centered-content">You don't have any friend requests at the moment!</h5>
 <% else %>
-	<% @friend_requests.each do |friend_request| %>
-		<ul>
-			<li>
-				Request From:
-				<%= friend_request.full_name %>
-				<%= button_to "Accept Friend", accept_friend_request_url(:user_id => friend_request.id), class: "btn btn-sm btn-primary" %>
-			</li>
-		</ul>
-	<% end %> <!-- End of friend_request each loop -->
-<% end %> <!-- End of having friend requests -->
+	<div class="card-block-row">
+		<h1 class="card-title"> <%= @view_type %> </h1>
+		<% @friend_requests.each do |user| %>
+			<div class="card-list">
+				<ul>
+					<h2 class="card-centered-content"><%= user.full_name %></h2>
+					<%= render(:partial => "users/scorecard", :locals => {:user => user})%>
+					<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
+				</ul>
+			</div>
+		<% end %>
+	</div>
+<% end %>
