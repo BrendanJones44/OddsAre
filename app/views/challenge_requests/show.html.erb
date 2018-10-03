@@ -2,15 +2,16 @@
   <h1 class="card-title"><%= @challenge_request.odds_are.initiator.full_name %>:</h1>
   <h3 class="card-subtitle">Odds are you <%= @challenge_request.action %></h3>
   <% if @challenge_response.errors.any? %>
-    <div id="error_explanation">
-      <div class="alert alert-danger" role="alert" text-align="center">
-        <% @challenge_response.errors.each do |attr,msg| %>
-          <strong text-align="center"> <%= msg %> </strong><br />
-        <% end %>
+    <div class="card-form-wrapper">
+      <div id="error_explanation">
+        <div class="alert alert-danger" role="alert" text-align="center">
+          <% @challenge_response.errors.each do |attr,msg| %>
+            <strong text-align="center"> <%= msg %> </strong><br />
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <div class="card-form-wrapper">
+    <% end %>
+  
     <%= form_for @challenge_response do |f| %>
       <h4>What are the odds out of</h4>
       <%= f.number_field :odds_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>

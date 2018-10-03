@@ -14,6 +14,7 @@ class ChallengeResponsesController < ApplicationController
       NewChallengeResponseNotificationService.new(@challenge_response).call
       redirect_to odds_are
     elsif current_user == odds_are.recipient
+      @challenge_request = odds_are.challenge_request
       render '/challenge_requests/show'
     else
       raise Exception, 'You must be the recipient off the odds are to respond'

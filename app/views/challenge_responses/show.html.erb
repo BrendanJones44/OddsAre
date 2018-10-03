@@ -1,11 +1,10 @@
 <div class="container">
   <div class="card-block">
     <h2 class="card-title">Respond to <%= @challenge_response_fields.other_user.full_name %></h2>
-    <% if @challenge_response_fields.finalize_challenge.errors.any? %>
+    <% unless !defined? @challenge_finalization %>
         <div id="error_explanation">
           <div class="alert alert-danger" role="alert" text-align="center">
-            <%= pluralize(@challenge_response_fields.finalize_challenge.errors.count, "error") %> prevented this from being sent: <br/>
-            <% @challenge_response_fields.finalize_challenge.errors.each do |attr,msg| %>
+            <% @challenge_finalization.errors.each do |attr,msg| %>
                 <strong text-align="center"> <%= msg %> </strong>
             <% end %>
           </div>

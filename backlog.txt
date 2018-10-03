@@ -1,9 +1,7 @@
 Need to fix before release:
 
   Views:
-  - Need to finalize notification -> feed migration. 
-    Old notifications shouldn't appear,
-    Odds ares should just appear as a link to the odds are (maybe some context?)
+  - Need to finalize notification -> feed migration.
 
   - Lost odds are link in side bar
   
