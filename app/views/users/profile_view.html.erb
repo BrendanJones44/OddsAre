@@ -2,15 +2,10 @@
   <h1 class="card-title">Your Profile</h1>
   <%= render(:partial => "users/scorecard", :locals => {:user => @user})%>
   <% @notifications.each do |notification|%>
-    <% if notification.part_of_odds_are? %>
-      <%= render(:partial => "odds_ares/card_item",
-        :locals => {:odds_are => notification.odds_are}) %>
-    <% else %>
-      <div class="odds-are-item-wrapper">
-        <div class="odds-are-item">
-          <h4 class="notification-text"><%= link_to notification.to_s, polymorphic_url(notification.notifiable) %></h4>
-        </div>
+    <div class="odds-are-item-wrapper">
+      <div class="odds-are-item">
+        <h4 class="notification-text"><%= link_to notification.to_s, polymorphic_url(notification.notifiable) %></h4>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
