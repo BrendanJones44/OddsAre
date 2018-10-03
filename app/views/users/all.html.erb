@@ -8,11 +8,11 @@
 					<% if current_user.friends_with?(user) %>
         		<%= link_to "Send Odds Are", new_challenge_request_path(:recipient_id => user.id), class: "btn card-button" %>
 					<% elsif user.requested_friends.include?(current_user) %>
-						(Request sent)
+						(Friend Request sent)
 					<% elsif current_user.requested_friends.include?(user) %>
-						<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
+						<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn card-button" %>
 					<% else %>
-						<%= button_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
+						<%= button_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn card-button" %>
 					<% end %>
 			</ul>
 		</div>
