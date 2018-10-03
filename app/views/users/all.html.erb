@@ -10,9 +10,9 @@
 					<% elsif user.requested_friends.include?(current_user) %>
 						(Friend Request sent)
 					<% elsif current_user.requested_friends.include?(user) %>
-						<%= link_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn card-button" %>
+						<%= link_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn card-button", method: :post %>
 					<% else %>
-						<%= link_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn card-button" %>
+						<%= link_to "Request Friend", send_friend_request_url(:user_id => user.id), class: "btn card-button", method: :post %>
 					<% end %>
 			</ul>
 		</div>
