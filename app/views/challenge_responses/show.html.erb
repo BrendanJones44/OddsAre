@@ -11,12 +11,12 @@
           </div>
         </div>
     <% end %>
-    <div class="card-body">
-      <h4 class="card-centered-content">Odds are they <%= @challenge_response_fields.challenge_action %> </br ></h4>
-    <div>
   </div>
   <div class="card-block">
-    <h5 class="card-centered-content">Guess a number between 1 and <%= @challenge_response_fields.response_out_of %> (what they set the odds to be out of)</h5>
+    <%= render(:partial => "odds_ares/card_item", :locals => {:odds_are => @challenge_response_fields.odds_are, :hide_number => true})%>
+  </div>
+  <div class="card-form-wrapper">
+    <h5 class="card-centered-content">Guess a number between 1 and <%= @challenge_response_fields.response_out_of %></h5>
     <%= form_for @challenge_response_fields.finalize_challenge do |f| %>
       <%= f.number_field :number_guessed, :placeholder => "Your guess" , class: "form form-group form-control"%>
       <%= f.hidden_field :odds_are_id, value: @challenge_response_fields.finalize_challenge.odds_are_id %>

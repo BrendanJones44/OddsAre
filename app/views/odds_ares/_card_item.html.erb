@@ -11,7 +11,11 @@
       </div>
       <div class="row">
         <div class="col-12">
+        <% if hide_number %>
+          <div class="h5 odds-are-number-chosen">(Hidden)</div>
+        <% else %>
           <div class="h5 odds-are-number-chosen">(Chose <%= odds_are.challenge_response.number_chosen %>)</div>
+        <% end %>
         </div>
       </div>
     <% else %>

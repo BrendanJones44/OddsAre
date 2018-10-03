@@ -5,7 +5,8 @@ class SetChallengeResponseFieldsService
                 :challenge_action,
                 :other_user,
                 :response_out_of,
-                :response_id
+                :response_id,
+                :odds_are
   def initialize(odds_are, user)
     @user = user
     @finalize_challenge = ChallengeFinalization.new(odds_are_id: odds_are.id)
@@ -13,5 +14,6 @@ class SetChallengeResponseFieldsService
     @other_user = odds_are.recipient
     @response_out_of = odds_are.challenge_response.odds_out_of
     @response_id = odds_are.challenge_response.id
+    @odds_are = odds_are
   end
 end
