@@ -3,6 +3,8 @@ Need to fix before release:
   Controllers:
   - Ability to view/update a task
 
+  Views:
+  - Friend Requests needs a lot touching up
 
 Views:
   - Remove spacing when error has field on sign up page.
