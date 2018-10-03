@@ -11,9 +11,10 @@ class ChallengeFinalizationsController < ApplicationController
                               .new(finalize_challenge_params)
     odds_are = OddsAre.find(@challenge_finalization.odds_are_id)
     if odds_are.should_finalize(current_user) && @challenge_finalization.save
-      task = NewTaskService.new(odds_are).call
-      UpdateOddsAreWithFinalizationService.new(odds_are, task).call
       NewChallengeFinalizationNotificationService.new(odds_are).call
+      UpdateOddsAreWithFinalizationService.new(odds_are).call
+      task = NewTaskService.new(odds_are).call
+      odds_are.update(task: task)
       redirect_to odds_are
     elsif !odds_are.should_finalize(current_user)
       return render '/pages/expired'

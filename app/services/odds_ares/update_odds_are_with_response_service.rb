@@ -9,6 +9,6 @@ class UpdateOddsAreWithResponseService
     @odds_are.update(responded_to_at: Time.zone.now)
     @odds_are.challenge_request.notification
              .update(acted_upon_at: Time.zone.now)
-    @odds_are.challenge_response = @challenge_response
+    @odds_are.update(challenge_response: @challenge_response)
   end
 end
