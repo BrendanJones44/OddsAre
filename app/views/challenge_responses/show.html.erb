@@ -20,7 +20,9 @@
     <%= form_for @challenge_response_fields.finalize_challenge do |f| %>
       <%= f.number_field :number_guessed, :placeholder => "Your guess" , class: "form form-group form-control"%>
       <%= f.hidden_field :odds_are_id, value: @challenge_response_fields.finalize_challenge.odds_are_id %>
-      <%= f.submit "Send response", class: "btn btn-primary btn-block" %>
+      <div id="card-button-wrapper">
+        <%= f.submit "Send response", class: "btn card-button" %>
+      </div>
     <% end %>
   </div>
 </div>
