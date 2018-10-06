@@ -20,10 +20,12 @@ Metrics/MethodLength:
   Max: 15
   Exclude:
     - 'spec/support/**'
+    - 'app/controllers/challenge_finalizations_controller.rb'
 Metrics/AbcSize:
   Max: 20
   Exclude:
     - 'spec/support/**'
+    - 'app/controllers/challenge_finalizations_controller.rb'
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"

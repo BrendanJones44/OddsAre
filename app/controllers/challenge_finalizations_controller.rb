@@ -22,10 +22,9 @@ class ChallengeFinalizationsController < ApplicationController
       return render '/pages/expired'
     else
       @challenge_response_fields = SetChallengeResponseFieldsService
-                                  .new(odds_are, current_user)
+                                   .new(odds_are, current_user)
 
       return render '/odds_ares/show' if odds_are.user_can_view(current_user)
-      return render '/pages/expired' unless odds_are.should_finalize(current_user)
       render '/challenge_responses/show'
     end
   end

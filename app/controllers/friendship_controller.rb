@@ -22,7 +22,10 @@ class FriendshipController < ApplicationController
     actor = User.find(params.require(:user_id))
     if current_user.can_accept_friend_request_from actor
       current_user.accept_request(actor)
-      Notification.where(notifiable: actor, actor: actor, recipient: current_user).first.update(acted_upon_at: Time.zone.now)
+      n = Notification.where(notifiable: actor,
+                             actor: actor,
+                             recipient: current_user).first
+      n&.update(acted_upon_at: Time.zone.now)
       Notification.create(recipient: actor,
                           actor: current_user,
                           action: 'accepted your friend request',
