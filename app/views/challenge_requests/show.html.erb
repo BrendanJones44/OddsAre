@@ -1,24 +1,26 @@
 <div class="card-block">
   <h1 class="card-title"><%= @challenge_request.odds_are.initiator.full_name %>:</h1>
   <h3 class="card-subtitle">Odds are you <%= @challenge_request.action %></h3>
-  <% if @challenge_response.errors.any? %>
     <div class="card-form-wrapper">
-      <div id="error_explanation">
-        <div class="alert alert-danger" role="alert" text-align="center">
-          <% @challenge_response.errors.each do |attr,msg| %>
-            <strong text-align="center"> <%= msg %> </strong><br />
-          <% end %>
+    <% if @challenge_response.errors.any? %>
+      <div class="card-form-wrapper">
+        <div id="error_explanation">
+          <div class="alert alert-danger" role="alert" text-align="center">
+            <% @challenge_response.errors.each do |attr,msg| %>
+              <strong text-align="center"> <%= msg %> </strong><br />
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  
-    <%= form_for @challenge_response do |f| %>
-      <h4>What are the odds out of</h4>
-      <%= f.number_field :odds_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>
-      <h4>Your number choice</h4>
-      <%= f.number_field :number_chosen, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
-      <%= f.hidden_field :odds_are_id, value: @challenge_request.odds_are.id %>
-      <%= f.submit "Send response", class: "btn card-button" %>
-    <% end %>
+      <% end %>
+    
+      <%= form_for @challenge_response do |f| %>
+        <h4>What are the odds out of</h4>
+        <%= f.number_field :odds_out_of, :placeholder => "(Minimum 3)" , class: "form form-group form-control" %>
+        <h4>Your number choice</h4>
+        <%= f.number_field :number_chosen, :placeholder => "(Between 1 and what the odds are out of)" , class: "form form-group form-control"%>
+        <%= f.hidden_field :odds_are_id, value: @challenge_request.odds_are.id %>
+        <%= f.submit "Send response", class: "btn card-button" %>
+      <% end %>
+    </div>
   </div>
 </div>
