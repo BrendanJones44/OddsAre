@@ -17,3 +17,10 @@ $(window).resize(function () {
     $('#left-sidebar-wrapper').hide();
   }
 });
+$(document).ready(function () {
+  if ($(window).width() >= 676) {
+    $('#left-sidebar-wrapper').show();
+  } else {
+    $('#left-sidebar-wrapper').hide();
+  }
+});
