@@ -10,18 +10,21 @@ function handleMenuToggle(x) {
   }
   isShowing = !isShowing;
 }
-$(window).resize(function () {
-  if ($(this).width() >= 676) {
-    $('#left-sidebar-wrapper').show();
-  }
-  else {
-    $('#left-sidebar-wrapper').hide();
-  }
-});
-$(document).ready(function () {
-  if ($(window).width() >= 676) {
-    $('#left-sidebar-wrapper').show();
-  } else {
-    $('#left-sidebar-wrapper').hide();
-  }
+document.addEventListener("turbolinks:load", function () {
+  isShowing = false;
+  $(window).resize(function () {
+    if ($(this).width() >= 676) {
+      $('#left-sidebar-wrapper').show();
+    }
+    else {
+      $('#left-sidebar-wrapper').hide();
+    }
+  });
+  $(document).ready(function () {
+    if ($(window).width() >= 676) {
+      $('#left-sidebar-wrapper').show();
+    } else {
+      $('#left-sidebar-wrapper').hide();
+    }
+  });
 });
