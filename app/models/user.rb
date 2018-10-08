@@ -60,6 +60,14 @@ class User < ApplicationRecord
     friends.any?
   end
 
+  def unread_notifications?
+    notifications.needs_action.any?
+  end
+
+  def unread_notifications
+    notifications.needs_action
+  end
+
   def friend_requests?
     requested_friends.any?
   end

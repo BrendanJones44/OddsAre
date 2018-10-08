@@ -13,7 +13,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">Profile</a></span>
+        <a class="nav-link" href="/"><span class="sidebar-link-favicon"><%= fa_icon "user-circle-o" %></span><span class="sidebar-link-text">
+          <% if current_user.unread_notifications? %>
+            Profile <b>(<%= current_user.unread_notifications.count %>)</b>
+          <% else %>
+            Profile
+          <% end %>
+        </a></span>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/users/settings"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
