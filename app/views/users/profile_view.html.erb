@@ -4,7 +4,7 @@
   <% @notifications.each do |notification|%>
     <div class="odds-are-item-wrapper">
       <div class="odds-are-item">
-        <h4 class="notification-text"><%= link_to notification.to_s, polymorphic_url(notification.notifiable) %></h4>
+        <h4 class="notification-text"><%= link_to notification.to_s, polymorphic_url([notification.notifiable], notification_id: notification.id) %></h4>
         <h6 class="card-centered-content">(<%= time_ago_in_words(notification.created_at) %> ago)</h6>
       </div>
     </div>
