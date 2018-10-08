@@ -51,7 +51,11 @@ body {
   margin-left: 60px;
   margin-right: 60px;  
 }
-
+@media (min-width: 676px) {
+  #mobile-menu-toggle {
+    display: none;
+  }
+}
 @media (max-width: 676px) {
   #main-content-wrapper {
     margin-left: 0px;
@@ -59,8 +63,9 @@ body {
   html {
     height: 0%;
   } 
-  #left-sidebar-wrapper {
-    display: none;
+  #mobile-menu-toggle {
+    display: inline-block;
+    align-self: right;
   }
   #main-content-card {
     margin-left: 10px;
