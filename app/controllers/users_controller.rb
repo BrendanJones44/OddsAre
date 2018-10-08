@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       @notifcations = @user.notifications.needs_action
       render 'users/profile_view'
     else
-      if params.has_key?(:notification_id)
+      if params.key?(:notification_id)
         n = Notification.find(params[:notification_id])
         if n.user_can_update(current_user)
           n.update(acted_upon_at: Time.zone.now)
