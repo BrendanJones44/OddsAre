@@ -6,6 +6,7 @@ function handleMenuToggle(x) {
   } else {
     $('#left-sidebar-wrapper').show();
     $('#left-sidebar-wrapper').css('z-index', '1000');
+    $('#left-sidebar-wrapper').css('overflow-y', 'auto');
   }
   isShowing = !isShowing;
 }
