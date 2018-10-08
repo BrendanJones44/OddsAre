@@ -1,2 +1,0 @@
-send odds are to friend doesn't preload from the friend page
-Friend requests button needs updated style

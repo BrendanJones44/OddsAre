@@ -9,7 +9,7 @@
 				<ul>
 					<h2 class="card-centered-content"><%= user.full_name %></h2>
 					<%= render(:partial => "users/scorecard", :locals => {:user => user})%>
-					<%= button_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn btn-sm btn-primary btn-block" %>
+						<%= link_to "Accept Friend", accept_friend_request_url(:user_id => user.id), class: "btn card-button", method: :post %>
 				</ul>
 			</div>
 		<% end %>
