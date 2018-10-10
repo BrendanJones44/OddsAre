@@ -10,6 +10,12 @@ class OddsAre < ApplicationRecord
   has_one :notification, as: :notifiable
 
   ### Helper methods ###
+  def odds_out_of
+    if challenge_response
+      challenge_response.odds_out_of
+    end
+  end
+
   def user_can_view(user)
     (recipient == user || initiator == user) && \
       finalized_at?
