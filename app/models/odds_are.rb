@@ -11,9 +11,7 @@ class OddsAre < ApplicationRecord
 
   ### Helper methods ###
   def odds_out_of
-    if challenge_response
-      challenge_response.odds_out_of
-    end
+    challenge_response&.odds_out_of
   end
 
   def user_can_view(user)

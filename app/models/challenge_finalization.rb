@@ -8,9 +8,7 @@ class ChallengeFinalization < ApplicationRecord
   validate :number_chosen_in_bounds
 
   def odds_out_of
-    if odds_are
-      odds_are.odds_out_of
-    end
+    odds_are&.odds_out_of
   end
 
   def number_chosen_not_middle
