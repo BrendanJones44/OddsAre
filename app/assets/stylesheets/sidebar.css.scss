@@ -1,6 +1,6 @@
 .sidebar-group {
-  margin-top: 30px;
   margin-left: 10px;
+  padding-bottom: 30px;
 }
 
 .sidebar-link-text {
@@ -12,6 +12,14 @@
   float: left;
   width: 20px;
   color: #3f72af;
+}
+
+.left-sidebar {
+  margin-top: 30px;
+}
+
+#left-sidebar-wrapper {
+  height: 100%;
 }
 
 .nav-label {
