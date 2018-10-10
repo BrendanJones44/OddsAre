@@ -95,6 +95,10 @@ class User < ApplicationRecord
       received_odds_ares.where(finalized_at: nil)).size
   end
 
+  def num_completed_odds_ares
+    completed_odds_ares.size
+  end
+
   def dares_completed
     lost_odds_ares.where.not(loser_marked_completed_at: nil,
                              winner_marked_completed_at: nil)

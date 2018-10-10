@@ -19,7 +19,11 @@ class UsersController < ApplicationController
 
   def all
     @view_type = 'All Users'
-    @users = User.where.not(id: current_user.id).order(:first_name)
+    @users = User
+             .where
+             .not(id: current_user.id)
+             .sort_by(&:num_completed_odds_ares)
+             .reverse
   end
 
   def friends

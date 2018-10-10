@@ -36,8 +36,9 @@ RSpec.describe UsersController, type: :controller do
 
     context 'authenticated user' do
       let(:user) { FactoryGirl.create(:user) }
-      let(:other_user) { FactoryGirl.create(:user) }
+      let(:other_user) { FactoryGirl.build(:user) }
       before do
+        other_user.save
         sign_in user
         get :all
       end
