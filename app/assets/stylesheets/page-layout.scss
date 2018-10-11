@@ -17,12 +17,11 @@ body {
 
 #search {
   flex: 1;
-  justify-self: center;
-  align-self: center;
+  margin-top: -8px;
 }
 
 #top-navbar-wrapper {
-  z-index: 1000;
+  z-index: 1500;
   //background-color: #f7f7f7;
   background-color: #f9f7f7; // lighter red
   position: fixed;
@@ -31,7 +30,7 @@ body {
 }
 
 #left-sidebar-wrapper {
-  margin-top: 40px;
+  padding-top: 40px;
   min-width: 160px;
   height: 100%;
   position: fixed;
