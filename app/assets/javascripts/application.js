@@ -14,5 +14,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery.easy-autocomplete
 //= require_tree .
 //= require bootstrap-sprockets
