@@ -33,12 +33,14 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.ransack(first_name_or_last_name_cont: params[:q]).result(distinct: true)
+    @users = User
+             .ransack(first_name_or_last_name_cont: params[:q])
+             .result(distinct: true)
     respond_to do |format|
       format.html {}
-      format.json {
+      format.json do
         @users = @users.limit(5)
-      }
+      end
     end
   end
 end

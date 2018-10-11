@@ -15,10 +15,14 @@ body {
   flex: 100%;
 }
 
+#search {
+  flex: 1;
+  justify-self: center;
+  align-self: center;
+}
+
 #top-navbar-wrapper {
   z-index: 1000;
-  max-height: 60px;
-  overflow: hidden;
   //background-color: #f7f7f7;
   background-color: #f9f7f7; // lighter red
   position: fixed;
