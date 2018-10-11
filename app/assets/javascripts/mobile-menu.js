@@ -13,6 +13,10 @@ function handleMenuToggle(x) {
 document.addEventListener("turbolinks:load", function () {
   isShowing = false;
   $(window).resize(function () {
+    if (isShowing){
+      x.classList.toggle("change");
+    }
+    isShowing = false;
     if ($(this).width() >= 676) {
       $('#left-sidebar-wrapper').show();
     }
@@ -21,6 +25,10 @@ document.addEventListener("turbolinks:load", function () {
     }
   });
   $(document).ready(function () {
+    if (isShowing) {
+      x.classList.toggle("change");
+    }
+    isShowing = false;
     if ($(window).width() >= 676) {
       $('#left-sidebar-wrapper').show();
     } else {
