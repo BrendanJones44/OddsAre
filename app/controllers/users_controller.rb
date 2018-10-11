@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def search
     @users = User
-             .ransack(first_name_or_last_name_cont: params[:q], 
+             .ransack(first_name_or_last_name_cont: params[:q],
                       id_not_eq: current_user.id)
              .result(distinct: true)
     respond_to do |format|
