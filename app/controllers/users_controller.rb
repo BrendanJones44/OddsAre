@@ -31,4 +31,14 @@ class UsersController < ApplicationController
     @users = current_user.friends
     render 'users/all'
   end
+
+  def search
+    @users = User.ransack(first_name_or_last_name_cont: params[:q]).result(distinct: true)
+    respond_to do |format|
+      format.html {}
+      format.json {
+        @users = @users.limit(5)
+      }
+    end
+  end
 end

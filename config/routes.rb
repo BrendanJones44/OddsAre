@@ -21,6 +21,7 @@ Rails.application.routes.draw do
    'friendship#accept_friend_request', as: 'accept_friend_request'
   get '/users/all', to: 'users#all'
   get '/users/friends', to: 'users#friends'
+  get '/users/search', to: 'users#search'
   get '/users/settings', to: 'users#settings'
 
   get 'pages/test', to: 'pages#test'
