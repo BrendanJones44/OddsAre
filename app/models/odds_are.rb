@@ -73,6 +73,10 @@ class OddsAre < ApplicationRecord
     end
   end
 
+  def challenge
+    challenge_request&.action
+  end
+
   def responder_name(current_user)
     return 'Nobody responded' unless challenge_response
     if initiator == current_user

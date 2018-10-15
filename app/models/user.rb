@@ -81,6 +81,18 @@ class User < ApplicationRecord
       received_odds_ares.where.not(finalized_at: nil)
   end
 
+  def lost_tasks?
+    !lost_tasks.empty?
+  end
+
+  def lost_tasks
+    OddsAre
+      .all
+      .joins(:task)
+      .merge(Task.where(loser: self)
+      .where(loser_marked_completed_at: nil))
+  end
+
   def lost_odds_ares?
     !lost_odds_ares.empty?
   end

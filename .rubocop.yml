@@ -27,6 +27,7 @@ Metrics/AbcSize:
     - 'spec/support/**'
     - 'app/controllers/challenge_finalizations_controller.rb'
     - 'app/controllers/users_controller.rb'
+    - 'app/controllers/tasks_controller.rb'
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
@@ -39,4 +40,5 @@ Style/GuardClause:
     - 'app/models/odds_are.rb'
     - 'app/controllers/notifications_controller.rb'
     - 'app/controllers/odds_ares_controller.rb'
+    - 'app/controllers/tasks_controller.rb'
     - 'app/services/users/check_friendship_service.rb'

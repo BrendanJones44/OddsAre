@@ -35,14 +35,14 @@
         <a class="nav-link" href="/odds_ares/show_completed"><span class="sidebar-link-favicon"><%= fa_icon "check-circle" %></span><span class="sidebar-link-text">Completed</span> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/tasks/show_lost">
           <span class="sidebar-link-favicon">
             <%= fa_icon "fire" %>
           </span>
           <span class="sidebar-link-text">
             Lost
-            <% if current_user.lost_odds_ares.size != 0 %>
-              <b>(<%= current_user.lost_odds_ares.size %>)</b>
+            <% if current_user.lost_tasks? %>
+              <b>(<%= current_user.lost_tasks.size %>)</b>
             <% end %>
           </span></a>
       </li>

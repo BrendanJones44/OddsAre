@@ -1,0 +1,19 @@
+<div class="odds-are-item-wrapper">
+  <div class="odds-are-item">
+    <h4 class="notification-text"><%= task.odds_are.challenge %></h4>
+    <h6 class="notification-text"><%= link_to "See the Odds Are", url_for(task.odds_are) %></h4>
+    <div id="task-button-wrapper">
+      <% if task.can_user_update_as_loser?(current_user) %>
+        <%= link_to "Mark as completed", mark_task_as_done_from_loser_url(:task_id => task.id), class: "btn card-button", method: :post %>
+      <% elsif task.can_user_update_as_winner?(current_user) %>
+        <%= link_to "Confirm as completed", mark_task_as_done_from_winner_url(:task_id => task.id), class: "btn card-button", method: :post %>
+      <% elsif task.loser == current_user && task.winner_marked_completed_at.nil? %>
+        (Waiting on <%= task.winner.full_name %> to confirm completed)
+      <% elsif task.winner == current_user && task.loser_marked_completed_at.nil? %>
+        (Waiting on <%= task.loser.full_name %> to mark completed)
+      <% else %>
+        Both of you have marked this as complete
+      <% end%>
+    </div>
+  </div>
+</div>

@@ -27,5 +27,10 @@ Rails.application.routes.draw do
   get 'pages/test', to: 'pages#test'
   get 'pages/how_to_play', to: 'pages#how_to_play'
   get '/users/:friendly', to: 'users#show'
+  get '/tasks/show_lost', to: 'tasks#show_lost'
+  post '/tasks/mark_as_done_from_loser', to: 'tasks#mark_as_done_from_loser', as: 'mark_task_as_done_from_loser'
+  post '/tasks/mark_as_done_from_winner', to: 'tasks#mark_as_done_from_winner', as: 'mark_task_as_done_from_winner'
+  get '/tasks/:task_id', to: 'tasks#show'
+  resources :tasks
   resources :users
 end
