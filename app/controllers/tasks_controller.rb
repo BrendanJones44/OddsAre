@@ -3,7 +3,16 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def show_lost
-    @tasks = Task.where(loser: current_user).order(created_at: :desc)
+    @tasks = Task.where(loser: current_user).sort_by do |task|
+      if task.both_marked_complete?
+        3
+      elsif task.winner_marked_completed_at.nil? &&
+            task.loser_marked_completed_at.nil?
+        -2
+      else
+        0
+      end
+    end
   end
 
   def show
