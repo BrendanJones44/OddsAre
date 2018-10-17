@@ -84,7 +84,7 @@ In the case that the odds are set out of an even number, let's say `10`, the num
 
 <a name="current_diagram"></a>
 ### Diagram
-![Data Model Diagram](README_files/Odds_are_UML.png?raw=true "OddsAreModel")
+![Data Model Diagram](README_files/Odds_Are_UML.png?raw=true "OddsAreModel")
 
 <a name="rationale"></a>
 ### Rationale
@@ -94,7 +94,7 @@ In this application's MVP, it was done with just two models, `User` and `OddsAre
 <a name="old_model"></a>
 #### Old Model
 
-![Old Data Model Diagram](README_files/Odds_are_OLD_UML.png?raw=true "OldOddsAreModel")
+![Old Data Model Diagram](README_files/Odds_Are_OLD_UML.png?raw=true "OldOddsAreModel")
 
 Initially it made sense to have the OddsAre broken up into three stages:
 - `ChallengeRequest`
