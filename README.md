@@ -116,6 +116,8 @@ Also, the `OddsAre` object also got a `has_one` relationship with `Task` as ther
 
 <a name="ci_cd"></a>
 ## CI-CD
+
+![ CI-CD-Flow ](README_files/CI-CD-Flow.png?raw=true "CI-CD-Flow with pictures")
 Currently, OddsAre uses both CircleCI and Heroku for CI/CD.
 
 Upon commit to Master branch, using GitHub's status API, a build is kicked off in CircleCI.
