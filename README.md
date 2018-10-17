@@ -59,21 +59,29 @@ There is always risk to the challenger, `User A`, though. If the number `User A`
 <a name="example_losing"></a>
 ### Example of Challenger Losing
 Challenger: "Odds Are you do this dare?"
+
 Recipient:  "1 out of 10"
+
 Recipient:  * Selects 2 *
+
 Challenger: * Guesses 8 *
+
 8 + 2 = 10 (what the odds were set out of)
 
-Challenger lost
+#### Challenger lost
 
 <a name="example_winning"></a>
 ### Example of Challenger Winning
+
 Challenger: "Odds Are you do this dare?"
+
 Recipient:  "1 out of 10"
+
 Recipient:  * Selects 8 *
+
 Challenger: * Guesses 8 *
 
-Recipient lost
+#### Recipient lost
 
 <a name="even_number_case"></a>
 ### Even Number Case
