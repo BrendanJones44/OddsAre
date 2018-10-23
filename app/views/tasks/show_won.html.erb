@@ -1,0 +1,6 @@
+<div class="card-block">
+  <h1 class="card-title">Won Odds Ares</h1>
+  <% @tasks.each do |task|%>
+    <%= render(:partial => "tasks/task", :locals => {:task => task, :show_loser => true})%>
+  <% end %>
+</div>

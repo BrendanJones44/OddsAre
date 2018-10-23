@@ -1,6 +1,12 @@
 <div class="odds-are-item-wrapper">
   <div class="odds-are-item">
-    <h4 class="notification-text"><%= task.odds_are.challenge %></h4>
+    <h4 class="notification-text">
+      <% if defined? show_loser %>
+        <%= task.loser.full_name + " has to " + task.odds_are.challenge %>
+      <% else %>
+        <%= task.odds_are.challenge %>
+      <% end %>
+    </h4>
     <h6 class="notification-text"><%= link_to "See the Odds Are", url_for(task.odds_are) %></h4>
     <div id="task-button-wrapper">
       <% if task.can_user_update_as_loser?(current_user) %>

@@ -15,6 +15,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def show_won
+    @tasks = Task.where(winner: current_user).sort_by do |task|
+      if task.both_marked_complete?
+        3
+      elsif task.winner_marked_completed_at.nil? &&
+            task.loser_marked_completed_at.nil?
+        -2
+      else
+        0
+      end
+    end
+  end
+
   def show
     @task = Task.find(params[:task_id])
     if @task.both_marked_complete?
