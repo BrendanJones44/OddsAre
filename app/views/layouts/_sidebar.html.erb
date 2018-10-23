@@ -21,9 +21,6 @@
           <% end %>
         </a></span>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/settings"><span class="sidebar-link-favicon"><%= fa_icon "cogs" %></span><span class="sidebar-link-text">Settings</a></span>
-      </li>
     </ul>
     <ul class="nav flex-column sidebar-group">
       <label class="nav-label">Odds Ares</label>
@@ -44,6 +41,15 @@
             <% if current_user.lost_tasks? %>
               <b>(<%= current_user.lost_tasks.size %>)</b>
             <% end %>
+          </span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/tasks/show_won">
+          <span class="sidebar-link-favicon">
+            <%= fa_icon "trophy" %>
+          </span>
+          <span class="sidebar-link-text">
+            Won
           </span></a>
       </li>
     </ul>
