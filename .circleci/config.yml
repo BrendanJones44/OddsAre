@@ -8,9 +8,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.3.4-node-browsers
 
-    environment:
-          DEVISE_JWT_SECRET_KEY: DEVISE_JWT_SECRET_KEY
-
     working_directory: ~/odds_are
 
     steps:
@@ -50,7 +47,7 @@ jobs:
 
       - run:
           name: Execute unit tests
-          command: docker exec -e RAILS_ENV=staging oddsare_web_1 bundle exec rspec
+          command: docker exec -e RAILS_ENV=staging -e DEVISE_JWT_SECRET_KEY=DEVISE_JWT_SECRET_KEY oddsare_web_1 bundle exec rspec
 
       - run:
           name: Code analysis
