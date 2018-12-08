@@ -14,6 +14,17 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+     jwt.dispatch_requests = [
+      ['POST', %r{^/users/sign_in$}]
+     ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/users/sign_out$}]
+    ]
+  end
+  config.skip_session_storage = [:http_auth, :params_auth]
+
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

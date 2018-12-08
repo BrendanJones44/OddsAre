@@ -31,7 +31,9 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :user_name, use: %i[slugged finders]
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :jwt_authenticatable,
+         jwt_revocation_strategy: JWTBlacklist
 
   ### Helper methods ###
   def can_accept_friend_request_from(user)
