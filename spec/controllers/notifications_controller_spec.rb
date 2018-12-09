@@ -1,5 +1,6 @@
 require 'rails_helper'
 require './spec/support/user_helpers'
+require 'devise/jwt/test_helpers'
 
 RSpec.describe NotificationsController, type: :controller do
   describe 'POST #mark_as_read' do
@@ -50,6 +51,26 @@ RSpec.describe NotificationsController, type: :controller do
         it 'should have updated the notificatin as read' do
           expect(notification.reload.acted_upon_at?). to eql true
         end
+      end
+    end
+  end
+
+  describe 'GET #new' do
+    context 'authenticated user' do
+      let(:user) { FactoryGirl.create(:user) }
+
+      before do
+        sign_in user
+        get :new
+      end
+
+      it 'should respond with found' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'should respond with the users notifications' do
+        parsed_body = JSON.parse(response.body)
+        expect(parsed_body).to match_array(user.notifications.needs_action)
       end
     end
   end

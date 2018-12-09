@@ -11,4 +11,10 @@ class NotificationsController < ApplicationController
       return head(:forbidden)
     end
   end
+
+  def new
+    @notifications = current_user
+                     .notifications.needs_action.order(created_at: :desc)
+    render json: @notifications
+  end
 end

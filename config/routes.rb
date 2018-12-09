@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   get '/tasks/:task_id', to: 'tasks#show'
   resources :tasks
   resources :users
+  resources :notifications
 end
