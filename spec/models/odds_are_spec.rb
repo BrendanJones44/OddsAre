@@ -275,4 +275,9 @@ RSpec.describe OddsAre, type: :model do
       it { expect(subject.initiator_name(build(:user))).to be nil }
     end
   end
+
+  describe '#challenge' do
+    subject { odds_are_with_no_winner }
+    it { expect(subject.challenge).to be_a String }
+  end
 end
