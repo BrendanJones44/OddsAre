@@ -8,9 +8,6 @@ end
 RSpec.describe 'POST /users/sign_in', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:url) { '/users/sign_in' }
-  let(:headers) do
-    { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
-  end
   let(:params) do
     {
       user: {
