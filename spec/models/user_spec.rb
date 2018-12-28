@@ -575,5 +575,35 @@ RSpec.describe User, type: :model do
         }
       end
     end
+
+    describe '#unread_notifications' do
+      context 'with no notifications' do
+        subject { build(:user) }
+        it {
+          expect(subject.unread_notifications).to match_array([])
+        }
+      end
+
+      context 'with an unread notification' do
+        let(:notification) { create(:notification) }
+        subject { create(:user, notifications: [notification]) }
+        it {
+          expect(subject.reload.unread_notifications).to match_array(
+            notification
+          )
+        }
+      end
+
+      context 'with a read notification' do
+        let(:notification) { create(:notification) }
+        subject { create(:user, notifications: [notification]) }
+        before do
+          notification.update_attribute(:acted_upon_at, Time.zone.now)
+        end
+        it {
+          expect(subject.reload.unread_notifications).to match_array([])
+        }
+      end
+    end
   end
 end
