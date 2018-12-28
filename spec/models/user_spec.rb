@@ -541,5 +541,39 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    describe '#lost_tasks' do
+      context 'with no lost tasks' do
+        subject { build(:user) }
+        it {
+          expect(subject.lost_tasks).to match_array([])
+        }
+      end
+
+      context 'with a lost task' do
+        subject { user_with_lost_odds_are }
+        it {
+          expect(subject.lost_tasks).to match_array(
+            subject.lost_odds_ares.first.odds_are
+          )
+        }
+      end
+    end
+
+    describe '#lost_tasks?' do
+      context 'with no lost tasks' do
+        subject { build(:user) }
+        it {
+          expect(subject.lost_tasks?).to be false
+        }
+      end
+
+      context 'with a lost task' do
+        subject { user_with_lost_odds_are }
+        it {
+          expect(subject.lost_tasks?).to be true
+        }
+      end
+    end
   end
 end
