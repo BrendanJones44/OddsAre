@@ -88,4 +88,34 @@ RSpec.describe Notification, type: :model do
       end
     end
   end
+
+  describe '#odds_are' do
+    context 'when notification is for a receiving a friend request' do
+      subject { notification_from_receiving_friend_request }
+      it 'returns nil' do
+        expect(subject.odds_are).to be nil
+      end
+    end
+
+    context 'when notification is for initiating an odds are' do
+      subject { notification_from_initiating_odds_are }
+      it 'returns an Odds Are' do
+        expect(subject.odds_are).to be_a OddsAre
+      end
+    end
+
+    context 'when notification is for responding to an odds are' do
+      subject { notification_from_responding_odds_are }
+      it 'returns an Odds Are' do
+        expect(subject.odds_are).to be_a OddsAre
+      end
+    end
+
+    context 'when notification is for finalizing an odds are' do
+      subject { notification_from_finalizing_odds_are }
+      it 'returns an Odds Are' do
+        expect(subject.odds_are).to be_a OddsAre
+      end
+    end
+  end
 end
