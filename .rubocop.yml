@@ -8,6 +8,10 @@ AllCops:
     - 'bin/*'
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
 Metrics/ClassLength:
@@ -31,9 +35,6 @@ Metrics/AbcSize:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/users/registrations_controller.rb'
 Style/GuardClause:
   Exclude:
     - 'app/models/user.rb'
