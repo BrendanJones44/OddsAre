@@ -32,9 +32,7 @@ class User < ApplicationRecord
   friendly_id :user_name, use: %i[slugged finders]
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :jwt_authenticatable,
-         jwt_revocation_strategy: JWTBlacklist
+         :recoverable, :rememberable, :trackable, :validatable
 
   include DeviseTokenAuth::Concerns::User
   ### Helper methods ###

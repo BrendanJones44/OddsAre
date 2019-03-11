@@ -19,7 +19,6 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 gem 'bootstrap'
 
-gem 'devise-jwt', '~> 0.5.8'
 gem 'devise_token_auth'
 gem 'rack-cors', require: 'rack/cors'
 gem 'react-rails'

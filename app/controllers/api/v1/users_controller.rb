@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
 
   def metadata
     @notifications = current_user
-                    .notifications.needs_action.order(created_at: :desc)
+                     .notifications.needs_action.order(created_at: :desc)
     render json: @notifications
   end
 end
