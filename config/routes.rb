@@ -35,4 +35,12 @@ Rails.application.routes.draw do
   resources :tasks
   resources :users
   resources :notifications
+
+  # token auth routes available at /api/v1/auth
+  namespace :api do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth'
+      get '/users/metadata', to: 'users#metadata'
+    end
+  end
 end

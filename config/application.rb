@@ -8,13 +8,13 @@ Bundler.require(*Rails.groups)
 
 module OddsAreApp
   class Application < Rails::Application
-    config.middleware.insert_before 0, Rack::Cors do
+    config.middleware.use Rack::Cors do
       allow do
         origins '*'
         resource '*',
-          headers: %w(Authorization),
-          methods: :any,
-          expose: %w(Authorization)
+           headers: :any,
+          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          methods: [:get, :post, :options, :delete, :put]
       end
     end
     config.to_prepare do
