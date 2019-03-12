@@ -13,7 +13,5 @@ class AddDeviseTokenAuthToUsers < ActiveRecord::Migration[5.0]
         end
       end
     end
-
-    add_index :users, [:uid, :provider], unique: true
   end
 end
