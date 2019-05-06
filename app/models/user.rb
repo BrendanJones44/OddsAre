@@ -34,7 +34,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  include DeviseTokenAuth::Concerns::User
   ### Helper methods ###
   def can_accept_friend_request_from(user)
     if friends.include? user
