@@ -7,7 +7,7 @@ RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt
 # Debian Jessie mirrors were removed
 RUN set -eux; \
         # Jessie's apt doesn't support [check-valid-until=no] so we have to use this instead
-        apt-get -o Acquire::Check-Valid-Until=false update; \
+        apt-get -o Acquire::Check-Valid-Until=false update;
 RUN app-get install -y build-essential libpq-dev nodejs
 RUN mkdir /odds-are-app
 WORKDIR /odds-are-app
