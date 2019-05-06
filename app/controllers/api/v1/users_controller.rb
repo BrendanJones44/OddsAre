@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user
 
   def metadata
     @notifications = current_user

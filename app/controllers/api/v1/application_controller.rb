@@ -3,7 +3,7 @@
 module Api
   module V1
     class ApplicationController < ActionController::Base
-      include DeviseTokenAuth::Concerns::SetUserByToken
+      # Auth helpers here
     end
   end
 end
