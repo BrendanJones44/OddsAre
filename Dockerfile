@@ -8,7 +8,6 @@ RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie-bac
 RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
 
 RUN apt-get -o Acquire::Check-Valid-Until=false update
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 RUN mkdir /odds-are-app
 WORKDIR /odds-are-app
 COPY Gemfile /odds-are-app/Gemfile
