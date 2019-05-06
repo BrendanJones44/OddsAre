@@ -1,6 +1,5 @@
 FROM ruby:2.3.4
 
-RUN apt-get update -qq
 # Debian Jessie mirrors were removed
 RUN echo "deb http://archive.debian.org/debian jessie-backports main" > /etc/apt/sources.list.d/jessie-backports.list
 RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
