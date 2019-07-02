@@ -2,11 +2,12 @@
 
 class Api::UsersController < Api::ApiController
   def authenticate
-    permitted = params.require(:user).permit(:email, :password)
     user = User.find_for_authentication(email: params[:user][:email])
 
-    resp = user.valid_password?(params[:user][:password]) ? user.auth_uuid : 'wrong password'
-    render json: resp
+    authenticated = user.valid_password?(params[:user][:password])
+    resp_message = authenticated ? user.auth_token : 'wrong password'
+
+    render json: resp_message
   end
 
   def metadata
