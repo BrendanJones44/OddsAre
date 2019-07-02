@@ -5,7 +5,7 @@ class Api::UsersController < Api::ApiController
     permitted = params.require(:user).permit(:email, :password)
     user = User.find_for_authentication(email: params[:user][:email])
 
-    resp = user.valid_password?(params[:user][:password]) ? user.auth_uuid : "wrong password"
+    resp = user.valid_password?(params[:user][:password]) ? user.auth_uuid : 'wrong password'
     render json: resp
   end
 

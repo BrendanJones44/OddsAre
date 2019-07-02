@@ -1,5 +1,6 @@
 require 'rails_helper'
 require './spec/support/odds_are_helpers'
+require 'pry'
 
 RSpec.configure do |c|
   c.include OddsAreHelpers

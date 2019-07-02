@@ -3,29 +3,29 @@ source 'https://rubygems.org'
 ruby '2.3.4'
 gem 'pg'
 gem 'pry'
-gem 'rails', '~> 5.0.4'
 gem 'puma', '~> 3.0'
+gem 'rails', '~> 5.0.4'
 
 gem 'ransack' # for searching on web
 
+gem 'bootstrap'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'bootstrap'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'react-rails'
 
 gem 'rubocop', '~> 0.56.0', require: false
 
-gem 'language_filter'
-gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'has_friendship'
+gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
 gem 'jquery-turbolinks'
+gem 'language_filter'
+gem 'turbolinks', '~> 5'
 
 group :test, :staging do
   gem 'database_cleaner', '~> 1.5'
