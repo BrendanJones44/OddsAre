@@ -1,9 +1,11 @@
 source 'https://rubygems.org'
 
+ruby '2.4.6'
+
 gem 'pg'
 gem 'pry'
 gem 'puma', '~> 3.0'
-gem 'rails', '~> 5.0.4'
+gem 'rails', '~> 5.2.0'
 
 gem 'ransack' # for searching on web
 
