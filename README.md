@@ -152,3 +152,6 @@ Heroku receives webhook that build has passed and creates it's own build and dep
 
 Upon successful deploy, app may be found live at: https://www.what-are-the-odds.com/
 
+#### Build information
+Ruby Version: `2.4.6`
+Rails Version: `5.2.0`
