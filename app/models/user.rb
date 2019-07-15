@@ -53,6 +53,21 @@ class User < ApplicationRecord
     end
   end
 
+  def notification_feed
+    notifications.select(:id,
+                         :action,
+                         :actor_id,
+                         :action,
+                         :notifiable_id,
+                         :notifiable_type)
+                 .needs_action
+                 .order(created_at: :desc)
+  end
+
+  def filtered_friends
+    friends.select(:id, :user_name, :first_name, :last_name)
+  end
+
   def full_name
     first_name + ' ' + last_name
   end
@@ -84,6 +99,15 @@ class User < ApplicationRecord
 
   def lost_tasks?
     !lost_tasks.empty?
+  end
+
+  def new_auth_token
+    update_attribute(:auth_token, random_token)
+    auth_token
+  end
+
+  def valid_token?(token)
+    self.token == token
   end
 
   def lost_tasks
@@ -177,5 +201,9 @@ class User < ApplicationRecord
   def uppercase_names
     self.first_name = first_name.upcase_first
     self.last_name = last_name.upcase_first
+  end
+
+  def random_token
+    SecureRandom.base58(24)
   end
 end

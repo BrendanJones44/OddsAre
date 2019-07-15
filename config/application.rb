@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module OddsAreApp
   class Application < Rails::Application
+    unless Rails.env == "test"
+      config.web_console.whiny_requests = false
+    end
     config.middleware.use Rack::Cors do
       allow do
         origins '*'

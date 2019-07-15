@@ -2,12 +2,27 @@
 
 class Api::UsersController < Api::ApiController
   def authenticate
-    user = User.find_for_authentication(email: params[:user][:email])
+    user = User.find_for_authentication(email: params[:email])
 
-    authenticated = user.valid_password?(params[:user][:password])
-    resp_message = authenticated ? user.auth_token : 'wrong password'
+    if user
+      authenticated = user.valid_password?(params[:password])
+      if authenticated
+        resp_message = 'authenticated'
+        data_hash = {
+          notifications: user.notification_feed,
+          friends: user.filtered_friends
+        }
+        response.set_header('auth_token', user.new_auth_token)
+      end
+    else
+      resp_message = 'no user found'
+      data_hash = {}
+    end
 
-    render json: resp_message
+    render json: {
+      message: resp_message,
+      data: data_hash
+    }
   end
 
   def metadata

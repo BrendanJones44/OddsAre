@@ -25,6 +25,7 @@ Metrics/MethodLength:
   Exclude:
     - 'spec/support/**'
     - 'app/controllers/challenge_finalizations_controller.rb'
+    - 'app/controllers/api/users_controller.rb'
 Metrics/AbcSize:
   Max: 20
   Exclude:
