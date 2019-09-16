@@ -42,11 +42,11 @@ group :development, :test, :staging do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'rack-mini-profiler', require: false
   gem 'rspec-rails', '~> 3.4'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0'
 end
