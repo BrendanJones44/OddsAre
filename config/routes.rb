@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # token auth routes available at /api/v1/auth
   namespace :api do
-    post '/users/authenticate', to: 'users#authenticate'
+    post '/users/authenticate_and_metadata', to: 'users#authenticate_and_metadata'
     get '/users/metadata', to: 'users#metadata'
   end
   resources :challenge_responses

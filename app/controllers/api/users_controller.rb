@@ -1,28 +1,24 @@
 # frozen_string_literal: true
 
 class Api::UsersController < Api::ApiController
-  def authenticate
+  def authenticate_and_metadata
     user = User.find_for_authentication(email: params[:email])
 
     if user
       authenticated = user.valid_password?(params[:password])
       if authenticated
-        resp_message = 'authenticated'
-        data_hash = {
-          notifications: user.notification_feed,
-          friends: user.filtered_friends
-        }
         response.set_header('auth_token', user.new_auth_token)
+        @notifications = user.notification_feed
+        @friends = user.filtered_friends
+        @user_id = user.id
+        render 'authenticated_with_metadata'
+      else
+        render 'failed_authentication', status: :unauthorized
       end
     else
-      resp_message = 'no user found'
-      data_hash = {}
+      @invalid_email = params[:email]
+      render 'not_found_by_email', status: :not_found
     end
-
-    render json: {
-      message: resp_message,
-      data: data_hash
-    }
   end
 
   def metadata

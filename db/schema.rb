@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2019_07_02_061646) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "challenge_finalizations", id: :serial, force: :cascade do |t|
@@ -66,10 +65,11 @@ ActiveRecord::Schema.define(version: 2019_07_02_061646) do
     t.string "friendable_type"
     t.integer "friendable_id"
     t.integer "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "blocker_id"
     t.integer "status"
+    t.index ["friendable_type", "friendable_id"], name: "index_friendships_on_friendable_type_and_friendable_id"
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
@@ -130,8 +130,6 @@ ActiveRecord::Schema.define(version: 2019_07_02_061646) do
     t.string "first_name"
     t.string "last_name"
     t.string "slug"
-    t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
     t.string "auth_token"
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
